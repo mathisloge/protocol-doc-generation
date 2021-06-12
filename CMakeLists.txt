@@ -3,5 +3,7 @@ project(protodoc)
 
 
 find_package(LibCommsdsl CONFIG REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
 
+add_subdirectory(lib)
 add_subdirectory(app)

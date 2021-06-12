@@ -5,4 +5,7 @@ add_executable(protodocapp
 
 set_property(TARGET protodocapp PROPERTY CXX_STANDARD 20)
 
-target_link_libraries(protodocapp PRIVATE commsdsl::commsdsl)
+target_link_libraries(protodocapp PRIVATE 
+    protodoc::protodoc
+    commsdsl::commsdsl
+)
