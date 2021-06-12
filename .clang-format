@@ -1,0 +1,28 @@
+BasedOnStyle: Microsoft
+IndentWidth: 4
+AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: false
+BinPackParameters: false
+BraceWrapping:
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
+BreakBeforeBinaryOperators: None
+BreakConstructorInitializers: BeforeComma
+BreakInheritanceList: AfterColon
+BreakBeforeInheritanceComma: false
+SortIncludes: true
+IncludeBlocks: Preserve
+IncludeCategories:
+  # Headers in <> without extension.
+  - Regex:           '<([A-Za-z0-9\Q/-_\E])+>'
+    Priority:        1
+  # Headers in <> from specific external libraries.
+  - Regex:           '<(boost)\/'
+    Priority:        2
+  # Headers in <> with extension.
+  - Regex:           '<([A-Za-z0-9.\Q/-_\E])+>'
+    Priority:        3
+  # Headers in "" with extension.
+  - Regex:           '"([A-Za-z0-9.\Q/-_\E])+"'
+    Priority:        4
