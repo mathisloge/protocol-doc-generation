@@ -3,6 +3,7 @@
 #include <memory>
 #include <vector>
 #include <commsdsl/Protocol.h>
+#include <nlohmann/json.hpp>
 
 namespace protodoc
 {
@@ -18,8 +19,11 @@ class Generator
   private:
     bool parseSchemaFiles(const FilesList &files);
     bool write();
-    bool writeFrames();
-    bool writeMessages();
+    bool writePlatforms(nlohmann::json &json);
+    bool writeFrames(nlohmann::json &json);
+    bool writeMessages(nlohmann::json &json);
+
+    void mergeCustomJson(nlohmann::json &custom, nlohmann::json &json);
 
   private:
     commsdsl::Protocol protocol_;

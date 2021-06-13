@@ -1,4 +1,7 @@
-{% extends "base.tex" %}
-{% block platforms %}
-c
-{% endblock %}
+\subsection{{^ platforms.title ^}}
+## for platform in platforms.platforms
+\subsection{{^ platform.name ^}}
+{% if existsIn(platform, "description") %}
+{^ platform.description ^}
+{% endif %}
+## endfor
