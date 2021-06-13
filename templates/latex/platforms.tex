@@ -1,7 +1,11 @@
-\subsection{{^ platforms.title ^}}
-## for platform in platforms.platforms
-\subsection{{^ platform.name ^}}
-{% if existsIn(platform, "description") %}
-{^ platform.description ^}
+\section{{^ platforms.title ^}}
+{% if existsIn(platforms, "abstract") %}
+    {^ platforms.abstract ^}
 {% endif %}
+
+## for platform in platforms.platforms
+    \subsection{{^ platform.name ^}}
+    {% if existsIn(platform, "description") %}
+        {^ platform.description ^}
+    {% endif %}
 ## endfor

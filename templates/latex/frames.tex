@@ -1,0 +1,10 @@
+\section{{^ frames.title ^}}
+
+{% if existsIn(frames, "abstract") %}
+    {^ frames.abstract ^}
+{% endif %}
+
+## for frame in frames.frames
+    \subsection{{^ frame.name ^}}
+    {^ frame.description ^}
+## endfor

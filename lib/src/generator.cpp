@@ -1,10 +1,12 @@
 #include "generator.hpp"
 #include <iostream>
 #include <sstream>
+#include <commsdsl/EnumField.h>
 #include <commsdsl/version.h>
 #include <inja/environment.hpp>
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
+#include "json/json.hpp"
 namespace protodoc
 {
 
@@ -64,7 +66,7 @@ bool Generator::write()
     }
 
     const auto written_dsl = writePlatforms(json) && writeFrames(json) && writeMessages(json);
-    std::cout << json << std::endl;
+    std::cout << std::setw(4) << json << std::endl;
     { // update all keys with the lang specs
         std::ifstream ifs{lang_file};
         const auto lang_json = nlohmann::json::parse(ifs);
@@ -73,8 +75,9 @@ bool Generator::write()
 
     try
     {
-        //std::cout << env.render_file("platforms.tex", json) << std::endl;
+        // std::cout << env.render_file("platforms.tex", json) << std::endl;
         env.write("platforms.tex", json, "platforms.tex");
+        env.write("frames.tex", json, "frames.tex");
     }
     catch (const std::exception &ex)
     {
@@ -85,25 +88,26 @@ bool Generator::write()
 }
 bool Generator::writePlatforms(nlohmann::json &json)
 {
-    if (!json["platforms"].contains("platforms") || !json["platforms"]["platforms"].is_array())
-        json["platforms"]["platforms"] = nlohmann::json::array();
-    auto &pjson = json["platforms"]["platforms"];
+    if (!json[kKeyPlatforms].contains(kKeyPlatforms) || !json[kKeyPlatforms][kKeyPlatforms].is_array())
+        json[kKeyPlatforms][kKeyPlatforms] = nlohmann::json::array();
 
-    const auto &platforms = protocol_.platforms();
-    for (int i = 0; i < platforms.size(); i++)
-    {
-        if (pjson.size() <= i)
-        {
-            pjson.emplace_back();
-        }
-        pjson[i]["name"] = platforms[i];
-    }
+    to_json(json[kKeyPlatforms][kKeyPlatforms], protocol_.platforms());
 
     return true;
 }
 
 bool Generator::writeFrames(nlohmann::json &json)
 {
+    if (!json[kKeyFrames].contains(kKeyFrames) || !json[kKeyFrames][kKeyFrames].is_array())
+        json[kKeyFrames][kKeyFrames] = nlohmann::json::array();
+    for (const auto &ns : protocol_.namespaces())
+    {
+
+        for (const auto &frame : ns.frames())
+        {
+            to_json(json[kKeyFrames][kKeyFrames].emplace_back(), frame);
+        }
+    }
 
     return true;
 }

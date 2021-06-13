@@ -1,10 +1,14 @@
 {
     "platforms": {
+        "abstract": "ABC",
         "platforms": [
             {"description": "This is platform 1"},
             {"description": "\\input{platforms/platform2.tex}"},
             {"description": "This is platform 3"},
             {"description": "This is platform 4"}
         ]
+    }, 
+    "frames": {
+        "abstract": "ABCD"
     }
 }

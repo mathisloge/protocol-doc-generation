@@ -2,11 +2,22 @@ set(SRCS
     src/generator.cpp
     src/diagram.cpp
     src/diagrams/ascii.cpp
+    src/json/platform.cpp
+    src/json/field.cpp
+    src/json/enum.cpp
+    src/json/frame.cpp
+    src/json/layer.cpp
 )
 set(HDRS
     include/generator.hpp
     include/diagram.hpp
     include/diagrams/ascii.hpp
+    src/json/json.hpp
+    src/json/platform.hpp
+    src/json/field.hpp
+    src/json/enum.hpp
+    src/json/frame.hpp
+    src/json/layer.hpp
 )
 
 add_library(protodoc

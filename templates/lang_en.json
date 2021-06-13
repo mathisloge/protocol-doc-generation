@@ -1,5 +1,8 @@
 {
     "platforms": {
         "title": "Platforms"
+    },
+    "frames": {
+        "title": "Frames"
     }
 }
