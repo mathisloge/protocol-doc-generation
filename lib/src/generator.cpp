@@ -2,13 +2,12 @@
 #include <iostream>
 #include <sstream>
 #include <commsdsl/version.h>
+#include <inja/environment.hpp>
 #include <spdlog/spdlog.h>
-#include "backend.hpp"
 namespace protodoc
 {
 
-Generator::Generator(std::unique_ptr<Backend> &&backend)
-    : backend_{std::move(backend)}
+Generator::Generator()
 {}
 
 bool Generator::generate(const FilesList &files)
@@ -45,22 +44,18 @@ bool Generator::parseSchemaFiles(const FilesList &files)
 
 bool Generator::write()
 {
+    //! \todo base on program options
+    inja::Environment env{"D:/dev/protocol-doc-generation/templates/latex/", "D:/dev/commsdsl_latex_text/gen/latex/"};
+
+    env.parse_file("base.tex");
+
+
     return writeFrames() && writeMessages();
 }
 
 bool Generator::writeFrames()
 {
-    std::stringstream ss;
-    ss << backend_->buildChapter(1, "Frames");
-    for (const auto &ns : protocol_.namespaces())
-    {
-        for (const auto &frame : ns.frames())
-        {
-            ss << backend_->buildChapter(2, frame.name());
-            ss << backend_->testFrame(frame);
-        }
-    }
-    std::cout << ss.str() << std::endl;
+
     return true;
 }
 

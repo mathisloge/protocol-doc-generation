@@ -6,14 +6,13 @@
 
 namespace protodoc
 {
-class Backend;
 class Generator
 {
   private:
     using FilesList = std::vector<std::filesystem::path>;
 
   public:
-    explicit Generator(std::unique_ptr<Backend> &&backend);
+    explicit Generator();
     bool generate(const FilesList &files);
 
   private:
@@ -23,7 +22,6 @@ class Generator
     bool writeMessages();
 
   private:
-    std::unique_ptr<Backend> backend_;
     commsdsl::Protocol protocol_;
 };
 } // namespace protodoc
