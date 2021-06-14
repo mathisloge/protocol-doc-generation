@@ -4,9 +4,11 @@ set(SRCS
     src/diagrams/ascii.cpp
     src/json/platform.cpp
     src/json/field.cpp
-    src/json/enum.cpp
+    src/json/fields/enum.cpp
+    src/json/fields/int.cpp
     src/json/frame.cpp
     src/json/layer.cpp
+    src/json/message.cpp
 )
 set(HDRS
     include/generator.hpp
@@ -15,9 +17,11 @@ set(HDRS
     src/json/json.hpp
     src/json/platform.hpp
     src/json/field.hpp
-    src/json/enum.hpp
+    src/json/fields/enum.hpp
+    src/json/fields/int.hpp
     src/json/frame.hpp
     src/json/layer.hpp
+    src/json/message.hpp
 )
 
 add_library(protodoc

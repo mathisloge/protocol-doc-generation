@@ -4,5 +4,8 @@
     },
     "frames": {
         "title": "Frames"
+    },
+    "messages": {
+        "title": "Messages"
     }
 }

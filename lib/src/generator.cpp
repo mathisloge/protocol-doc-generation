@@ -78,6 +78,7 @@ bool Generator::write()
         // std::cout << env.render_file("platforms.tex", json) << std::endl;
         env.write("platforms.tex", json, "platforms.tex");
         env.write("frames.tex", json, "frames.tex");
+        env.write("messages.tex", json, "messages.tex");
     }
     catch (const std::exception &ex)
     {
@@ -114,6 +115,13 @@ bool Generator::writeFrames(nlohmann::json &json)
 
 bool Generator::writeMessages(nlohmann::json &json)
 {
+    if (!json[kKeyMessages].contains(kKeyMessages) || !json[kKeyMessages][kKeyMessages].is_array())
+        json[kKeyMessages][kKeyMessages] = nlohmann::json::array();
+
+    for (const auto &m : protocol_.allMessages())
+    {
+        to_json(json[kKeyMessages][kKeyMessages].emplace_back(), m);
+    }
     return true;
 }
 

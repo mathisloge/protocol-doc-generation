@@ -11,9 +11,9 @@ class Generator
 {
   private:
     using FilesList = std::vector<std::filesystem::path>;
-    static constexpr const char* kKeyPlatforms = "platforms";
-    static constexpr const char* kKeyFrames = "frames";
-
+    static constexpr const char *kKeyPlatforms = "platforms";
+    static constexpr const char *kKeyFrames = "frames";
+    static constexpr const char *kKeyMessages = "messages";
 
   public:
     explicit Generator();
