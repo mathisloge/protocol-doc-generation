@@ -8,7 +8,7 @@ void to_json(nlohmann::json &j, const commsdsl::Message &message)
     j["name"] = message.displayName().empty() ? message.name() : message.displayName();
     j["description"] = message.description();
     if (!j.contains("fields"))
-        j["fields"] = nlohmann::json{};
+        j["fields"] = nlohmann::json::object();
 
     for (const auto &f : message.fields())
     {

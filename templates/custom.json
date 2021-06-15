@@ -1,12 +1,6 @@
 {
     "platforms": {
-        "abstract": "ABC",
-        "platforms": {
-            "Plat1": {"description": "This is platform 1"},
-            "Plat2": {"description": "\\input{platforms/platform2.tex}"},
-            "Plat3": {"description": "This is platform 3"},
-            "Plat4": {"description": "This is platform 4"}
-        }
+        "abstract": "ABC"
     }, 
     "frames": {
         "abstract": "ABCD"

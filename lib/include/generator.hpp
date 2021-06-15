@@ -26,8 +26,6 @@ class Generator
     bool writeFrames(nlohmann::json &json);
     bool writeMessages(nlohmann::json &json);
 
-    void mergeCustomJson(nlohmann::json &custom, nlohmann::json &json);
-
   private:
     commsdsl::Protocol protocol_;
 };

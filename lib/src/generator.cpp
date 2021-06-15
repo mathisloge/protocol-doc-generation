@@ -1,6 +1,7 @@
 #include "generator.hpp"
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include <commsdsl/EnumField.h>
 #include <commsdsl/version.h>
 #include <inja/environment.hpp>
@@ -66,24 +67,26 @@ bool Generator::write()
     }
 
     const auto written_dsl = writePlatforms(json) && writeFrames(json) && writeMessages(json);
-    std::cout << std::setw(4) << json << std::endl;
+
+    std::ofstream MyFile("test.json");
+    MyFile<< std::setw(4) << json << std::endl;
     { // update all keys with the lang specs
         std::ifstream ifs{lang_file};
         const auto lang_json = nlohmann::json::parse(ifs);
         json.merge_patch(lang_json);
     }
 
-    try
-    {
+   // try
+   // {
         // std::cout << env.render_file("platforms.tex", json) << std::endl;
         env.write("platforms.tex", json, "platforms.tex");
         env.write("frames.tex", json, "frames.tex");
         env.write("messages.tex", json, "messages.tex");
-    }
-    catch (const std::exception &ex)
-    {
-        std::cout << ex.what() << std::endl;
-    }
+   // }
+   // catch (const std::exception &ex)
+   // {
+   //     std::cout << ex.what() << std::endl;
+   // }
 
     return written_dsl;
 }
@@ -124,6 +127,4 @@ bool Generator::writeMessages(nlohmann::json &json)
     return true;
 }
 
-void Generator::mergeCustomJson(nlohmann::json &custom, nlohmann::json &json)
-{}
 } // namespace protodoc
