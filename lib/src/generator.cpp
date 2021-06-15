@@ -89,8 +89,8 @@ bool Generator::write()
 }
 bool Generator::writePlatforms(nlohmann::json &json)
 {
-    if (!json[kKeyPlatforms].contains(kKeyPlatforms) || !json[kKeyPlatforms][kKeyPlatforms].is_array())
-        json[kKeyPlatforms][kKeyPlatforms] = nlohmann::json::array();
+    if (!json[kKeyPlatforms].contains(kKeyPlatforms))
+        json[kKeyPlatforms][kKeyPlatforms] = nlohmann::json{};
 
     to_json(json[kKeyPlatforms][kKeyPlatforms], protocol_.platforms());
 
@@ -99,14 +99,13 @@ bool Generator::writePlatforms(nlohmann::json &json)
 
 bool Generator::writeFrames(nlohmann::json &json)
 {
-    if (!json[kKeyFrames].contains(kKeyFrames) || !json[kKeyFrames][kKeyFrames].is_array())
-        json[kKeyFrames][kKeyFrames] = nlohmann::json::array();
+    if (!json[kKeyFrames].contains(kKeyFrames))
+        json[kKeyFrames][kKeyFrames] = nlohmann::json{};
     for (const auto &ns : protocol_.namespaces())
     {
-
         for (const auto &frame : ns.frames())
         {
-            to_json(json[kKeyFrames][kKeyFrames].emplace_back(), frame);
+            to_json(json[kKeyFrames][kKeyFrames][frame.name()], frame);
         }
     }
 
@@ -115,12 +114,12 @@ bool Generator::writeFrames(nlohmann::json &json)
 
 bool Generator::writeMessages(nlohmann::json &json)
 {
-    if (!json[kKeyMessages].contains(kKeyMessages) || !json[kKeyMessages][kKeyMessages].is_array())
-        json[kKeyMessages][kKeyMessages] = nlohmann::json::array();
+    if (!json[kKeyMessages].contains(kKeyMessages))
+        json[kKeyMessages][kKeyMessages] = nlohmann::json{};
 
     for (const auto &m : protocol_.allMessages())
     {
-        to_json(json[kKeyMessages][kKeyMessages].emplace_back(), m);
+        to_json(json[kKeyMessages][kKeyMessages][m.name()], m);
     }
     return true;
 }

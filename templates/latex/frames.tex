@@ -4,7 +4,7 @@
     {^ frames.abstract ^}
 {% endif %}
 
-## for frame in frames.frames
+{% for fkey, frame in frames.frames %}
     \subsection{{^ frame.name ^}}
     {^ frame.description ^}
-## endfor
+{% endfor %}

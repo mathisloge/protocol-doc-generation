@@ -3,9 +3,9 @@
     {^ platforms.abstract ^}
 {% endif %}
 
-## for platform in platforms.platforms
+{% for pkey, platform in platforms.platforms %}
     \subsection{{^ platform.name ^}}
     {% if existsIn(platform, "description") %}
         {^ platform.description ^}
     {% endif %}
-## endfor
+{% endfor %}

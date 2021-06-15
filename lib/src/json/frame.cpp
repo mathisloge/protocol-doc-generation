@@ -12,12 +12,9 @@ void to_json(nlohmann::json &j, const commsdsl::Frame &f)
 
 void to_json(nlohmann::json &j, const commsdsl::Frame::LayersList &f)
 {
-    if (!j.is_array())
+    for (const auto &layer : f)
     {
-        j = nlohmann::json::array();
-    }
-    for(const auto& layer : f) {
-        to_json(j.emplace_back(), layer);
+        to_json(j[layer.name()], layer);
     }
 }
 

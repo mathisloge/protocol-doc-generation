@@ -4,17 +4,19 @@
     {^- messages.abstract -^}
 {% endif %}
 
-## for message in messages.messages
-    \subsection{{^ message.name ^}}
-    {^ message.description ^}
 
-    \begin{table}[H]
-        \begin{tabular}{|l|l|l|l|l|l|l|}\hline
-            Name & Description & Bytes & Unit & Scaling & since version & deprecated since \\ \hline
-## for field in message.fields
-                {^ field.name ^} & {^ field.description ^} & 1 & ~ & {% if existsIn(field, "scaling") %} {^ field.scaling.0 ^} / {^ field.scaling.1 ^} {% else %} - {% endif %} & 0 & ~ \\ 
-## endfor
-            \hline
-        \end{tabular}
-    \end{table}
-## endfor
+{% for mkey, message in messages.messages %}
+
+\subsection{{^ message.name ^}}
+{^ message.description ^}
+
+\begin{table}[H]
+    \begin{tabular}{|l|l|l|l|l|l|l|}\hline
+        Name & Description & Bytes & Unit & Scaling & since version & deprecated since \\ \hline
+{% for fkey, field in message.fields %}
+            {^ field.name ^} & {^ field.description ^} & 1 & ~ & {% if existsIn(field, "scaling") %} {^ field.scaling.0 ^} / {^ field.scaling.1 ^} {% else %} - {% endif %} & 0 & ~ \\ 
+{% endfor %}
+        \hline
+    \end{tabular}
+\end{table}
+{% endfor  %}
