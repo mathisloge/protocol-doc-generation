@@ -7,15 +7,22 @@
 
 {% for mkey, message in messages.messages %}
 
-\subsection{{^ message.name ^}}
-{^ message.description ^}
+\subsection{{^ latexText(message.name) ^}}
+{^ latexText(message.description) ^}
 
 \begin{table}[H]
     \begin{tabular}{|l|l|l|l|l|l|l|}\hline
         Name & Description & Bytes & Unit & Scaling & since version & deprecated since \\ \hline
-{% for fkey, field in message.fields %}
-            {^ field.name ^} & {^ field.description ^} & 1 & ~ & {% if existsIn(field, "scaling") %} {^ field.scaling.0 / field.scaling.1 ^} {% else %} - {% endif %} & 0 & ~ \\ 
-{% endfor %}
+
+        {% for fkey, field in message.fields %}
+            {^ latexText(field.name) ^} & 
+            {% if existsIn(field, "description") %} {^ latexText(field.description) ^} {% endif %} & 
+            {% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %} & 
+            ~ & 
+            {% if existsIn(field, "scaling") %} {^ field.scaling.0 / field.scaling.1 ^} {% else %} - {% endif %} & 
+            {% if existsIn(field, "minVersion") %} {^ field.minVersion ^} {% else %} - {% endif %} & 
+            ~ \\ 
+        {% endfor %}
         \hline
     \end{tabular}
 \end{table}

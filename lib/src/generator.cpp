@@ -1,7 +1,8 @@
 #include "generator.hpp"
-#include <iostream>
-#include <sstream>
 #include <fstream>
+#include <iostream>
+#include <regex>
+#include <sstream>
 #include <commsdsl/EnumField.h>
 #include <commsdsl/version.h>
 #include <inja/environment.hpp>
@@ -59,6 +60,21 @@ bool Generator::write()
     env.set_statement("{%", "%}");  // Statements {% %} for many things, see below
     env.set_line_statement("##");   // Line statements ## (just an opener)
 
+    env.add_callback("latexText", 1, [](inja::Arguments &args) {
+        auto replace_all = [](std::string &inout, std::string_view what, std::string_view with) -> std::size_t {
+            std::size_t count{};
+            for (std::string::size_type pos{}; inout.npos != (pos = inout.find(what.data(), pos, what.length()));
+                 pos += with.length(), ++count)
+            {
+                inout.replace(pos, what.length(), with.data(), with.length());
+            }
+            return count;
+        };
+        auto text = args.at(0)->get<std::string>();
+        replace_all(text, "_", "\\_");
+        return text;
+    });
+
     nlohmann::json json;
     {
         std::ifstream ifs{custom_file};
@@ -69,24 +85,24 @@ bool Generator::write()
     const auto written_dsl = writePlatforms(json) && writeFrames(json) && writeMessages(json);
 
     std::ofstream MyFile("test.json");
-    MyFile<< std::setw(4) << json << std::endl;
+    MyFile << std::setw(4) << json << std::endl;
     { // update all keys with the lang specs
         std::ifstream ifs{lang_file};
         const auto lang_json = nlohmann::json::parse(ifs);
         json.merge_patch(lang_json);
     }
 
-   // try
-   // {
-        // std::cout << env.render_file("platforms.tex", json) << std::endl;
-        env.write("platforms.tex", json, "platforms.tex");
-        env.write("frames.tex", json, "frames.tex");
-        env.write("messages.tex", json, "messages.tex");
-   // }
-   // catch (const std::exception &ex)
-   // {
-   //     std::cout << ex.what() << std::endl;
-   // }
+    // try
+    // {
+    // std::cout << env.render_file("platforms.tex", json) << std::endl;
+    env.write("platforms.tex", json, "platforms.tex");
+    env.write("frames.tex", json, "frames.tex");
+    env.write("messages.tex", json, "messages.tex");
+    // }
+    // catch (const std::exception &ex)
+    // {
+    //     std::cout << ex.what() << std::endl;
+    // }
 
     return written_dsl;
 }

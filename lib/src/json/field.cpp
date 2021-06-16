@@ -7,10 +7,12 @@ namespace protodoc
 void to_json(nlohmann::json &j, const commsdsl::Field &f)
 {
     j["name"] = f.displayName().empty() ? f.name() : f.displayName();
-    j["description"] = f.description();
+    if (!f.description().empty())
+        j["description"] = f.description();
     if (commsdsl::Protocol::notYetDeprecated() != f.deprecatedSince())
         j["deprecatedSince"] = f.deprecatedSince();
-    j["sinceVersion"] = f.sinceVersion();
+    if (f.sinceVersion() > 0)
+        j["sinceVersion"] = f.sinceVersion();
     j["minLength"] = f.minLength();
     j["maxLength"] = f.maxLength();
 
