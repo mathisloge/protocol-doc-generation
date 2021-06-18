@@ -84,14 +84,13 @@ bool Generator::write()
 
     const auto written_dsl = writePlatforms(json) && writeFrames(json) && writeMessages(json);
 
-    std::ofstream MyFile("test.json");
-    MyFile << std::setw(4) << json << std::endl;
     { // update all keys with the lang specs
         std::ifstream ifs{lang_file};
         const auto lang_json = nlohmann::json::parse(ifs);
         json.merge_patch(lang_json);
     }
-
+    std::ofstream MyFile("test.json");
+    MyFile << std::setw(4) << json << std::endl;
     // try
     // {
     // std::cout << env.render_file("platforms.tex", json) << std::endl;

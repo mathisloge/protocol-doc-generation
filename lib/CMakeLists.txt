@@ -19,6 +19,7 @@ set(HDRS
     src/json/field.hpp
     src/json/fields/enum.hpp
     src/json/fields/int.hpp
+    src/json/units.hpp
     src/json/frame.hpp
     src/json/layer.hpp
     src/json/message.hpp
