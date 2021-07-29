@@ -15,13 +15,17 @@
         Name & Description & Bytes & Unit & Scaling & since version & deprecated since \\ \hline
 
         {% for fkey, field in message.fields %}
-            {^ latexText(field.name) ^} & 
-            {% if existsIn(field, "description") %} {^ latexText(field.description) ^} {% endif %} & 
-            {% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %} & 
-            {% if existsIn(field, "units") %} {^ at(units, field.units) ^} {% else %} - {% endif %} & 
-            {% if existsIn(field, "scaling") %} {^ field.scaling.0 / field.scaling.1 ^} {% else %} - {% endif %} & 
-            {% if existsIn(field, "minVersion") %} {^ field.minVersion ^} {% else %} - {% endif %} & 
-            {% if existsIn(field, "deprecatedSice") %} {^ field.deprecatedSice ^} {% else %} - {% endif %} \\ 
+            {% if field.kind == 0 %} 
+                {% include "fields/int.tex" %} 
+            {% else %}
+                {^ latexText(field.name) ^} & 
+                {% if existsIn(field, "description") %} {^ latexText(field.description) ^} {% endif %} & 
+                {% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %} & 
+                {% if existsIn(field, "units") %} {^ at(units, field.units) ^} {% else %} - {% endif %} & 
+                {% if existsIn(field, "scaling") %} {^ field.scaling.0 / field.scaling.1 ^} {% else %} - {% endif %} & 
+                {% if existsIn(field, "minVersion") %} {^ field.minVersion ^} {% else %} - {% endif %} & 
+                {% if existsIn(field, "deprecatedSice") %} {^ field.deprecatedSice ^} {% else %} - {% endif %} \\ 
+            {% endif %}
         {% endfor %}
         \hline
     \end{tabular}

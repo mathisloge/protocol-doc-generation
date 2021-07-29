@@ -7,6 +7,7 @@ namespace protodoc
 void to_json(nlohmann::json &j, const commsdsl::Field &f)
 {
     j["name"] = f.displayName().empty() ? f.name() : f.displayName();
+    j["kind"] = f.kind();
     if (!f.description().empty())
         j["description"] = f.description();
     if (commsdsl::Protocol::notYetDeprecated() != f.deprecatedSince())
