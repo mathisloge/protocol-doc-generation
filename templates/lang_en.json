@@ -51,5 +51,18 @@
         "Megabytes": "mb",
         "Gigabytes": "gb",
         "Terabytes": "tb"
+    },
+    "types": {
+        "int8": "int",
+        "uint8": "uint",
+        "int16": "int",
+        "uint16": "uint",
+        "int32": "int",
+        "uint32": "uint",
+        "int64": "int",
+        "uint64": "uint",
+        "intvar": "intvar",
+        "uintvar": "uintvar",
+        "unknown": "unknown"
     }
 }

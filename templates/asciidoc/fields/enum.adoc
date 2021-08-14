@@ -1,9 +1,10 @@
 |{^ field.name ^}
 |{^ at(types, field.type) ^}
-{% if existsIn(field, "description") %} 
-|{^ field.description ^} --- {% if length(field.range) > 0 %} Range: ## for range in field.range {^ range.min ^} - {^ range.max ^} ## endfor {% endif %}
-{% else %}
-|
+|{% if existsIn(field, "description") %} {^ field.description ^} {% endif %}
+{% if existsIn(field, "enum") %}
+{% for fkey, enum in field.enum %}
+* {^ enum.name ^}: {^ enum.value ^}
+{% endfor %}
 {% endif %}
 |{% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %}
 |{% if existsIn(field, "units") %} {^ at(units, field.units) ^} {% else %} - {% endif %}

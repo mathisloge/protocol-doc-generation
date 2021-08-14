@@ -16,7 +16,6 @@ void to_json(nlohmann::json &j, const commsdsl::Field &f)
         j["sinceVersion"] = f.sinceVersion();
     j["minLength"] = f.minLength();
     j["maxLength"] = f.maxLength();
-
     switch (f.kind())
     {
     case commsdsl::Field::Kind::Enum:
@@ -26,6 +25,7 @@ void to_json(nlohmann::json &j, const commsdsl::Field &f)
         to_json(j, commsdsl::IntField{f});
         break;
     default:
+        j["type"] = "unknown";
         break;
     }
 }

@@ -10,9 +10,10 @@
 === {^ message.name ^}
 {^ message.description ^}
 
-[cols=7*,options=header]
+[cols="2,1,3a,1,1,1,1,1",options=header]
 |===
 |Name
+|Type
 |Description
 |Bytes
 |Unit
@@ -23,14 +24,17 @@
 {% for fkey, field in message.fields %}
     {% if field.kind == 0 %} 
         {% include "fields/int.adoc" %} 
+    {% else if field.kind == 1 %}
+        {% include "fields/enum.adoc" %} 
     {% else %}
 |{^ field.name ^}
-|{% if existsIn(field, "description") %} {^ field.description ^} {% endif %}
+|{^ at(types, field.type) ^}
+|{^ default(field.description, "-") ^}
 |{% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %}
 |{% if existsIn(field, "units") %} {^ at(units, field.units) ^} {% else %} - {% endif %} 
 |{% if existsIn(field, "scaling") %} {^ field.scaling.0 / field.scaling.1 ^} {% else %} - {% endif %}
-|{% if existsIn(field, "minVersion") %} {^ field.minVersion ^} {% else %} - {% endif %}
-|{% if existsIn(field, "deprecatedSice") %} {^ field.deprecatedSice ^} {% else %} - {% endif %}
+|{^ default(field.minVersion, "-") ^}
+|{^ default(field.deprecatedSice, "-") ^}
     {% endif %}
 {% endfor %}
 
