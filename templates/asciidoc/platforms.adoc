@@ -5,7 +5,7 @@
 
 {% for pkey, platform in platforms.platforms %}
 === {^ platform.name ^}
-{% if existsIn(platform, "description") %}
+    {% if existsIn(platform, "description") %}
 {^ platform.description ^}
-{% endif %}
+    {% endif %}
 {% endfor %}

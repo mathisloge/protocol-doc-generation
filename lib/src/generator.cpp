@@ -60,8 +60,8 @@ bool Generator::write()
     env.set_statement("{%", "%}");  // Statements {% %} for many things, see below
     env.set_line_statement("##");   // Line statements ## (just an opener)
 
-    env.set_trim_blocks(true);
-    env.set_lstrip_blocks(true);
+    env.set_trim_blocks(true); // remove new line after a command
+    env.set_lstrip_blocks(true); // remove whitespaces and tabs from the beginning to the start of a block
 
     env.add_callback("latexText", 1, [](inja::Arguments &args) {
         auto replace_all = [](std::string &inout, std::string_view what, std::string_view with) -> std::size_t {
