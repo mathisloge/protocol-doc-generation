@@ -10,12 +10,12 @@
 === {^ message.name ^}
 {^ message.description ^}
 
-[cols="2,1,3a,1,1,1,1,1",options=header]
+[cols="2,1,1,3a,1,1,1,1",options=header]
 |===
 |Name
 |Type
-|Description
 |Bytes
+|Description
 |Unit
 |Scaling
 |since version
@@ -29,10 +29,10 @@
     {% else %}
 |{^ field.name ^}
 |{^ at(types, field.type) ^}
-|{^ default(field.description, "-") ^}
 |{% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %}
+|{^ default(field.description, "-") ^}
 |{% if existsIn(field, "units") %} {^ at(units, field.units) ^} {% else %} - {% endif %} 
-|{% if existsIn(field, "scaling") %} {^ field.scaling.0 / field.scaling.1 ^} {% else %} - {% endif %}
+|{% if existsIn(field, "scaling") %} stem:[frac({^ field.scaling.0 ^})({^ field.scaling.1 ^})] {% else %} - {% endif %}
 |{^ default(field.minVersion, "-") ^}
 |{^ default(field.deprecatedSice, "-") ^}
     {% endif %}
