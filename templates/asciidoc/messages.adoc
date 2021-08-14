@@ -30,6 +30,8 @@
         {% include "fields/float.adoc" %} 
     {% else if field.kind == 4 %}
         {% include "fields/bitfield.adoc" %} 
+    {% else if field.kind == 10 %}
+        {% include "fields/optional.adoc" %} 
     {% else %}
 |{^ field.name ^}
 |{^ at(types, field.type) ^}
