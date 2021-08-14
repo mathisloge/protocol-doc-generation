@@ -50,7 +50,7 @@ bool Generator::parseSchemaFiles(const FilesList &files)
 bool Generator::write()
 {
     //! \todo base on program options
-    inja::Environment env{"D:/dev/protocol-doc-generation/templates/latex/", "D:/dev/commsdsl_latex_text/latex/gen/"};
+    inja::Environment env{"D:/dev/protocol-doc-generation/templates/asciidoc/", "D:/dev/commsdsl_text/asciidoc/gen/"};
     const auto lang_file = "D:/dev/protocol-doc-generation/templates/lang_en.json";
     const auto custom_file = "D:/dev/protocol-doc-generation/templates/custom.json";
 
@@ -59,6 +59,9 @@ bool Generator::write()
     env.set_comment("{#", "#}");    // Comments
     env.set_statement("{%", "%}");  // Statements {% %} for many things, see below
     env.set_line_statement("##");   // Line statements ## (just an opener)
+
+    env.set_trim_blocks(true);
+    env.set_lstrip_blocks(true);
 
     env.add_callback("latexText", 1, [](inja::Arguments &args) {
         auto replace_all = [](std::string &inout, std::string_view what, std::string_view with) -> std::size_t {
@@ -94,9 +97,9 @@ bool Generator::write()
     // try
     // {
     // std::cout << env.render_file("platforms.tex", json) << std::endl;
-    env.write("platforms.tex", json, "platforms.tex");
-    env.write("frames.tex", json, "frames.tex");
-    env.write("messages.tex", json, "messages.tex");
+    env.write("platforms.adoc", json, "platforms.adoc");
+    env.write("frames.adoc", json, "frames.adoc");
+    env.write("messages.adoc", json, "messages.adoc");
     // }
     // catch (const std::exception &ex)
     // {

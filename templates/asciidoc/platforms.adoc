@@ -1,0 +1,11 @@
+== {^ platforms.title ^}
+{% if existsIn(platforms, "abstract") %}
+{^ platforms.abstract ^}
+{% endif %}
+
+{% for pkey, platform in platforms.platforms %}
+=== {^ platform.name ^}
+{% if existsIn(platform, "description") %}
+{^ platform.description ^}
+{% endif %}
+{% endfor %}

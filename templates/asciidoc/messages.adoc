@@ -1,0 +1,38 @@
+== {^ messages.title ^}
+
+{% if existsIn(messages, "abstract") %}
+{^- messages.abstract -^}
+{% endif %}
+
+
+{% for mkey, message in messages.messages %}
+
+=== {^ message.name ^}
+{^ message.description ^}
+
+[cols=7*,options=header]
+|===
+|Name
+|Description
+|Bytes
+|Unit
+|Scaling
+|since version
+|deprecated since
+
+{% for fkey, field in message.fields %}
+{% if field.kind == 0 %} 
+{% include "fields/int.adoc" %} 
+{% else %}
+|{^ field.name ^}
+|{% if existsIn(field, "description") %} {^ field.description ^} {% endif %}
+|{% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %}
+|{% if existsIn(field, "units") %} {^ at(units, field.units) ^} {% else %} - {% endif %} 
+|{% if existsIn(field, "scaling") %} {^ field.scaling.0 / field.scaling.1 ^} {% else %} - {% endif %}
+|{% if existsIn(field, "minVersion") %} {^ field.minVersion ^} {% else %} - {% endif %}
+|{% if existsIn(field, "deprecatedSice") %} {^ field.deprecatedSice ^} {% else %} - {% endif %}
+{% endif %}
+{% endfor %}
+
+|===
+{% endfor  %}

@@ -1,0 +1,11 @@
+|{^ field.name ^}
+{% if existsIn(field, "description") %} 
+|{^ field.description ^} --- {% if length(field.range) > 0 %} Range: ## for range in field.range {^ range.min ^} - {^ range.max ^} ## endfor {% endif %}
+{% else %}
+|
+{% endif %}
+|{% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %}
+|{% if existsIn(field, "units") %} {^ at(units, field.units) ^} {% else %} - {% endif %}
+|{% if existsIn(field, "scaling") %} {^ field.scaling.0 / field.scaling.1 ^} {% else %} - {% endif %}
+|{% if existsIn(field, "minVersion") %} {^ field.minVersion ^} {% else %} - {% endif %}
+|{% if existsIn(field, "deprecatedSice") %} {^ field.deprecatedSice ^} {% else %} - {% endif %}

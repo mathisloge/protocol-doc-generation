@@ -1,0 +1,10 @@
+== {^ frames.title ^}
+
+{% if existsIn(frames, "abstract") %}
+{^ frames.abstract ^}
+{% endif %}
+
+{% for fkey, frame in frames.frames %}
+=== {^ frame.name ^}
+{^ frame.description ^}
+{% endfor %}
