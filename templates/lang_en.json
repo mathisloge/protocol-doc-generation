@@ -63,6 +63,9 @@
         "uint64": "uint",
         "intvar": "intvar",
         "uintvar": "uintvar",
+        "float": "float",
+        "double": "double",
+        "bitfield": "bitfield",
         "unknown": "unknown"
     }
 }

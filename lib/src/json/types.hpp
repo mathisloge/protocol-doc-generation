@@ -1,4 +1,5 @@
 #pragma once
+#include <commsdsl/FloatField.h>
 #include <commsdsl/IntField.h>
 namespace protodoc
 {
@@ -18,6 +19,19 @@ constexpr const char *TypeToString(commsdsl::IntField::Type type)
     case Type::Uint64: return "uint64";
     case Type::Intvar: return "intvar";
     case Type::Uintvar: return "uintvar";
+    default: return "unknown";
+    }
+    // clang-format on
+}
+
+constexpr const char *TypeToString(commsdsl::FloatField::Type type)
+{
+    using Type = commsdsl::FloatField::Type;
+    // clang-format off
+    switch (type)
+    {
+    case Type::Float: return "float";
+    case Type::Double: return "double";
     default: return "unknown";
     }
     // clang-format on

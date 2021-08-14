@@ -1,14 +1,8 @@
 |{^ field.name ^}
-|{^ at(types, field.type) ^}
+|{^ at(types, "bitfield") ^}
 |{% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %}
 |{^ default(field.description, "") ^}
-{% if existsIn(field, "enum") %}
-
-{% for fkey, enum in field.enum %}
-* {^ enum.name ^}: {^ enum.value ^}
-{% endfor %}
-{% endif %}
-|{% if existsIn(field, "units") %} {^ at(units, field.units) ^} {% else %} - {% endif %}
-|{% if existsIn(field, "scaling") %} {^ field.scaling.0 / field.scaling.1 ^} {% else %} - {% endif %}
+|
+|
 |{% if existsIn(field, "minVersion") %} {^ field.minVersion ^} {% else %} - {% endif %}
 |{% if existsIn(field, "deprecatedSice") %} {^ field.deprecatedSice ^} {% else %} - {% endif %}

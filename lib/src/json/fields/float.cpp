@@ -1,16 +1,15 @@
-#include "int.hpp"
-#include "../endian.hpp"
+#include "float.hpp"
 #include "../types.hpp"
 #include "../units.hpp"
+#include "../endian.hpp"
 
 namespace protodoc
 {
 
-void to_json(nlohmann::json &j, const commsdsl::IntField &f)
+void to_json(nlohmann::json &j, const commsdsl::FloatField &f)
 {
     j["type"] = TypeToString(f.type());
     j["endian"] = EndianToString(f.endian());
-    j["scaling"] = f.scaling();
     if (f.units() != commsdsl::Units::Unknown && f.units() < commsdsl::Units::NumOfValues)
     {
         j["units"] = UnitsToString(f.units());

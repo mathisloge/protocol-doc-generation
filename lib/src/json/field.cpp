@@ -1,5 +1,7 @@
 #include "field.hpp"
+#include "fields/bitfield.hpp"
 #include "fields/enum.hpp"
+#include "fields/float.hpp"
 #include "fields/int.hpp"
 namespace protodoc
 {
@@ -23,6 +25,12 @@ void to_json(nlohmann::json &j, const commsdsl::Field &f)
         break;
     case commsdsl::Field::Kind::Int:
         to_json(j, commsdsl::IntField{f});
+        break;
+    case commsdsl::Field::Kind::Float:
+        to_json(j, commsdsl::FloatField{f});
+        break;
+    case commsdsl::Field::Kind::Bitfield:
+        to_json(j, commsdsl::BitfieldField{f});
         break;
     default:
         j["type"] = "unknown";

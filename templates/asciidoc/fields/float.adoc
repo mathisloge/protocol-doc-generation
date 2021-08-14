@@ -12,6 +12,6 @@ Range:
         {% endif %} 
     {% endif %}
 |{% if existsIn(field, "units") %} {^ at(units, field.units) ^} {% else %} - {% endif %}
-|{% if existsIn(field, "scaling") %} stem:[frac({^ field.scaling.0 ^})({^ field.scaling.1 ^})] {% else %} - {% endif %}
+|
 |{% if existsIn(field, "minVersion") %} {^ field.minVersion ^} {% else %} - {% endif %}
 |{% if existsIn(field, "deprecatedSice") %} {^ field.deprecatedSice ^} {% else %} - {% endif %}

@@ -4,7 +4,9 @@ set(SRCS
     src/diagrams/ascii.cpp
     src/json/platform.cpp
     src/json/field.cpp
+    src/json/fields/bitfield.cpp
     src/json/fields/enum.cpp
+    src/json/fields/float.cpp
     src/json/fields/int.cpp
     src/json/frame.cpp
     src/json/layer.cpp
@@ -14,10 +16,13 @@ set(HDRS
     include/generator.hpp
     include/diagram.hpp
     include/diagrams/ascii.hpp
+    src/json/endian.hpp
     src/json/json.hpp
     src/json/platform.hpp
     src/json/field.hpp
+    src/json/fields/bitfield.hpp
     src/json/fields/enum.hpp
+    src/json/fields/float.hpp
     src/json/fields/int.hpp
     src/json/units.hpp
     src/json/types.hpp
