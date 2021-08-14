@@ -1,9 +1,10 @@
-|{^ field.name ^}
-|{^ at(types, field.type) ^}
-|{^ field.minLength ^} or {^ field.maxLength ^}
-|{^ default(field.description, "") ^}
+{% extends "field.adoc" %}
+{% block type %}{^ super() ^}{% endblock %}
+{% block length %}{^ field.minLength ^} or {^ field.maxLength ^}{% endblock %}
+{% block description %}
+{^ super() ^}
 Condition: {^ default(field.condition, "none") ^}
-|
-|
-|{% if existsIn(field, "minVersion") %} {^ field.minVersion ^} {% else %} - {% endif %}
-|{% if existsIn(field, "deprecatedSice") %} {^ field.deprecatedSice ^} {% else %} - {% endif %}
+{% endblock %}
+
+{% block minVersion %}{^ super() ^}{% endblock %}
+{% block deprecatedSince %}{^ super() ^}{% endblock %}

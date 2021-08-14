@@ -1,17 +1,18 @@
-|{^ field.name ^}
-|{^ at(types, field.type) ^}
-|{% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %}
-|{^ default(field.description, "") ^}
-    {% if existsIn(field, "range") %} 
-        {% if length(field.range) > 0 %} 
+{% extends "field.adoc" %}
+{% block type %}{^ super() ^}{% endblock %}
+{% block length %}{^ super() ^}{% endblock %}
+{% block description %}
+{^ super() ^}
+{% if existsIn(field, "range") %} 
+    {% if length(field.range) > 0 %} 
 Range: 
 
 ## for range in field.range 
 * {^ range.min ^} - {^ range.max ^} 
 ## endfor 
-        {% endif %} 
-    {% endif %}
-|{% if existsIn(field, "units") %} {^ at(units, field.units) ^} {% else %} - {% endif %}
-|
-|{% if existsIn(field, "minVersion") %} {^ field.minVersion ^} {% else %} - {% endif %}
-|{% if existsIn(field, "deprecatedSice") %} {^ field.deprecatedSice ^} {% else %} - {% endif %}
+    {% endif %} 
+{% endif %}
+{% endblock %}
+{% block units %}{^ super() ^}{% endblock %}
+{% block minVersion %}{^ super() ^}{% endblock %}
+{% block deprecatedSince %}{^ super() ^}{% endblock %}

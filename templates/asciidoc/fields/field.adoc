@@ -1,0 +1,8 @@
+|{^ field.name ^}
+|{% block type %}{^ at(types, field.type) ^}{% endblock %}
+|{% block length %}{% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %}{% endblock %}
+|{% block description %}{^ default(field.description, "") ^}{% endblock %}
+|{% block units %}{% if existsIn(field, "units") %} {^ at(units, field.units) ^} {% else %} - {% endif %}{% endblock %}
+|{% block scaling %}{% if existsIn(field, "scaling") %} stem:[frac({^ field.scaling.0 ^})({^ field.scaling.1 ^})] {% else %} - {% endif %}{% endblock %}
+|{% block minVersion %}{% if existsIn(field, "minVersion") %} {^ field.minVersion ^} {% else %} - {% endif %}{% endblock %}
+|{% block deprecatedSince %}{% if existsIn(field, "deprecatedSince") %} {^ field.deprecatedSince ^} {% else %} - {% endif %}{% endblock %}

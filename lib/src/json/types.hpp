@@ -4,6 +4,10 @@
 #include <commsdsl/IntField.h>
 namespace protodoc
 {
+
+inline constexpr std::string_view kBitfieldType = "bitfield";
+inline constexpr std::string_view kOptionalType = "optional";
+
 constexpr const char *TypeToString(commsdsl::IntField::Type type)
 {
     using Type = commsdsl::IntField::Type;
@@ -37,6 +41,4 @@ constexpr const char *TypeToString(commsdsl::FloatField::Type type)
     }
     // clang-format on
 }
-
-inline constexpr std::string_view kOptionalType = "optional";
 } // namespace protodoc

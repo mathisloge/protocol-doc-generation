@@ -1,8 +1,6 @@
-|{^ field.name ^}
-|{^ at(types, "bitfield") ^}
-|{% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %}
-|{^ default(field.description, "") ^}
-|
-|
-|{% if existsIn(field, "minVersion") %} {^ field.minVersion ^} {% else %} - {% endif %}
-|{% if existsIn(field, "deprecatedSice") %} {^ field.deprecatedSice ^} {% else %} - {% endif %}
+{% extends "field.adoc" %}
+{% block type %}{^ super() ^}{% endblock %}
+{% block length %}{^ super() ^}{% endblock %}
+{% block description %}{^ super() ^}{% endblock %}
+{% block minVersion %}{^ super() ^}{% endblock %}
+{% block deprecatedSince %}{^ super() ^}{% endblock %}

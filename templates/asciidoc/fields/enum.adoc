@@ -1,14 +1,18 @@
-|{^ field.name ^}
-|{^ at(types, field.type) ^}
-|{% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %}
-|{^ default(field.description, "") ^}
+{% extends "field.adoc" %}
+{% block type %}{^ super() ^}{% endblock %}
+{% block length %}{^ super() ^}{% endblock %}
+
+{% block description %}
+{^ super() ^}
 {% if existsIn(field, "enum") %}
 
 {% for fkey, enum in field.enum %}
 * {^ enum.name ^}: {^ enum.value ^}
 {% endfor %}
 {% endif %}
-|{% if existsIn(field, "units") %} {^ at(units, field.units) ^} {% else %} - {% endif %}
-|{% if existsIn(field, "scaling") %} {^ field.scaling.0 / field.scaling.1 ^} {% else %} - {% endif %}
-|{% if existsIn(field, "minVersion") %} {^ field.minVersion ^} {% else %} - {% endif %}
-|{% if existsIn(field, "deprecatedSice") %} {^ field.deprecatedSice ^} {% else %} - {% endif %}
+{% endblock %}
+
+{% block units %}{^ super() ^}{% endblock %}
+{% block scaling %}{^ super() ^}{% endblock %}
+{% block minVersion %}{^ super() ^}{% endblock %}
+{% block deprecatedSince %}{^ super() ^}{% endblock %}
