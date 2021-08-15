@@ -4,6 +4,7 @@
 #include "fields/float.hpp"
 #include "fields/int.hpp"
 #include "fields/optional.hpp"
+#include "fields/ref.hpp"
 namespace protodoc
 {
 
@@ -32,6 +33,9 @@ void to_json(nlohmann::json &j, const commsdsl::Field &f)
         break;
     case commsdsl::Field::Kind::Bitfield:
         to_json(j, commsdsl::BitfieldField{f});
+        break;
+    case commsdsl::Field::Kind::Ref:
+        to_json(j, commsdsl::RefField{f});
         break;
     case commsdsl::Field::Kind::Optional:
         to_json(j, commsdsl::OptionalField{f});

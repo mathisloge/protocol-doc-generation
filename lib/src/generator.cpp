@@ -105,7 +105,6 @@ bool Generator::write()
     // {
     //     std::cout << ex.what() << std::endl;
     // }
-
     return written_dsl;
 }
 bool Generator::writePlatforms(nlohmann::json &json)

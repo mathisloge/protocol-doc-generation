@@ -9,6 +9,7 @@ set(SRCS
     src/json/fields/float.cpp
     src/json/fields/int.cpp
     src/json/fields/optional.cpp
+    src/json/fields/ref.cpp
     src/json/frame.cpp
     src/json/layer.cpp
     src/json/message.cpp
@@ -26,6 +27,7 @@ set(HDRS
     src/json/fields/float.hpp
     src/json/fields/int.hpp
     src/json/fields/optional.hpp
+    src/json/fields/ref.hpp
     src/json/units.hpp
     src/json/types.hpp
     src/json/frame.hpp
