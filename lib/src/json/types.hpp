@@ -15,6 +15,7 @@ inline constexpr std::string_view kListType = "list";
 inline constexpr std::string_view kRefType = "ref";
 inline constexpr std::string_view kSetType = "set";
 inline constexpr std::string_view kStringType = "string";
+inline constexpr std::string_view kVariantType = "variant";
 
 constexpr const char *SemanticTypeToString(commsdsl::Field::SemanticType type)
 {

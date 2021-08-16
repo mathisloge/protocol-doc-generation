@@ -73,6 +73,7 @@
         "ref": "ref",
         "set": "set",
         "string": "string",
+        "variant": "variant",
         "unknown": "unknown"
     },
     "semanticTypes": {

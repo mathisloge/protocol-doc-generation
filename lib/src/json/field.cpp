@@ -10,6 +10,7 @@
 #include "fields/ref.hpp"
 #include "fields/set.hpp"
 #include "fields/string.hpp"
+#include "fields/variant.hpp"
 #include "types.hpp"
 namespace protodoc
 {
@@ -62,7 +63,9 @@ void to_json(nlohmann::json &j, const commsdsl::Field &f)
     case commsdsl::Field::Kind::Optional:
         to_json(j, commsdsl::OptionalField{f});
         break;
-
+    case commsdsl::Field::Kind::Variant:
+        to_json(j, commsdsl::VariantField{f});
+        break;
     default:
         j["type"] = "unknown";
         break;

@@ -15,6 +15,7 @@ set(SRCS
     src/json/fields/list.cpp
     src/json/fields/set.cpp
     src/json/fields/string.cpp
+    src/json/fields/variant.cpp
     src/json/frame.cpp
     src/json/layer.cpp
     src/json/message.cpp
@@ -38,6 +39,7 @@ set(HDRS
     src/json/fields/list.hpp
     src/json/fields/set.hpp
     src/json/fields/string.hpp
+    src/json/fields/variant.hpp
     src/json/units.hpp
     src/json/types.hpp
     src/json/frame.hpp
@@ -45,21 +47,18 @@ set(HDRS
     src/json/message.hpp
 )
 
-add_library(protodoc
-    ${SRCS}
-    ${HDRS}
-)
-add_library(protodoc::protodoc ALIAS protodoc)
+add_library(libprotodoc ${SRCS} ${HDRS})
+add_library(protodoc::libprotodoc ALIAS libprotodoc)
 
-target_include_directories(protodoc PUBLIC 
+target_include_directories(libprotodoc PUBLIC 
     $<INSTALL_INTERFACE:include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
 
-set_property(TARGET protodoc PROPERTY CXX_STANDARD 20)
-target_link_libraries(protodoc PRIVATE 
+set_property(TARGET libprotodoc PROPERTY CXX_STANDARD 20)
+target_link_libraries(libprotodoc PRIVATE 
     commsdsl::commsdsl
     spdlog::spdlog
     pantor::inja
 )
-target_compile_definitions(protodoc PRIVATE -DINJA_THROW=throw)
+target_compile_definitions(libprotodoc PRIVATE -DINJA_THROW=throw)
