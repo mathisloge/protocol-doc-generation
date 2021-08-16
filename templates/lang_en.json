@@ -67,6 +67,16 @@
         "double": "double",
         "bitfield": "bitfield",
         "optional": "optional",
+        "data": "bytes",
+        "bundle": "bundle",
+        "list": "list",
+        "unknown": "unknown"
+    },
+    "semanticTypes": {
+        "none": "",
+        "version": "Version",
+        "msgId": "Message ID",
+        "length": "Length",
         "unknown": "unknown"
     }
 }
