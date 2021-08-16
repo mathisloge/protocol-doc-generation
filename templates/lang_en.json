@@ -70,6 +70,9 @@
         "data": "bytes",
         "bundle": "bundle",
         "list": "list",
+        "ref": "ref",
+        "set": "set",
+        "string": "string",
         "unknown": "unknown"
     },
     "semanticTypes": {

@@ -8,7 +8,7 @@ namespace protodoc
 
 void to_json(nlohmann::json &j, const commsdsl::DataField &f)
 {
-    j["type"] = kDataType;
+    j[kKeyType] = kDataType;
     if (f.hasLengthPrefixField())
         to_json(j["lengthField"], f.lengthPrefixField());
     else if (!f.detachedPrefixFieldName().empty())

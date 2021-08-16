@@ -8,8 +8,8 @@ namespace protodoc
 
 void to_json(nlohmann::json &j, const commsdsl::FloatField &f)
 {
-    j["type"] = TypeToString(f.type());
-    j["endian"] = EndianToString(f.endian());
+    j[kKeyType] = TypeToString(f.type());
+    j[kKeyEndian] = EndianToString(f.endian());
     if (f.units() != commsdsl::Units::Unknown && f.units() < commsdsl::Units::NumOfValues)
     {
         j["units"] = UnitsToString(f.units());

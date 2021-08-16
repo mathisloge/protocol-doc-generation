@@ -8,7 +8,7 @@ namespace protodoc
 
 void to_json(nlohmann::json &j, const commsdsl::BundleField &f)
 {
-    j["type"] = kBundleType;
+    j[kKeyType] = kBundleType;
 
     for (const auto &m : f.members())
         to_json(j["members"][m.name()], m);

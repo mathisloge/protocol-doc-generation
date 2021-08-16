@@ -5,11 +5,16 @@
 namespace protodoc
 {
 
+inline constexpr const char *kKeyType = "type";
+
 inline constexpr std::string_view kBitfieldType = "bitfield";
 inline constexpr std::string_view kOptionalType = "optional";
 inline constexpr std::string_view kDataType = "data";
 inline constexpr std::string_view kBundleType = "bundle";
 inline constexpr std::string_view kListType = "list";
+inline constexpr std::string_view kRefType = "ref";
+inline constexpr std::string_view kSetType = "set";
+inline constexpr std::string_view kStringType = "string";
 
 constexpr const char *SemanticTypeToString(commsdsl::Field::SemanticType type)
 {

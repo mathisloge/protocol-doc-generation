@@ -1,8 +1,10 @@
 #pragma once
+#include <string_view>
 #include <commsdsl/Endian.h>
 
 namespace protodoc
 {
+inline constexpr const char * kKeyEndian = "endian";
 constexpr const char *EndianToString(commsdsl::Endian type)
 {
     using Endian = commsdsl::Endian;

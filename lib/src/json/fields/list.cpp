@@ -8,7 +8,7 @@ namespace protodoc
 
 void to_json(nlohmann::json &j, const commsdsl::ListField &f)
 {
-    j["type"] = kListType;
+    j[kKeyType] = kListType;
 
     if (f.hasLengthPrefixField())
     {

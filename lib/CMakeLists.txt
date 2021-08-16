@@ -13,6 +13,8 @@ set(SRCS
     src/json/fields/data.cpp
     src/json/fields/bundle.cpp
     src/json/fields/list.cpp
+    src/json/fields/set.cpp
+    src/json/fields/string.cpp
     src/json/frame.cpp
     src/json/layer.cpp
     src/json/message.cpp
@@ -34,6 +36,8 @@ set(HDRS
     src/json/fields/data.hpp
     src/json/fields/bundle.hpp
     src/json/fields/list.hpp
+    src/json/fields/set.hpp
+    src/json/fields/string.hpp
     src/json/units.hpp
     src/json/types.hpp
     src/json/frame.hpp

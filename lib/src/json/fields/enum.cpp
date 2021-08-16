@@ -5,7 +5,7 @@ namespace protodoc
 
 void to_json(nlohmann::json &j, const commsdsl::EnumField &f)
 {
-    j["type"] = TypeToString(f.type());
+    j[kKeyType] = TypeToString(f.type());
     for (const auto &value : f.values())
     {
         auto &val_json = j["enum"][std::to_string(value.second.m_value)];

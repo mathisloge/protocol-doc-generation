@@ -1,10 +1,11 @@
 #include "ref.hpp"
 #include "../field.hpp"
-
+#include "../types.hpp"
 namespace protodoc
 {
 void to_json(nlohmann::json &j, const commsdsl::RefField &f)
 {
-    to_json(j, f.field());
+    j["type"] = kRefType;
+    to_json(j["field"], f.field());
 }
 } // namespace protodoc

@@ -8,6 +8,8 @@
 #include "fields/list.hpp"
 #include "fields/optional.hpp"
 #include "fields/ref.hpp"
+#include "fields/set.hpp"
+#include "fields/string.hpp"
 #include "types.hpp"
 namespace protodoc
 {
@@ -33,6 +35,9 @@ void to_json(nlohmann::json &j, const commsdsl::Field &f)
     case commsdsl::Field::Kind::Enum:
         to_json(j, commsdsl::EnumField{f});
         break;
+    case commsdsl::Field::Kind::Set:
+        to_json(j, commsdsl::SetField{f});
+        break;
     case commsdsl::Field::Kind::Float:
         to_json(j, commsdsl::FloatField{f});
         break;
@@ -41,6 +46,9 @@ void to_json(nlohmann::json &j, const commsdsl::Field &f)
         break;
     case commsdsl::Field::Kind::Bundle:
         to_json(j, commsdsl::BundleField{f});
+        break;
+    case commsdsl::Field::Kind::String:
+        to_json(j, commsdsl::StringField{f});
         break;
     case commsdsl::Field::Kind::Data:
         to_json(j, commsdsl::DataField{f});
