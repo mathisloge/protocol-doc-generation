@@ -6,9 +6,11 @@
 {^ super() ^}
 {% if existsIn(field, "enum") %}
 
-{% for fkey, enum in field.enum %}
-* {^ enum.name ^}: {^ enum.value ^}
-{% endfor %}
+{% set sortedEnum = sortEnum(field.enum, "value") %}
+## for enumName in sortedEnum
+{% set enum = at(field.enum, enumName) %}
+* {^ default(enum.displayName, enum.name) ^}: {^ enum.value ^}
+## endfor
 {% endif %}
 {% endblock %}
 

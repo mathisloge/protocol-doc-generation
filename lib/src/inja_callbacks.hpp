@@ -3,5 +3,6 @@
 #include <inja/inja.hpp>
 namespace protodoc::callbacks
 {
-std::string latexText(inja::Arguments &args);
-}
+inja::json latexText(inja::Arguments &args);
+inja::json sortEnum(inja::Arguments &args);
+} // namespace protodoc::callbacks

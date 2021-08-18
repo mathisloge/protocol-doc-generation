@@ -8,9 +8,10 @@ void to_json(json_obj &j, const commsdsl::EnumField &f)
     j[kKeyType] = TypeToString(f.type());
     for (const auto &value : f.values())
     {
-        auto &val_json = j["enum"][std::to_string(value.second.m_value)];
+        auto &val_json = j["enum"][value.first];
         val_json[kKeyFieldName] = value.first;
-        val_json[kKeyFieldDisplayName] = value.second.m_displayName;
+        if (!value.second.m_displayName.empty())
+            val_json[kKeyFieldDisplayName] = value.second.m_displayName;
         val_json["value"] = value.second.m_value;
         if (!value.second.m_description.empty())
             val_json[kKeyFieldDescription] = value.second.m_description;

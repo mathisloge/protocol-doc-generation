@@ -64,6 +64,9 @@ bool Generator::write()
     env.set_lstrip_blocks(true); // remove whitespaces and tabs from the beginning to the start of a block
 
     env.add_callback("latexText", 1, callbacks::latexText);
+    env.add_callback("sortEnum", 2, callbacks::sortEnum);
+
+
 
     json_obj json;
     {
