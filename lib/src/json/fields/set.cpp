@@ -7,11 +7,11 @@ namespace protodoc
 void to_json(json_obj &j, const commsdsl::SetField::BitInfo &f)
 {
     j["index"] = f.m_idx;
-    j["displayName"] = f.m_displayName;
-    j["description"] = f.m_description;
-    j["sinceVersion"] = f.m_sinceVersion;
+    j[kKeyFieldDisplayName] = f.m_displayName;
+    j[kKeyFieldDescription] = f.m_description;
+    j[kKeyFieldSinceVersion] = f.m_sinceVersion;
     if (f.m_deprecatedSince != commsdsl::Protocol::notYetDeprecated())
-        j["deprecatedSince"] = f.m_deprecatedSince;
+        j[kKeyFieldDeprecatedSince] = f.m_deprecatedSince;
 }
 
 void to_json(json_obj &j, const commsdsl::SetField &f)

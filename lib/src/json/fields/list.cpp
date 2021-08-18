@@ -35,7 +35,7 @@ void to_json(json_obj &j, const commsdsl::ListField &f)
     j["fixedElemLength"] = f.elemFixedLength();
     j["fixedCount"] = f.fixedCount();
 
-    to_json(j["element"], f.elementField());
+    to_json(j[kKeyFieldField], f.elementField());
 }
 
 } // namespace protodoc

@@ -17,17 +17,17 @@ namespace protodoc
 
 void to_json(json_obj &j, const commsdsl::Field &f)
 {
-    j["name"] = f.displayName().empty() ? f.name() : f.displayName();
-    j["semanticType"] = SemanticTypeToString(f.semanticType());
-    j["kind"] = f.kind();
+    j[kKeyFieldName] = f.displayName().empty() ? f.name() : f.displayName();
+    j[kKeyFieldSemanticType] = SemanticTypeToString(f.semanticType());
+    j[kKeyFieldKind] = f.kind();
     if (!f.description().empty())
-        j["description"] = f.description();
+        j[kKeyFieldDescription] = f.description();
     if (commsdsl::Protocol::notYetDeprecated() != f.deprecatedSince())
-        j["deprecatedSince"] = f.deprecatedSince();
+        j[kKeyFieldDeprecatedSince] = f.deprecatedSince();
     if (f.sinceVersion() > 0)
-        j["sinceVersion"] = f.sinceVersion();
-    j["minLength"] = f.minLength();
-    j["maxLength"] = f.maxLength();
+        j[kKeyFieldSinceVersion] = f.sinceVersion();
+    j[kKeyFieldMinLength] = f.minLength();
+    j[kKeyFieldMaxLength] = f.maxLength();
     switch (f.kind())
     {
     case commsdsl::Field::Kind::Int:
@@ -67,7 +67,7 @@ void to_json(json_obj &j, const commsdsl::Field &f)
         to_json(j, commsdsl::VariantField{f});
         break;
     default:
-        j["type"] = "unknown";
+        j[kKeyType] = "unknown";
         break;
     }
 }

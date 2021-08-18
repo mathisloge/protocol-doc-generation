@@ -5,7 +5,7 @@ namespace protodoc
 {
 void to_json(json_obj &j, const commsdsl::RefField &f)
 {
-    j["type"] = kRefType;
-    to_json(j["field"], f.field());
+    j[kKeyType] = kRefType;
+    to_json(j[kKeyFieldField], f.field());
 }
 } // namespace protodoc

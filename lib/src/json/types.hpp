@@ -2,10 +2,25 @@
 #include <string_view>
 #include <commsdsl/FloatField.h>
 #include <commsdsl/IntField.h>
+
 namespace protodoc
 {
 
 inline constexpr const char *kKeyType = "type";
+inline constexpr const char *kKeyFieldName = "name";
+inline constexpr const char *kKeyFieldDisplayName = "displayName";
+inline constexpr const char *kKeyFieldSemanticType = "semanticType";
+inline constexpr const char *kKeyFieldKind = "kind";
+inline constexpr const char *kKeyFieldDescription = "description";
+inline constexpr const char *kKeyFieldDeprecatedSince = "deprecatedSince";
+inline constexpr const char *kKeyFieldSinceVersion = "sinceVersion";
+inline constexpr const char *kKeyFieldMinLength = "minLength";
+inline constexpr const char *kKeyFieldMaxLength = "maxLength";
+inline constexpr const char *kKeyFieldUnits = "units";
+inline constexpr const char *kKeyFieldScaling = "scaling";
+inline constexpr const char *kKeyFieldRange = "range";
+inline constexpr const char *kKeyFieldMembers = "members";
+inline constexpr const char *kKeyFieldField = "field";
 
 inline constexpr std::string_view kBitfieldType = "bitfield";
 inline constexpr std::string_view kOptionalType = "optional";
