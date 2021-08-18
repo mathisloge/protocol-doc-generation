@@ -22,9 +22,9 @@ class Generator
   private:
     bool parseSchemaFiles(const FilesList &files);
     bool write();
-    bool writePlatforms(nlohmann::json &json);
-    bool writeFrames(nlohmann::json &json);
-    bool writeMessages(nlohmann::json &json);
+    bool writePlatforms(nlohmann::ordered_json &json);
+    bool writeFrames(nlohmann::ordered_json &json);
+    bool writeMessages(nlohmann::ordered_json &json);
 
   private:
     commsdsl::Protocol protocol_;

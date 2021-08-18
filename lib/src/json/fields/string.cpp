@@ -4,7 +4,7 @@
 
 namespace protodoc
 {
-void to_json(nlohmann::json &j, const commsdsl::StringField &f)
+void to_json(json_obj &j, const commsdsl::StringField &f)
 {
     j[kKeyType] = kStringType;
 

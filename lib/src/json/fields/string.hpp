@@ -1,8 +1,8 @@
 #pragma once
 #include <commsdsl/StringField.h>
-#include <nlohmann/json.hpp>
+#include "../def.hpp"
 
 namespace protodoc
 {
-void to_json(nlohmann::json &j, const commsdsl::StringField &f);
+void to_json(json_obj &j, const commsdsl::StringField &f);
 } // namespace protodoc

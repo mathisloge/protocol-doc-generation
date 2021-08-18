@@ -1,8 +1,8 @@
 #pragma once
 #include <commsdsl/Message.h>
-#include <nlohmann/json.hpp>
+#include "def.hpp"
 
 namespace protodoc
 {
-void to_json(nlohmann::json &j, const commsdsl::Message &message);
+void to_json(json_obj &j, const commsdsl::Message &message);
 } // namespace protodoc

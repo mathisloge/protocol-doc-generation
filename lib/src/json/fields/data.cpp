@@ -6,7 +6,7 @@
 namespace protodoc
 {
 
-void to_json(nlohmann::json &j, const commsdsl::DataField &f)
+void to_json(json_obj &j, const commsdsl::DataField &f)
 {
     j[kKeyType] = kDataType;
     if (f.hasLengthPrefixField())

@@ -8,6 +8,7 @@
 #include <inja/environment.hpp>
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
+#include "json/def.hpp"
 #include "json/json.hpp"
 namespace protodoc
 {
@@ -78,10 +79,10 @@ bool Generator::write()
         return text;
     });
 
-    nlohmann::json json;
+    json_obj json;
     {
         std::ifstream ifs{custom_file};
-        auto custom_json = nlohmann::json::parse(ifs);
+        auto custom_json = json_obj::parse(ifs);
         json.update(custom_json);
     }
 
@@ -89,7 +90,7 @@ bool Generator::write()
 
     { // update all keys with the lang specs
         std::ifstream ifs{lang_file};
-        const auto lang_json = nlohmann::json::parse(ifs);
+        const auto lang_json = json_obj::parse(ifs);
         json.merge_patch(lang_json);
     }
     std::ofstream MyFile("test.json");
@@ -107,20 +108,20 @@ bool Generator::write()
     // }
     return written_dsl;
 }
-bool Generator::writePlatforms(nlohmann::json &json)
+bool Generator::writePlatforms(json_obj &json)
 {
     if (!json[kKeyPlatforms].contains(kKeyPlatforms))
-        json[kKeyPlatforms][kKeyPlatforms] = nlohmann::json{};
+        json[kKeyPlatforms][kKeyPlatforms] = json_obj{};
 
     to_json(json[kKeyPlatforms][kKeyPlatforms], protocol_.platforms());
 
     return true;
 }
 
-bool Generator::writeFrames(nlohmann::json &json)
+bool Generator::writeFrames(json_obj &json)
 {
     if (!json[kKeyFrames].contains(kKeyFrames))
-        json[kKeyFrames][kKeyFrames] = nlohmann::json{};
+        json[kKeyFrames][kKeyFrames] = json_obj{};
     for (const auto &ns : protocol_.namespaces())
     {
         for (const auto &frame : ns.frames())
@@ -132,10 +133,12 @@ bool Generator::writeFrames(nlohmann::json &json)
     return true;
 }
 
-bool Generator::writeMessages(nlohmann::json &json)
+bool Generator::writeMessages(json_obj &json)
 {
     if (!json[kKeyMessages].contains(kKeyMessages))
-        json[kKeyMessages][kKeyMessages] = nlohmann::json{};
+        json[kKeyMessages][kKeyMessages] = json_obj{};
+    else
+        json[kKeyMessages][kKeyMessages] = json_obj{json[kKeyMessages][kKeyMessages]};
 
     for (const auto &m : protocol_.allMessages())
     {

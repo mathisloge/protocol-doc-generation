@@ -21,28 +21,7 @@
 |since version
 |deprecated since
 
-{% for fkey, field in message.fields %}
-    {% if field.kind == 0 %} 
-        {% include "fields/int.adoc" %} 
-    {% else if field.kind == 1 %}
-        {% include "fields/enum.adoc" %}     
-    {% else if field.kind == 3 %}
-        {% include "fields/float.adoc" %} 
-    {% else if field.kind == 4 %}
-        {% include "fields/bitfield.adoc" %} 
-    {% else if field.kind == 10 %}
-        {% include "fields/optional.adoc" %} 
-    {% else %}
-|{^ field.name ^}
-|{^ at(types, field.type) ^}
-|{% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %}
-|{^ default(field.description, "") ^}
-|{% if existsIn(field, "units") %} {^ at(units, field.units) ^} {% else %} - {% endif %} 
-|{% if existsIn(field, "scaling") %} stem:[frac({^ field.scaling.0 ^})({^ field.scaling.1 ^})] {% else %} - {% endif %}
-|{^ default(field.minVersion, "-") ^}
-|{^ default(field.deprecatedSice, "-") ^}
-    {% endif %}
-{% endfor %}
+{% include "message_row.adoc" %} 
 
 |===
 {% endfor  %}

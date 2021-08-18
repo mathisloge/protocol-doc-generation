@@ -31,7 +31,7 @@ static void addCond(std::ostream &cond_str, const commsdsl::OptCond &cond)
     }
 }
 
-void to_json(nlohmann::json &j, const commsdsl::OptionalField &f)
+void to_json(json_obj &j, const commsdsl::OptionalField &f)
 {
     j[kKeyType] = kOptionalType;
     {

@@ -3,7 +3,7 @@
 #include "../types.hpp"
 namespace protodoc
 {
-void to_json(nlohmann::json &j, const commsdsl::RefField &f)
+void to_json(json_obj &j, const commsdsl::RefField &f)
 {
     j["type"] = kRefType;
     to_json(j["field"], f.field());

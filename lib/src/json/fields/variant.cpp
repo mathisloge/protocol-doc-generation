@@ -3,7 +3,7 @@
 #include "../types.hpp"
 namespace protodoc
 {
-void to_json(nlohmann::json &j, const commsdsl::VariantField &f)
+void to_json(json_obj &j, const commsdsl::VariantField &f)
 {
     j[kKeyType] = kVariantType;
     for (const auto &m : f.members())

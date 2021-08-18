@@ -2,7 +2,7 @@
 #include "field.hpp"
 namespace protodoc
 {
-void to_json(nlohmann::json &j, const commsdsl::Layer &f)
+void to_json(json_obj &j, const commsdsl::Layer &f)
 {
     j["name"] = f.name();
     j["description"] = f.description();

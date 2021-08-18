@@ -15,7 +15,7 @@
 namespace protodoc
 {
 
-void to_json(nlohmann::json &j, const commsdsl::Field &f)
+void to_json(json_obj &j, const commsdsl::Field &f)
 {
     j["name"] = f.displayName().empty() ? f.name() : f.displayName();
     j["semanticType"] = SemanticTypeToString(f.semanticType());

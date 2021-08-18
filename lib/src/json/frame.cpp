@@ -3,14 +3,14 @@
 namespace protodoc
 {
 
-void to_json(nlohmann::json &j, const commsdsl::Frame &f)
+void to_json(json_obj &j, const commsdsl::Frame &f)
 {
     j["name"] = f.name();
     j["description"] = f.description();
     to_json(j["fields"], f.layers());
 }
 
-void to_json(nlohmann::json &j, const commsdsl::Frame::LayersList &f)
+void to_json(json_obj &j, const commsdsl::Frame::LayersList &f)
 {
     for (const auto &layer : f)
     {

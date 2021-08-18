@@ -6,7 +6,7 @@
 namespace protodoc
 {
 
-void to_json(nlohmann::json &j, const commsdsl::BundleField &f)
+void to_json(json_obj &j, const commsdsl::BundleField &f)
 {
     j[kKeyType] = kBundleType;
 

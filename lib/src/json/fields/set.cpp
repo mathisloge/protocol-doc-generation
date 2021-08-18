@@ -4,7 +4,7 @@
 
 namespace protodoc
 {
-void to_json(nlohmann::json &j, const commsdsl::SetField::BitInfo &f)
+void to_json(json_obj &j, const commsdsl::SetField::BitInfo &f)
 {
     j["index"] = f.m_idx;
     j["displayName"] = f.m_displayName;
@@ -14,7 +14,7 @@ void to_json(nlohmann::json &j, const commsdsl::SetField::BitInfo &f)
         j["deprecatedSince"] = f.m_deprecatedSince;
 }
 
-void to_json(nlohmann::json &j, const commsdsl::SetField &f)
+void to_json(json_obj &j, const commsdsl::SetField &f)
 {
     j[kKeyType] = kSetType;
     j[kKeyEndian] = EndianToString(f.endian());

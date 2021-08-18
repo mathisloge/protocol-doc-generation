@@ -3,7 +3,7 @@
 namespace protodoc
 {
 
-void to_json(nlohmann::json &j, const commsdsl::EnumField &f)
+void to_json(json_obj &j, const commsdsl::EnumField &f)
 {
     j[kKeyType] = TypeToString(f.type());
     for (const auto &value : f.values())
