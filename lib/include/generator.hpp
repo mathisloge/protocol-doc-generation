@@ -12,8 +12,7 @@ class Generator
   private:
     using FilesList = std::vector<std::filesystem::path>;
     static constexpr const char *kKeyPlatforms = "platforms";
-    static constexpr const char *kKeyFrames = "frames";
-    static constexpr const char *kKeyMessages = "messages";
+    static constexpr const char *kKeyNamespace = "namespaces";
 
   public:
     explicit Generator();
@@ -23,8 +22,7 @@ class Generator
     bool parseSchemaFiles(const FilesList &files);
     bool write();
     bool writePlatforms(nlohmann::ordered_json &json);
-    bool writeFrames(nlohmann::ordered_json &json);
-    bool writeMessages(nlohmann::ordered_json &json);
+    bool writeNamespaces(nlohmann::ordered_json &json);
 
   private:
     commsdsl::Protocol protocol_;

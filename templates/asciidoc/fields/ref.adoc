@@ -1,0 +1,6 @@
+{% extends "field.adoc" %}
+{% block type %}{% set ref_field=at(namespaces.fields, field.field) %}{^ at(types, ref_field.type) ^}{% endblock %}
+{% block length %}{^ super() ^}{% endblock %}
+{% block description %}see <<field_{^ field.field ^},{^ field.field ^}>>{% endblock %}
+{% block minVersion %}{^ super() ^}{% endblock %}
+{% block deprecatedSince %}{^ super() ^}{% endblock %}

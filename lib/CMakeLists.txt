@@ -3,6 +3,7 @@ set(SRCS
     src/generator.cpp
     src/inja_callbacks.cpp
     src/json/platform.cpp
+    src/json/namespace.cpp
     src/json/field.cpp
     src/json/fields/bitfield.cpp
     src/json/fields/enum.cpp
@@ -26,6 +27,7 @@ set(HDRS
     src/json/endian.hpp
     src/json/json.hpp
     src/json/platform.hpp
+    src/json/namespace.hpp
     src/json/field.hpp
     src/json/fields/bitfield.hpp
     src/json/fields/enum.hpp

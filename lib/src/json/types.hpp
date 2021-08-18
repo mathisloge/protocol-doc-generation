@@ -6,6 +6,9 @@
 namespace protodoc
 {
 
+static constexpr const char *kKeyFrames = "frames";
+static constexpr const char *kKeyMessages = "messages";
+static constexpr const char *kKeyFields = "fields";
 inline constexpr const char *kKeyType = "type";
 inline constexpr const char *kKeyFieldName = "name";
 inline constexpr const char *kKeyFieldDisplayName = "displayName";

@@ -1,0 +1,6 @@
+== {^ titles.namespace ^}
+{% for nskey, ns in namespaces %}
+
+include::{^ nskey ^}.adoc[]
+
+{% endfor %}

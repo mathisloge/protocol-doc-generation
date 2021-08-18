@@ -1,12 +1,10 @@
 {
-    "platforms": {
-        "title": "Platforms"
-    },
-    "frames": {
-        "title": "Frames"
-    },
-    "messages": {
-        "title": "Messages"
+    "titles": {
+        "platforms": "Platforms",
+        "namespace": "Namespace",
+        "messages": "Messages",
+        "frames": "Frames",
+        "fields": "Fields"
     },
     "units": {
         "Nanoseconds": "ns",

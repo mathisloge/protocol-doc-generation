@@ -17,9 +17,11 @@ namespace protodoc
 
 void to_json(json_obj &j, const commsdsl::Field &f)
 {
-    j[kKeyFieldName] = f.displayName().empty() ? f.name() : f.displayName();
+    j[kKeyFieldName] = f.name();
     j[kKeyFieldSemanticType] = SemanticTypeToString(f.semanticType());
     j[kKeyFieldKind] = f.kind();
+    if (!f.displayName().empty())
+        j[kKeyFieldDisplayName] = f.displayName();
     if (!f.description().empty())
         j[kKeyFieldDescription] = f.description();
     if (commsdsl::Protocol::notYetDeprecated() != f.deprecatedSince())

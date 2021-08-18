@@ -1,0 +1,11 @@
+
+{^ default(namespaces.description, "") ^}
+==== {^ titles.frames ^}
+{% for frameskey, frame in namespaces.frames %}
+{% endfor %}
+
+==== {^ titles.fields ^}
+{% include "fields.adoc" %} 
+
+==== {^ titles.messages ^}
+{% include "messages.adoc" %} 

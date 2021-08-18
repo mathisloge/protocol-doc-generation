@@ -1,16 +1,9 @@
-== {^ messages.title ^}
+{% for msgkey, message in namespaces.messages %}
 
-{% if existsIn(messages, "abstract") %}
-{^- messages.abstract -^}
-{% endif %}
-
-
-{% for mkey, message in messages.messages %}
-
-=== {^ message.name ^}
+===== {^ message.name ^}
 {^ message.description ^}
 
-[cols="2,1,1,3a,1,1,1,1",options=header]
+[cols="2a,1,1,3a,1,1,1,1",options=header]
 |===
 |Name
 |Type
@@ -21,7 +14,9 @@
 |since version
 |deprecated since
 
-{% include "message_row.adoc" %} 
+{% for fkey, field in message.fields %}
+{% include "field.adoc" %} 
+{% endfor %}
 
 |===
 {% endfor  %}

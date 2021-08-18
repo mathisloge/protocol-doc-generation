@@ -1,0 +1,16 @@
+[cols="2a,1,1,6a,1,1,1,1",options=header]
+|===
+|Name
+|Type
+|Bytes
+|Description
+|Unit
+|Scaling
+|since version
+|deprecated since
+
+{% for fkey, field in namespaces.fields %}
+{% include "field.adoc" %} 
+{% endfor %}
+
+|===

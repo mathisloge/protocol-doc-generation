@@ -4,5 +4,10 @@
     }, 
     "frames": {
         "abstract": "ABCD"
+    },
+    "namespaces": {
+        "global": {
+            "name": "All"
+        }
     }
 }

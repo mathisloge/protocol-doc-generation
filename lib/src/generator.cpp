@@ -66,8 +66,6 @@ bool Generator::write()
     env.add_callback("latexText", 1, callbacks::latexText);
     env.add_callback("sortEnum", 2, callbacks::sortEnum);
 
-
-
     json_obj json;
     {
         std::ifstream ifs{custom_file};
@@ -75,11 +73,11 @@ bool Generator::write()
         json.update(custom_json);
     }
 
-    const auto written_dsl = writePlatforms(json) && writeFrames(json) && writeMessages(json);
+    const auto written_dsl = writePlatforms(json) && writeNamespaces(json);
 
+    std::ifstream ifs{lang_file};
+    const auto lang_json = json_obj::parse(ifs);
     { // update all keys with the lang specs
-        std::ifstream ifs{lang_file};
-        const auto lang_json = json_obj::parse(ifs);
         json.merge_patch(lang_json);
     }
     std::ofstream MyFile("test.json");
@@ -88,8 +86,18 @@ bool Generator::write()
     // {
     // std::cout << env.render_file("platforms.tex", json) << std::endl;
     env.write("platforms.adoc", json, "platforms.adoc");
-    env.write("frames.adoc", json, "frames.adoc");
-    env.write("messages.adoc", json, "messages.adoc");
+    // env.write("frames.adoc", json, "frames.adoc");
+    env.write("namespaces.adoc", json, "namespaces.adoc");
+
+    for (auto &[key, val] : json[kKeyNamespace].items())
+    {
+        inja::json ns_json{{kKeyNamespace, val}};
+        ns_json.merge_patch(lang_json);
+        std::ofstream ns_json_file(key + ".json");
+        ns_json_file << std::setw(4) << ns_json << std::endl;
+        env.write("namespace.adoc", ns_json, key + ".adoc");
+    }
+
     // }
     // catch (const std::exception &ex)
     // {
@@ -107,31 +115,13 @@ bool Generator::writePlatforms(json_obj &json)
     return true;
 }
 
-bool Generator::writeFrames(json_obj &json)
+bool Generator::writeNamespaces(json_obj &json)
 {
-    if (!json[kKeyFrames].contains(kKeyFrames))
-        json[kKeyFrames][kKeyFrames] = json_obj{};
     for (const auto &ns : protocol_.namespaces())
     {
-        for (const auto &frame : ns.frames())
-        {
-            to_json(json[kKeyFrames][kKeyFrames][frame.name()], frame);
-        }
-    }
-
-    return true;
-}
-
-bool Generator::writeMessages(json_obj &json)
-{
-    if (!json[kKeyMessages].contains(kKeyMessages))
-        json[kKeyMessages][kKeyMessages] = json_obj{};
-    else
-        json[kKeyMessages][kKeyMessages] = json_obj{json[kKeyMessages][kKeyMessages]};
-
-    for (const auto &m : protocol_.allMessages())
-    {
-        to_json(json[kKeyMessages][kKeyMessages][m.name()], m);
+        const std::string ns_name = ns.name().empty() ? "global" : ns.name();
+        auto &ns_json = json[kKeyNamespace][ns_name];
+        to_json(ns_json, ns);
     }
     return true;
 }

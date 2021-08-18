@@ -1,4 +1,4 @@
-== {^ platforms.title ^}
+== {^ titles.platforms ^}
 {% if existsIn(platforms, "abstract") %}
 {^ platforms.abstract ^}
 {% endif %}
