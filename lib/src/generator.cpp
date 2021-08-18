@@ -1,13 +1,12 @@
 #include "generator.hpp"
 #include <fstream>
-#include <iostream>
-#include <regex>
 #include <sstream>
 #include <commsdsl/EnumField.h>
 #include <commsdsl/version.h>
 #include <inja/environment.hpp>
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
+#include "inja_callbacks.hpp"
 #include "json/def.hpp"
 #include "json/json.hpp"
 namespace protodoc
@@ -64,20 +63,7 @@ bool Generator::write()
     env.set_trim_blocks(true);   // remove new line after a command
     env.set_lstrip_blocks(true); // remove whitespaces and tabs from the beginning to the start of a block
 
-    env.add_callback("latexText", 1, [](inja::Arguments &args) {
-        auto replace_all = [](std::string &inout, std::string_view what, std::string_view with) -> std::size_t {
-            std::size_t count{};
-            for (std::string::size_type pos{}; inout.npos != (pos = inout.find(what.data(), pos, what.length()));
-                 pos += with.length(), ++count)
-            {
-                inout.replace(pos, what.length(), with.data(), with.length());
-            }
-            return count;
-        };
-        auto text = args.at(0)->get<std::string>();
-        replace_all(text, "_", "\\_");
-        return text;
-    });
+    env.add_callback("latexText", 1, callbacks::latexText);
 
     json_obj json;
     {
