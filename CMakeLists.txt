@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.21)
 project(protodoc)
 
+option(BUILD_TESTING "build the tests" ON)
 
 find_package(LibCommsdsl CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
@@ -8,3 +9,8 @@ find_package(inja CONFIG REQUIRED)
 
 add_subdirectory(lib)
 add_subdirectory(app)
+
+include(CTest)
+if(BUILD_TESTING)
+    add_subdirectory(tests)
+endif()

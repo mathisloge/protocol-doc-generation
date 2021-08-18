@@ -4,6 +4,7 @@
     "dependencies": [
         "spdlog",
         "commsdsl",
-        "inja"
+        "inja",
+        "catch2"
     ]
 }

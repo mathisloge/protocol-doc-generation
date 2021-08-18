@@ -1,3 +1,4 @@
+project(libprotodoc)
 set(SRCS 
     src/generator.cpp
     src/inja_callbacks.cpp
@@ -47,16 +48,18 @@ set(HDRS
 
 add_library(libprotodoc ${SRCS} ${HDRS})
 add_library(protodoc::libprotodoc ALIAS libprotodoc)
-
+set_target_properties(libprotodoc PROPERTIES 
+    CXX_STANDARD 20
+    CXX_STANDARD_REQUIRED ON 
+    CXX_EXTENSIONS OFF
+)
+target_compile_definitions(libprotodoc PRIVATE INJA_THROW=throw)
 target_include_directories(libprotodoc PUBLIC 
     $<INSTALL_INTERFACE:include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
-
-set_property(TARGET libprotodoc PROPERTY CXX_STANDARD 20)
 target_link_libraries(libprotodoc PRIVATE 
     commsdsl::commsdsl
     spdlog::spdlog
     pantor::inja
 )
-target_compile_definitions(libprotodoc PRIVATE -DINJA_THROW=throw)
