@@ -1,7 +1,5 @@
 set(SRCS 
     src/generator.cpp
-    src/diagram.cpp
-    src/diagrams/ascii.cpp
     src/json/platform.cpp
     src/json/field.cpp
     src/json/fields/bitfield.cpp
@@ -22,8 +20,6 @@ set(SRCS
 )
 set(HDRS
     include/generator.hpp
-    include/diagram.hpp
-    include/diagrams/ascii.hpp
     src/json/endian.hpp
     src/json/json.hpp
     src/json/platform.hpp
