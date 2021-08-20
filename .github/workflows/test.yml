@@ -13,8 +13,14 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-20.04]
+        include:
+          - os: "ubuntu-20.04"
+            triplet: "x64-linux"
+            mono: "mono"
     steps:
       - uses: actions/checkout@v2
         with:
@@ -30,7 +36,15 @@ jobs:
       - name: bootstrap vcpkg
         if: steps.cache.outputs.cache-hit != 'true'
         shell: "bash"
-        run: ./vcpkg/bootstrap-vcpkg.sh
+        run: |
+          if [ "$RUNNER_OS" == "Linux" ]; then
+               ./vcpkg/bootstrap-vcpkg.sh
+          elif [ "$RUNNER_OS" == "Windows" ]; then
+               ./vcpkg/bootstrap-vcpkg.bat
+          else
+               echo "$RUNNER_OS not supported"
+               exit 1
+          fi
 
       - name: "Setup NuGet Credentials"
         shell: "bash"
