@@ -9,6 +9,7 @@ on:
 env:
   CONFIGURE_PRESET: "linux-default-release"
   BUILD_PRESET: "linux-ci"
+  VCPKG_BINARY_SOURCES: 'clear;nuget,GitHub,readwrite'
 
 jobs:
   build:
@@ -19,6 +20,18 @@ jobs:
         with:
           submodules: "recursive"
       - uses: lukka/get-cmake@latest
+
+      - name: 'Setup NuGet Credentials'
+        shell: 'bash'
+        # Replace <OWNER> with your organization name
+        run: >
+          ${{ matrix.mono }} `./vcpkg/vcpkg fetch nuget | tail -n 1`
+          sources add
+          -source "https://nuget.pkg.github.com/mathisloge/index.json"
+          -storepasswordincleartext
+          -name "GitHub"
+          -username "mathisloge"
+          -password "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Configure CMake
         run: cmake --preset ${{env.CONFIGURE_PRESET}}
