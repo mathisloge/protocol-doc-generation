@@ -1,0 +1,25 @@
+{
+    "templates": {
+        "root": "",
+        "protocol": "protocol.adoc",
+        "namespaces": "namespaces.adoc",
+        "namespace": "namespaces.adoc"
+    },
+    "lang": "lang_en.json",
+    "custom": "custom.json",
+    "output": "D:/dev/commsdsl_text/asciidoc/gen",
+    "trim": true,
+    "split": true,
+    "jsonOutput": true,
+    "files": [
+        "D:/dev/myschema/protos/myschema1.xml",
+        "D:/dev/myschema/protos/myschema2.xml",
+        "D:/dev/myschema/protos/myschema3.xml",
+        "D:/dev/myschema/protos/myschema4.xml"
+    ],
+    "inputDir": "D:/dev/myschema/protos/",
+    "responseFile": {
+        "file": "myschema.txt",
+        "path": "D:/dev/myschema/protos/"
+    }
+}

@@ -1,171 +1,42 @@
-#include "generator.hpp"
+#include <iostream>
+#include <cxxopts.hpp>
+#include <generator.hpp>
+#include <spdlog/spdlog.h>
 #if WIN32
+#define NOMINMAX
 #include <Windows.h>
 #endif
+#include "options.hpp"
 
-int main(int argc, char const *argv[])
+int main(int argc, char **argv)
 {
 #if WIN32
     SetConsoleOutputCP(CP_UTF8);
 #endif
 
-    protodoc::Generator gen{};
+    cxxopts::Options options{"protodoc", "Generates a protocol description document from a commsdsl schema."};
+    prepareOptions(options);
+    const auto result = options.parse(argc, argv);
+    if (result.count("help"))
+    {
+        std::cout << options.help() << std::endl;
+        exit(EXIT_FAILURE);
+    }
 
-    // gen.generate({"D:\\dev\\commsdsl_latex_text\\schema.xml"});
+    protodoc::GeneratorOpts gen_opts;
+    try
+    {
+        parseOpts(result, gen_opts);
+    }
+    catch (std::exception e)
+    {
+        spdlog::critical("Error while reading the program options: {}", e.what());
+        std::cout << options.help() << std::endl;
+        exit(EXIT_FAILURE);
+    }
 
-    gen.generate({"D:/dev/cc.ublox.commsdsl/dsl/main.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/field/common.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/field/cfgval.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavPosecef.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavPosllh.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavStatus.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavDop.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavAtt.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavSol.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavPvt.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavOdo.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavResetodo.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavVelecef.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavVelned.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavHpposecef.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavHpposllh.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavTimegps.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavTimeutc.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavClock.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavTimeglo.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavTimebds.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavTimegal.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavTimels.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavSvinfo.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavDgps.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavSbas.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavOrb.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavSat.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavGeofence.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavSvin.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavRelposned.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavSlas.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavSig.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavAopstatus.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/NavEoe.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/RxmRaw.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/RxmSfrb.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/RxmSfrbx.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/RxmMeasx.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/RxmRawx.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/RxmSvsi.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/RxmAlm.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/RxmEph.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/RxmRtcm.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/RxmPmreq.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/RxmRlm.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/RxmImes.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/Inf.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/Ack.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgPrt.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgMsg.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgInf.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgRst.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgDat.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgTp.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgRate.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgCfg.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgFxn.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgRxm.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgEkf.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgAnt.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgSbas.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgNmea.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgUsb.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgTmode.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgOdo.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgNvs.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgNavx5.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgNav5.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgTp5.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgPm.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgRinv.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgItfm.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgPm2.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgTmode2.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgGnss.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgLogfilter.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgTxslot.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgPwr.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgHnr.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgEsrc.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgDosc.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgSmgr.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgGeofence.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgDgnss.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgTmode3.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgFixseed.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgPms.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgValset.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgValget.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/CfgValdel.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/UpdSos.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MonIo.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MonVer.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MonMsgpp.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MonRxbuf.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MonTxbuf.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MonHw.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MonHw2.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MonRxr.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MonPatch.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MonGnss.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MonSmgr.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MonSpan.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MonComms.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MonHw3.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MonRf.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/AidReq.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/AidIni.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/AidHui.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/AidData.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/AidAlm.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/AidEph.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/AidAlpsrv.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/AidAop.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/AidAlp.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/TimTp.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/TimTm2.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/TimSvin.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/TimVrfy.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/TimDosc.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/TimTos.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/TimSmeas.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/TimVcocal.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/TimFchg.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/EsfMeas.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/EsfRaw.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/EsfStatus.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/EsfIns.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MgaGps.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MgaGal.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MgaBds.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MgaQzss.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MgaGlo.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MgaAno.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MgaFlash.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MgaIni.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MgaAck.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/MgaDbd.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/LogErase.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/LogString.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/LogCreate.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/LogInfo.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/LogRetrieve.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/LogRetrievepos.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/LogRetrievestring.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/LogFindtime.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/LogRetrieveposextra.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/LogRetrievebatch.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/LogBatch.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/SecSign.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/SecUniqid.xml",
-                  "D:/dev/cc.ublox.commsdsl/dsl/message/HnrPvt.xml"});
+    protodoc::Generator gen;
+    gen.generate(gen_opts);
 
     return 0;
 }

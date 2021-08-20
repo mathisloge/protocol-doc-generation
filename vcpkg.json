@@ -5,6 +5,7 @@
         "spdlog",
         "commsdsl",
         "inja",
-        "catch2"
+        "catch2",
+        "cxxopts"
     ]
 }
