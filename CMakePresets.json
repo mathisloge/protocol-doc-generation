@@ -120,8 +120,8 @@
     "testPresets": [
         {
             "name": "linux-ci",
-            "displayName": "Test Release",
             "description": "Test",
+            "displayName": "Test Release",
             "configurePreset": "linux-default-release"
         }
     ]
