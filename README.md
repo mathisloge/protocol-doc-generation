@@ -78,6 +78,11 @@ I recommend to dump the generated json values with `jsonOutput: true` to match t
 
 Please see https://pantor.github.io/inja for detailed instructions of the template language.
 
+There are some premade templates, which can be used to getting started:
+
+* https://github.com/mathisloge/protodoc-template-asciidoctor
+* https://github.com/mathisloge/protodoc-template-latex
+
 ### Available Functions
 
 In addition to the buildin inja function, the following functions are provided: 
