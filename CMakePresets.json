@@ -7,11 +7,36 @@
     },
     "configurePresets": [
         {
+            "name": "default-builddir",
+            "hidden": true,
+            "binaryDir": "${sourceDir}/build/${presetName}"
+        },
+        {
+            "name": "generator-ninja",
+            "generator": "Ninja"
+        },
+        {
+            "name": "default-debug",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "default-release",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
             "name": "windows-default",
             "displayName": "Windows x64 Debug",
             "hidden": true,
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/build/${presetName}",
+            "inherits": [
+                "default-builddir",
+                "generator-ninja"
+            ],
             "architecture": {
                 "value": "x64",
                 "strategy": "external"
@@ -36,24 +61,60 @@
         {
             "name": "windows-default-debug",
             "displayName": "Windows x64 Debug",
-            "inherits": "windows-default",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
-            }
+            "inherits": [
+                "default-debug",
+                "windows-default"
+            ]
         },
         {
             "name": "windows-default-release",
             "displayName": "Windows x64 Release",
-            "inherits": "windows-default",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
-            }
+            "inherits": [
+                "default-release",
+                "windows-default"
+            ]
+        },
+        {
+            "name": "linux-default",
+            "hidden": true,
+            "inherits": [
+                "default-builddir",
+                "generator-ninja"
+            ]
+        },
+        {
+            "name": "linux-default-debug",
+            "displayName": "linux debug",
+            "inherits": [
+                "default-debug",
+                "linux-default"
+            ]
+        },
+        {
+            "name": "linux-default-release",
+            "displayName": "linux release",
+            "inherits": [
+                "default-release",
+                "linux-default"
+            ]
         }
     ],
     "buildPresets": [
         {
             "name": "windows-default",
             "configurePreset": "windows-default-debug"
+        },
+        {
+            "name": "linux-ci",
+            "configurePreset": "linux-default-release"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "linux-ci",
+            "displayName": "Test Release",
+            "description": "Test",
+            "configurePreset": "linux-default-release"
         }
     ]
 }
