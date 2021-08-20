@@ -1,9 +1,17 @@
 find_package(Catch2 REQUIRED)
 
 
+set(TEST_SCHEMAS 
+    src/fields/bitfield.xml
+
+)
+
 add_executable(tests
     src/main.cpp
     src/inja_callbacks.cpp
+    src/fields/common.hpp
+    src/fields/common.cpp
+    src/fields/bitfield.cpp
 )
 target_link_libraries(tests PRIVATE 
     Catch2::Catch2 
@@ -15,6 +23,8 @@ set_target_properties(tests PROPERTIES
     CXX_STANDARD_REQUIRED ON 
     CXX_EXTENSIONS OFF
 )
+
+file(COPY ${TEST_SCHEMAS} DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
 
 include(Catch)
 catch_discover_tests(tests)

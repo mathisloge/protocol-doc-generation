@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema name="Schema1" id="1" endian="big">
+    <fields>
+        <bitfield name="Bitfield1">
+            <displayName value="Proper Bitfield Name" />
+            <description>Bitfield description</description>
+            <members>
+                <enum name="Enum1" type="uint8" bitLength="2"></enum>
+                <set name="Set1" type="uint8" bitLength="2">>
+                </set>
+                <int name="Int1" type="uint8" bitLength="4" />
+            </members>
+        </bitfield>
+    </fields>
+</schema>
