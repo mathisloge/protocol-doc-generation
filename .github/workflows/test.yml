@@ -2,9 +2,9 @@ name: CMake
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 env:
   CONFIGURE_PRESET: "linux-default-release"
@@ -15,16 +15,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: lukka/get-cmake@latest
+      - uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+      - uses: lukka/get-cmake@latest
 
-    - name: Configure CMake
-      run: cmake --preset ${{env.CONFIGURE_PRESET}} 
+      - name: Configure CMake
+        run: cmake --preset ${{env.CONFIGURE_PRESET}}
 
-    - name: Build
-      run: cmake --build --preset ${{env.BUILD_PRESET}}
+      - name: Build
+        run: cmake --build --preset ${{env.BUILD_PRESET}}
 
-    - name: Test
-      working-directory: ${{github.workspace}}/build
-      run: ctest --preset ${{env.BUILD_PRESET}}
-      
+      - name: Test
+        working-directory: ${{github.workspace}}/build
+        run: ctest --preset ${{env.BUILD_PRESET}}
