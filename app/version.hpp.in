@@ -1,0 +1,10 @@
+#pragma once
+namespace protodoc
+{
+inline constexpr unsigned int kVersionMajor = @PROJECT_VERSION_MAJOR@;
+inline constexpr unsigned int kVersionMinor = @PROJECT_VERSION_MINOR@;
+inline constexpr unsigned int kVersionPatch = @PROJECT_VERSION_PATCH@;
+inline constexpr const char *kVersion = "@PROJECT_VERSION@";
+inline constexpr const char *kGitRef = "@GIT_REF@";
+inline constexpr const char *kGitRefSpec = "@GIT_REFSPEC@";
+} // namespace protodoc

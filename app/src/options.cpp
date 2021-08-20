@@ -2,18 +2,20 @@
 #include <filesystem>
 #include <fstream>
 #include <nlohmann/json.hpp>
+#include "version.hpp"
 
 namespace fs = std::filesystem;
 using nlohmann::json;
 
 static constexpr const char *kKeySettings = "settings";
-
+static void printName();
 void prepareOptions(cxxopts::Options &opts)
 {
     // clang-format off
     opts.add_options()
         ("s,settings", "The project settings file", cxxopts::value<std::string>())
         ("h,help", "Print usage")
+        ("v,version", "Print version")
         ;
     // clang-format on
 }
@@ -159,4 +161,26 @@ void checkForRequiredOpts(const cxxopts::ParseResult &res)
 {
     if (res.count(kKeySettings) == 0)
         throw std::runtime_error("settings not found");
+}
+
+void printVersion()
+{
+    printName();
+    std::cout << "==============================================" << std::endl;
+    std::cout << "version: " << protodoc::kVersion << std::endl;
+    std::cout << "sha1: " << protodoc::kGitRef << std::endl;
+    std::cout << "spec: " << protodoc::kGitRefSpec << std::endl;
+    std::cout << "==============================================" << std::endl;
+}
+
+void printName()
+{
+    std::cout << R"(                                _             
+                  _            | |            
+ ____   ____ ___ | |_  ___   _ | | ___   ____ 
+|  _ \ / ___) _ \|  _)/ _ \ / || |/ _ \ / ___)
+| | | | |  | |_| | |_| |_| ( (_| | |_| ( (___ 
+| ||_/|_|   \___/ \___)___/ \____|\___/ \____)
+|_|                                           )"
+              << std::endl;
 }

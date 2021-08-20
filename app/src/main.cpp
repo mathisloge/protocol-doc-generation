@@ -13,13 +13,17 @@ int main(int argc, char **argv)
 #if WIN32
     SetConsoleOutputCP(CP_UTF8);
 #endif
-
     cxxopts::Options options{"protodoc", "Generates a protocol description document from a commsdsl schema."};
     prepareOptions(options);
     const auto result = options.parse(argc, argv);
     if (result.count("help"))
     {
         std::cout << options.help() << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    else if (result.count("version"))
+    {
+        printVersion();
         exit(EXIT_FAILURE);
     }
 
@@ -35,6 +39,7 @@ int main(int argc, char **argv)
         exit(EXIT_FAILURE);
     }
 
+    printVersion();
     protodoc::Generator gen;
     gen.generate(gen_opts);
 
