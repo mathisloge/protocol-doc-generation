@@ -85,12 +85,15 @@ bool Generator::write()
     // try
     // {
     // std::cout << env.render_file("platforms.tex", json) << std::endl;
+    spdlog::info("Writing platforms...");
     env.write("platforms.adoc", json, "platforms.adoc");
     // env.write("frames.adoc", json, "frames.adoc");
+    spdlog::info("Writing namespaces...");
     env.write("namespaces.adoc", json, "namespaces.adoc");
 
     for (auto &[key, val] : json[kKeyNamespace].items())
     {
+        spdlog::info("Writing namespace {}...", key);
         inja::json ns_json{{kKeyNamespace, val}};
         ns_json.merge_patch(lang_json);
         std::ofstream ns_json_file(key + ".json");
