@@ -12,6 +12,13 @@
             "binaryDir": "${sourceDir}/build/${presetName}"
         },
         {
+            "name": "use-vcpkg",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake"
+            }
+        },
+        {
             "name": "generator-ninja",
             "generator": "Ninja"
         },
@@ -35,7 +42,8 @@
             "hidden": true,
             "inherits": [
                 "default-builddir",
-                "generator-ninja"
+                "generator-ninja",
+                "use-vcpkg"
             ],
             "architecture": {
                 "value": "x64",
@@ -47,8 +55,7 @@
             },
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "cl",
-                "CMAKE_CXX_COMPILER": "cl",
-                "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake"
+                "CMAKE_CXX_COMPILER": "cl"
             },
             "vendor": {
                 "microsoft.com/VisualStudioSettings/CMake/1.0": {
@@ -79,7 +86,8 @@
             "hidden": true,
             "inherits": [
                 "default-builddir",
-                "generator-ninja"
+                "generator-ninja",
+                "use-vcpkg"
             ]
         },
         {
