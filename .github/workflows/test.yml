@@ -9,7 +9,7 @@ on:
 env:
   CONFIGURE_PRESET: "linux-default-release"
   BUILD_PRESET: "linux-ci"
-  VCPKG_BINARY_SOURCES: 'clear;nuget,GitHub,readwrite'
+  VCPKG_BINARY_SOURCES: "clear;nuget,GitHub,readwrite"
 
 jobs:
   build:
@@ -21,8 +21,19 @@ jobs:
           submodules: "recursive"
       - uses: lukka/get-cmake@latest
 
-      - name: 'Setup NuGet Credentials'
-        shell: 'bash'
+      - uses: actions/cache@v2
+        id: cache
+        with:
+          path: ./vcpkg
+          key: ${{ runner.os }}-${{ hashFiles('vcpkg/**') }}
+
+      - name: bootstrap vcpkg
+        if: steps.cache.outputs.cache-hit != 'true'
+        shell: "bash"
+        run: ./vcpkg/bootstrap-vcpkg.sh
+
+      - name: "Setup NuGet Credentials"
+        shell: "bash"
         # Replace <OWNER> with your organization name
         run: >
           ${{ matrix.mono }} `./vcpkg/vcpkg fetch nuget | tail -n 1`
