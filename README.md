@@ -4,7 +4,11 @@ Generates protocol descrptions from https://github.com/commschamp/CommsDSL-Speci
 
 ## Usage
 
-Create a protodoc.json file
+Create a [protodoc.json](#protodocjson) file and call `protodoc -s "<pathto>/protodoc.json"`.
+
+
+
+## protodoc.json
 ```json
 {
     "templates": {
@@ -32,6 +36,7 @@ Create a protodoc.json file
     }
 }
 ```
+
 If a file path is relativ, the path will resolve to `<location of protodoc.json>/<filepath>`.
 
 Note that only one of `files`, `inputDir` or `responseFile` can be present at a time.
