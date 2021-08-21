@@ -128,7 +128,7 @@
             "name": "windows-ci",
             "description": "Test",
             "displayName": "Test Release",
-            "configurePreset": "windows-default-debug"
+            "configurePreset": "windows-default-release"
         }
     ]
 }
