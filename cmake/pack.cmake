@@ -2,6 +2,7 @@ set(CPACK_PACKAGE_NAME "protodoc")
 set(CPACK_PACKAGE_HOMEPAGE_URL "https://github.com/mathisloge/protocol-doc-generation")
 set(CPACK_PACKAGE_EXECUTABLES "protodoc;protodoc")
 set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE.txt")
+set(CPACK_TOPLEVEL_TAG "protodoc")
 
 if(WIN32)
     set(CPACK_GENERATOR "WIX")

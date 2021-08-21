@@ -1,4 +1,4 @@
-#include "generator.hpp"
+#include "protodoc/generator.hpp"
 #include <fstream>
 #include <sstream>
 #include <commsdsl/EnumField.h>

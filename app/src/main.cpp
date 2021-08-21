@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cxxopts.hpp>
-#include <generator.hpp>
+#include <protodoc/generator.hpp>
 #include <spdlog/spdlog.h>
 #if WIN32
 #define NOMINMAX

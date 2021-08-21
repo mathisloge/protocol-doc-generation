@@ -22,7 +22,7 @@ set(SRCS
     src/json/message.cpp
 )
 set(HDRS
-    include/generator.hpp
+    include/protodoc/generator.hpp
     src/inja_callbacks.hpp
     src/json/endian.hpp
     src/json/json.hpp
@@ -65,3 +65,5 @@ target_link_libraries(libprotodoc PUBLIC
     spdlog::spdlog
     pantor::inja
 )
+
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})

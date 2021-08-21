@@ -19,10 +19,7 @@ configure_file (
     "${CMAKE_CURRENT_BINARY_DIR}/version.hpp"
 )
 
-set(PROTODOC_RUNTIME_DIR "bin")
-install(TARGETS protodoc RUNTIME DESTINATION ${PROTODOC_RUNTIME_DIR} COMPONENT applications)
-
-
+install(CODE "set(CMAKE_INSTALL_BINDIR \"${CMAKE_INSTALL_BINDIR}\")")
 install(CODE [[
     file(GET_RUNTIME_DEPENDENCIES
         LIBRARIES $<TARGET_FILE:protodoc>
@@ -35,7 +32,7 @@ install(CODE [[
     )
     foreach(_file IN LISTS _r_deps)
         file(INSTALL
-            DESTINATION "${CMAKE_INSTALL_PREFIX}/bin"
+            DESTINATION "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}"
             TYPE SHARED_LIBRARY
             FOLLOW_SYMLINK_CHAIN
             FILES "${_file}"
