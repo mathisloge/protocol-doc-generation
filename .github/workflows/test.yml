@@ -48,7 +48,6 @@ jobs:
 
       - name: "Setup NuGet Credentials"
         shell: "bash"
-        # Replace <OWNER> with your organization name
         run: >
           ${{ matrix.mono }} `./vcpkg/vcpkg fetch nuget | tail -n 1`
           sources add

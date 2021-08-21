@@ -5,8 +5,13 @@
             <displayName value="Proper Bitfield Name" />
             <description>Bitfield description</description>
             <members>
-                <enum name="Enum1" type="uint8" bitLength="2"></enum>
-                <set name="Set1" type="uint8" bitLength="2">>
+                <enum name="Enum1" type="uint8" bitLength="2">
+                    <validValue name="V1" val="1" />
+                    <validValue name="V2" val="2" />
+                </enum>
+                <set name="Set1" type="uint8" bitLength="2">
+                    <bit name="B0" idx="0" />
+                    <bit name="B1" idx="1" />
                 </set>
                 <int name="Int1" type="uint8" bitLength="4" />
             </members>
