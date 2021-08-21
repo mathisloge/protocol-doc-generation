@@ -88,8 +88,12 @@ bool Generator::write(const GeneratorOpts &opts)
     { // update all keys with the lang specs
         json.merge_patch(lang_json);
     }
-    std::ofstream MyFile("test.json");
-    MyFile << std::setw(4) << json << std::endl;
+
+    if (opts.json_output)
+    {
+        std::ofstream json_output_file{"protodoc_internal.json"};
+        json_output_file << std::setw(4) << json << std::endl;
+    }
     // try
     // {
     // std::cout << env.render_file("platforms.tex", json) << std::endl;
