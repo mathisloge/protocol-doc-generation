@@ -18,3 +18,31 @@ configure_file (
     "${CMAKE_CURRENT_SOURCE_DIR}/version.hpp.in" 
     "${CMAKE_CURRENT_BINARY_DIR}/version.hpp"
 )
+
+set(PROTODOC_RUNTIME_DIR "bin")
+install(TARGETS protodoc RUNTIME DESTINATION ${PROTODOC_RUNTIME_DIR} COMPONENT applications)
+
+
+install(CODE [[
+    file(GET_RUNTIME_DEPENDENCIES
+        LIBRARIES $<TARGET_FILE:protodoc>
+        EXECUTABLES $<TARGET_FILE:protodoc>
+        RESOLVED_DEPENDENCIES_VAR _r_deps
+        UNRESOLVED_DEPENDENCIES_VAR _u_deps
+        DIRECTORIES ${MY_DEPENDENCY_PATHS}
+        POST_EXCLUDE_REGEXES
+            ".*system32/.*\\.dll"
+    )
+    foreach(_file IN LISTS _r_deps)
+        file(INSTALL
+            DESTINATION "${CMAKE_INSTALL_PREFIX}/bin"
+            TYPE SHARED_LIBRARY
+            FOLLOW_SYMLINK_CHAIN
+            FILES "${_file}"
+        )
+    endforeach()
+    list(LENGTH _u_deps _u_length)
+    if("${_u_length}" GREATER 0)
+        message(WARNING "Unresolved dependencies detected!: ${_u_deps}")
+    endif()
+]])

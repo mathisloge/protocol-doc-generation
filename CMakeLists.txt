@@ -8,6 +8,7 @@ find_package(LibCommsdsl CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 find_package(inja CONFIG REQUIRED)
 
+include(GNUInstallDirs)
 include(GetGitRevisionDescription)
 get_git_head_revision(GIT_REFSPEC GIT_REF)
 message(STATUS "GIT_REF: ${GIT_REF}")
@@ -21,3 +22,5 @@ include(CTest)
 if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
+
+include(pack)

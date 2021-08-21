@@ -1,0 +1,13 @@
+set(CPACK_PACKAGE_NAME "protodoc")
+set(CPACK_PACKAGE_HOMEPAGE_URL "https://github.com/mathisloge/protocol-doc-generation")
+set(CPACK_PACKAGE_EXECUTABLES "protodoc;protodoc")
+set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE.txt")
+
+if(WIN32)
+    set(CPACK_GENERATOR "WIX")
+elseif(UNIX AND NOT APPLE)
+    set(CPACK_GENERATOR "DEB")
+else()
+    set(CPACK_GENERATOR "DragNDrop")  
+endif()
+include(CPack)
