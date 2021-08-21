@@ -1,6 +1,6 @@
 # protodoc
 
-Generates protocol descrptions from https://github.com/commschamp/CommsDSL-Specification schema definition files.
+Generates protocol descriptions from https://github.com/commschamp/CommsDSL-Specification schema definition files.
 
 ## Usage
 
@@ -76,7 +76,7 @@ I recommend to dump the generated json values with `jsonOutput: true` to match t
 
 ## Templates
 
-Please see https://pantor.github.io/inja for detailed instructions of the template language.
+Please see https://github.com/pantor/inja for detailed instructions of the template language.
 
 There are some premade templates, which can be used to getting started:
 
