@@ -57,11 +57,8 @@ jobs:
           -username "mathisloge"
           -password "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Configure CMake
-        run: cmake --preset ${{env.CONFIGURE_PRESET}}
-
-      - name: Build
+      - name: Configure & Build CMake
         run: cmake --build --preset ${{env.BUILD_PRESET}}
 
       - name: Test
-        run: ctest --preset ${{env.BUILD_PRESET}}
+        run: ctest --preset ${{env.BUILD_PRESET}} --output-on-failure

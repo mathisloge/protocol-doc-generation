@@ -123,6 +123,12 @@
             "description": "Test",
             "displayName": "Test Release",
             "configurePreset": "linux-default-release"
+        },
+        {
+            "name": "windows-ci",
+            "description": "Test",
+            "displayName": "Test Release",
+            "configurePreset": "windows-default-debug"
         }
     ]
 }
