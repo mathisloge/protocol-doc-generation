@@ -34,7 +34,7 @@ inja::json sortEnum(inja::Arguments &args)
     for (auto &[key, val] : obj_list.items())
         idx_list.emplace(val[sort_key].get<int>(), key);
 
-    inja::json ret_list{inja::json::array()};
+    inja::json ret_list = inja::json::array();
     for (const auto &v : idx_list)
         ret_list.emplace_back(v.second);
 
