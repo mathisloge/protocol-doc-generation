@@ -1,11 +1,12 @@
 {
-    "name": "protocol-doc-generation",
-    "version-string": "0.0.1",
+    "name": "protodoc",
+    "version-string": "1.0.",
     "dependencies": [
         "spdlog",
         "commsdsl",
         "inja",
         "catch2",
-        "cxxopts"
+        "cxxopts",
+        "nlohmann-json"
     ]
 }

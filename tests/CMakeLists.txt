@@ -15,6 +15,7 @@ add_executable(tests
 )
 target_link_libraries(tests PRIVATE 
     Catch2::Catch2 
+    
     protodoc::libprotodoc
 )
 target_include_directories(tests PRIVATE "${libprotodoc_SOURCE_DIR}/src")

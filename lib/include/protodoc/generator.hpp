@@ -4,6 +4,7 @@
 #include <vector>
 #include <commsdsl/Protocol.h>
 #include <nlohmann/json.hpp>
+#include "protodoc_export.hpp"
 
 namespace protodoc
 {
@@ -25,14 +26,11 @@ struct GeneratorOpts
         std::filesystem::path t_namespace;
     } templates;
 };
-class Generator
+class PROTODOC_EXPORT Generator final
 {
-  private:
-    static constexpr const char *kKeyPlatforms = "platforms";
-    static constexpr const char *kKeyNamespace = "namespaces";
-
   public:
     Generator();
+    ~Generator();
     bool generate(const GeneratorOpts &opts);
 
   private:
@@ -42,6 +40,7 @@ class Generator
     bool writeNamespaces(nlohmann::ordered_json &json);
 
   private:
-    commsdsl::Protocol protocol_;
+    class Impl;
+    std::unique_ptr<Impl> impl_;
 };
 } // namespace protodoc

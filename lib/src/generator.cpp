@@ -7,12 +7,21 @@
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
 #include "inja_callbacks.hpp"
-#include "json/def.hpp"
 #include "json/json.hpp"
+
 namespace protodoc
 {
 
+class Generator::Impl final
+{
+  public:
+    Impl() = default;
+    ~Impl() = default;
+    commsdsl::Protocol protocol_;
+};
+
 Generator::Generator()
+    : impl_{std::make_unique<Impl>()}
 {}
 
 bool Generator::generate(const GeneratorOpts &opts)
@@ -25,18 +34,18 @@ bool Generator::parseSchemaFiles(const FilesList &files)
     for (auto &f : files)
     {
         spdlog::info("Parsing {}", f.string());
-        if (!protocol_.parse(f.string()))
+        if (!impl_->protocol_.parse(f.string()))
         {
             return false;
         }
     }
 
-    if (!protocol_.validate())
+    if (!impl_->protocol_.validate())
     {
         return false;
     }
 
-    auto schema = protocol_.schema();
+    auto schema = impl_->protocol_.schema();
 
     if (commsdsl::versionMajor() < schema.dslVersion())
     {
@@ -115,14 +124,14 @@ bool Generator::writePlatforms(json_obj &json)
     if (!json[kKeyPlatforms].contains(kKeyPlatforms))
         json[kKeyPlatforms][kKeyPlatforms] = json_obj{};
 
-    to_json(json[kKeyPlatforms][kKeyPlatforms], protocol_.platforms());
+    to_json(json[kKeyPlatforms][kKeyPlatforms], impl_->protocol_.platforms());
 
     return true;
 }
 
 bool Generator::writeNamespaces(json_obj &json)
 {
-    for (const auto &ns : protocol_.namespaces())
+    for (const auto &ns : impl_->protocol_.namespaces())
     {
         const std::string ns_name = ns.name().empty() ? "global" : ns.name();
         auto &ns_json = json[kKeyNamespace][ns_name];
@@ -130,5 +139,8 @@ bool Generator::writeNamespaces(json_obj &json)
     }
     return true;
 }
+
+Generator::~Generator()
+{}
 
 } // namespace protodoc
