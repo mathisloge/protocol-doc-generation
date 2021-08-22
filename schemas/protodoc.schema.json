@@ -1,0 +1,102 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://github.com/mathisloge/protocol-doc-generation/blob/master/protodoc.schema.json",
+    "title": "protodoc",
+    "description": "protodoc settings file",
+    "type": "object",
+    "properties": {
+        "root": {
+            "description": "prefix path for relativ dirs",
+            "type": "string"
+        },
+        "templates": {
+            "type": "object",
+            "properties": {
+                "root": {
+                    "description": "the templates root dir",
+                    "type": "string"
+                },
+                "platforms": {
+                    "description": "name of the platforms template file with the correct extension",
+                    "type": "string"
+                },
+                "namespaces": {
+                    "description": "name of the namespaces template file with the correct extension",
+                    "type": "string"
+                },
+                "namespace": {
+                    "description": "name of the namespace template file with the correct extension",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "root",
+                "platforms",
+                "namespaces",
+                "namespace"
+            ]
+        },
+        "lang": {
+            "description": "File path to the language file",
+            "type": "string"
+        },
+        "custom": {
+            "description": "file path to the merge json file",
+            "type": "string"
+        },
+        "output": {
+            "description": "output directory",
+            "type": "string"
+        },
+        "trim": {
+            "description": "remove new line after a command",
+            "type": "boolean"
+        },
+        "split": {
+            "description": "remove whitespaces and tabs from the beginning to the start of a block",
+            "type": "boolean"
+        },
+        "jsonOutput": {
+            "description": "dump the generated json into a file <output>/protodoc_internal.json",
+            "type": "boolean"
+        }
+    },
+    "oneOf": [
+        {
+            "files": {
+                "description": "A array of schema files.",
+                "type": "array"
+            }
+        },
+        {
+            "inputDir": {
+                "description": "The directory containing the schema files",
+                "type": "string"
+            }
+        },
+        {
+            "responseFile": {
+                "type": "object",
+                "properties": {
+                    "file": {
+                        "description": "the file path to the schema list file",
+                        "type": "string"
+                    },
+                    "path": {
+                        "description": "the file path which gets prepended to every file in the schema list file. Can be empty.",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "file",
+                    "path"
+                ]
+            }
+        }
+    ],
+    "required": [
+        "templates",
+        "lang",
+        "output"
+    ]
+}
