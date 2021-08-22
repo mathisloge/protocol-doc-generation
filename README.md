@@ -59,7 +59,7 @@ I don't recommend the usage of `inputDir` since it will just read the files in t
 
 | Json Field          | Description   | Required   |
 | ------------------- | ------------- |----|
-| root | prefix path for relativ dirs. if not present, the <location of protodoc.json> will be used to resolve relative paths. | optional |
+| root | prefix path for relativ dirs. if not present, the `<location of protodoc.json>` will be used to resolve relative paths. | optional |
 | templates           | ||
 | templates/root      | the templates root dir.       |required|
 | templates/platforms | name of the platforms template file with the correct extension      |required|
