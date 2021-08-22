@@ -59,39 +59,48 @@
         "jsonOutput": {
             "description": "dump the generated json into a file <output>/protodoc_internal.json",
             "type": "boolean"
+        },
+        "files": {
+            "description": "A array of schema files.",
+            "type": "array"
+        },
+        "inputDir": {
+            "description": "The directory containing the schema files",
+            "type": "string"
+        },
+        "responseFile": {
+            "type": "object",
+            "properties": {
+                "file": {
+                    "description": "the file path to the schema list file",
+                    "type": "string"
+                },
+                "path": {
+                    "description": "the file path which gets prepended to every file in the schema list file. Can be empty.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "file",
+                "path"
+            ]
         }
     },
     "oneOf": [
         {
-            "files": {
-                "description": "A array of schema files.",
-                "type": "array"
-            }
+            "required": [
+                "files"
+            ]
         },
         {
-            "inputDir": {
-                "description": "The directory containing the schema files",
-                "type": "string"
-            }
+            "required": [
+                "inputDir"
+            ]
         },
         {
-            "responseFile": {
-                "type": "object",
-                "properties": {
-                    "file": {
-                        "description": "the file path to the schema list file",
-                        "type": "string"
-                    },
-                    "path": {
-                        "description": "the file path which gets prepended to every file in the schema list file. Can be empty.",
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "file",
-                    "path"
-                ]
-            }
+            "required": [
+                "responseFile"
+            ]
         }
     ],
     "required": [
