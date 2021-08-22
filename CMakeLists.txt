@@ -8,6 +8,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
 
 option(BUILD_TESTING "build the tests" ON)
 option(BUILD_SHARED_LIBS "build libprotodoc static(OFF) or shared(ON) tests" ON)
+set(PROTODOC_CMAKE_MODULE_INSTALL_DIR "${CMAKE_INSTALL_LIBDIR}/cmake/protodoc")
+
 if(BUILD_TESTING AND BUILD_SHARED_LIBS) 
     message(WARNING "We need to build static when using the tests")
     set(BUILD_SHARED_LIBS OFF)

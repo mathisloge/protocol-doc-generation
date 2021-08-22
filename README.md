@@ -11,6 +11,7 @@ Create a [protodoc.json](#protodocjson) file and call `protodoc -s "<pathto>/pro
 ## protodoc.json
 ```json
 {
+    "root": "D:/dev/protodoc_configs",
     "templates": {
         "root": "",
         "platforms": "platforms.adoc",
@@ -37,15 +38,15 @@ Create a [protodoc.json](#protodocjson) file and call `protodoc -s "<pathto>/pro
 }
 ```
 
-If a file path is relativ, the path will resolve to `<location of protodoc.json>/<filepath>`.
+If a file path is relativ, the path will resolve to `<location of protodoc.json>/<filepath>` or if `root` is specified, `<root>/<filepath>`
 
 Note that only one of `files`, `inputDir` or `responseFile` can be present at a time.
 I don't recommend the usage of `inputDir` since it will just read the files in the order of the filesystem. In most cases the commsdsl parser would fail because of missing defines.
 
 
-
 | Json Field          | Description   | Required   |
 | ------------------- | ------------- |----|
+| root | prefix path for relativ dirs. if not present, the <location of protodoc.json> will be used to resolve relative paths. | optional |
 | templates           | ||
 | templates/root      | the templates root dir.       |required|
 | templates/platforms | name of the platforms template file with the correct extension      |required|

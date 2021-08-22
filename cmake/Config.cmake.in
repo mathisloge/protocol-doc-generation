@@ -2,4 +2,10 @@
 
 include("${CMAKE_CURRENT_LIST_DIR}/protodocTargets.cmake")
 
+set_and_check(PROTODOC_MODULE_PATH "@PACKAGE_PROTODOC_CMAKE_MODULE_INSTALL_DIR@/modules")
+set_and_check(PROTODOC_INCLUDE_DIR "@PACKAGE_CMAKE_INSTALL_INCLUDEDIR@")
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROTODOC_MODULE_PATH}")
+
+check_required_components(protodoc)
 check_required_components(libprotodoc)

@@ -2,6 +2,7 @@
 #include <filesystem>
 #include <fstream>
 #include <nlohmann/json.hpp>
+#include <spdlog/spdlog.h>
 #include "version.hpp"
 
 namespace fs = std::filesystem;
@@ -29,7 +30,6 @@ void parseOpts(const cxxopts::ParseResult &res, protodoc::GeneratorOpts &opts)
         throw std::runtime_error("settings file does not exists");
     else if (!fs::is_regular_file(settings_file))
         throw std::runtime_error("settings file is not a regular file");
-    const fs::path settings_root{settings_file.parent_path()};
 
     std::ifstream ifs{settings_file};
     const auto settings = json::parse(ifs);
@@ -41,12 +41,22 @@ void parseOpts(const cxxopts::ParseResult &res, protodoc::GeneratorOpts &opts)
     const auto split = settings.find("split");
     const auto jsonOutput = settings.find("jsonOutput");
 
+    const fs::path settings_root = [&]() {
+        const auto root_dir = settings.find("root");
+        if (root_dir != settings.end())
+            return fs::path{root_dir->get<std::string>()};
+        return settings_file.parent_path();
+    }();
+
     { //! templates
         if (!templates.is_object())
             throw std::runtime_error("settings: templates is not a object");
         opts.templates.t_root_dir = settings_root;
         if (auto it = templates.find("root"); it != templates.end())
             opts.templates.t_root_dir = fs::path(it->get<std::string>());
+        if (opts.templates.t_root_dir.is_relative())
+            opts.templates.t_root_dir = settings_root / opts.templates.t_root_dir;
+        spdlog::info("ROOT: {}", opts.templates.t_root_dir.string());
         if (!fs::is_directory(opts.templates.t_root_dir))
             throw std::runtime_error("settings: templates.root is not a directory");
 

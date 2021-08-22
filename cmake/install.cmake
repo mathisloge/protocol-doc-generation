@@ -11,12 +11,13 @@ install(TARGETS protodoc libprotodoc
 install(EXPORT protodocTargets
     FILE protodocTargets.cmake
     NAMESPACE protodoc::
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/protodoc
+    DESTINATION "${PROTODOC_CMAKE_MODULE_INSTALL_DIR}"
 )
 configure_package_config_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Config.cmake.in
     "${CMAKE_CURRENT_BINARY_DIR}/protodocConfig.cmake"
-    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/protodoc
+    INSTALL_DESTINATION "${PROTODOC_CMAKE_MODULE_INSTALL_DIR}"
+    PATH_VARS CMAKE_INSTALL_INCLUDEDIR PROTODOC_CMAKE_MODULE_INSTALL_DIR
 )
 write_basic_package_version_file(
     "${CMAKE_CURRENT_BINARY_DIR}/protodocConfigVersion.cmake"
@@ -26,5 +27,10 @@ write_basic_package_version_file(
 install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/protodocConfig.cmake"
     "${CMAKE_CURRENT_BINARY_DIR}/protodocConfigVersion.cmake"
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/protodoc
+    DESTINATION "${PROTODOC_CMAKE_MODULE_INSTALL_DIR}"
+)
+
+install(FILES
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/protodoc_generate.cmake"
+    DESTINATION "${PROTODOC_CMAKE_MODULE_INSTALL_DIR}/modules"
 )
