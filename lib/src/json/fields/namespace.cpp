@@ -4,20 +4,29 @@
 #include "frame.hpp"
 #include "message.hpp"
 
-namespace protodoc
+using namespace protodoc;
+namespace commsdsl
 {
-void to_json(json_obj &j, const commsdsl::Namespace &ns)
+static void to_json(protodoc::json_obj &j, const commsdsl::Namespace::FramesList &frames)
 {
-    if (!ns.description().empty())
-        j[kKeyFieldDescription] = ns.description();
-
-    for (const auto &f : ns.frames())
-        to_json(j[kKeyFrames][f.name()], f);
-
-    for (const auto &f : ns.fields())
-        to_json(j[kKeyFields][f.name()], f);
-
-    for (const auto &m : ns.messages())
-        to_json(j[kKeyMessages][m.name()], m);
+    for (const auto &f : frames)
+        j[f.name()].merge_patch(f);
 }
-} // namespace protodoc
+static void to_json(protodoc::json_obj &j, const commsdsl::Namespace::FieldsList &fields)
+{
+    for (const auto &f : fields)
+        j[f.name()].merge_patch(f);
+}
+static void to_json(protodoc::json_obj &j, const commsdsl::Namespace::MessagesList &messages)
+{
+    for (const auto &m : messages)
+        j[m.name()].merge_patch(m);
+}
+void to_json(protodoc::json_obj &j, const commsdsl::Namespace &ns)
+{
+    j.merge_patch({{kKeyFieldDescription, ns.description()},
+                   {kKeyFrames, ns.frames()},
+                   {kKeyFields, ns.fields()},
+                   {kKeyMessages, ns.messages()}});
+}
+} // namespace commsdsl

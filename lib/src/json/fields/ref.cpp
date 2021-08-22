@@ -1,11 +1,12 @@
 #include "ref.hpp"
 #include "../types.hpp"
 #include "field.hpp"
-namespace protodoc
+
+using namespace protodoc;
+namespace commsdsl
 {
-void to_json(json_obj &j, const commsdsl::RefField &f)
+void to_json(protodoc::json_obj &j, const commsdsl::RefField &f)
 {
-    j[kKeyType] = kRefType;
-    j[kKeyFieldField] = f.field().name();
+    j.merge_patch({{kKeyType, kRefType}, {kKeyFieldField, f.field().name()}});
 }
-} // namespace protodoc
+} // namespace commsdsl

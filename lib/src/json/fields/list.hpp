@@ -2,7 +2,7 @@
 #include <commsdsl/ListField.h>
 #include "../def.hpp"
 
-namespace protodoc
+namespace commsdsl
 {
-void to_json(json_obj &j, const commsdsl::ListField &f);
-} // namespace protodoc
+void to_json(protodoc::json_obj &j, const commsdsl::ListField &f);
+} // namespace commsdsl

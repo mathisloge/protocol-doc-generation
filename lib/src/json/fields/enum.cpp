@@ -1,14 +1,15 @@
 #include "enum.hpp"
 #include "../types.hpp"
-namespace protodoc
+
+using namespace protodoc;
+namespace commsdsl
 {
 
-void to_json(json_obj &j, const commsdsl::EnumField &f)
+static void to_json(protodoc::json_obj &j, const commsdsl::EnumField::Values &values)
 {
-    j[kKeyType] = TypeToString(f.type());
-    for (const auto &value : f.values())
+    for (const auto &value : values)
     {
-        auto &val_json = j["enum"][value.first];
+        auto &val_json = j[value.first];
         val_json[kKeyFieldName] = value.first;
         if (!value.second.m_displayName.empty())
             val_json[kKeyFieldDisplayName] = value.second.m_displayName;
@@ -22,4 +23,9 @@ void to_json(json_obj &j, const commsdsl::EnumField &f)
     }
 }
 
-} // namespace protodoc
+void to_json(protodoc::json_obj &j, const commsdsl::EnumField &f)
+{
+    j.merge_patch({{kKeyType, TypeToString(f.type())}, {"enum", f.values()}});
+}
+
+} // namespace commsdsl

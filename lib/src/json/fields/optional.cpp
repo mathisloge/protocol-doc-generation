@@ -5,7 +5,8 @@
 #include "../units.hpp"
 #include "field.hpp"
 
-namespace protodoc
+using namespace protodoc;
+namespace commsdsl
 {
 
 static void addCond(std::ostream &cond_str, const commsdsl::OptCond &cond)
@@ -31,15 +32,16 @@ static void addCond(std::ostream &cond_str, const commsdsl::OptCond &cond)
     }
 }
 
-void to_json(json_obj &j, const commsdsl::OptionalField &f)
+static void to_json(protodoc::json_obj &j, const commsdsl::OptCond &f)
 {
-    j[kKeyType] = kOptionalType;
-    {
-        std::stringstream cond_str;
-        addCond(cond_str, f.cond());
-        j["condition"] = cond_str.str();
-    }
-    to_json(j[kKeyFieldField], f.field());
+    std::stringstream cond_str;
+    addCond(cond_str, f);
+    j = cond_str.str();
 }
 
-} // namespace protodoc
+void to_json(protodoc::json_obj &j, const commsdsl::OptionalField &f)
+{
+    j.merge_patch({{kKeyType, kOptionalType}, {kKeyFieldField, f.field()}, {"condition", f.cond()}});
+}
+
+} // namespace commsdsl

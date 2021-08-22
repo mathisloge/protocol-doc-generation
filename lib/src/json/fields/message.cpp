@@ -3,15 +3,16 @@
 #include "../types.hpp"
 #include "field.hpp"
 
-namespace protodoc
+using namespace protodoc;
+namespace commsdsl
 {
-void to_json(json_obj &j, const commsdsl::Message::FieldsList &fields)
+static void to_json(protodoc::json_obj &j, const commsdsl::Message::FieldsList &fields)
 {
     for (const auto &f : fields)
         j[f.name()] = f;
 }
 
-void to_json(json_obj &j, const commsdsl::Message &message)
+void to_json(protodoc::json_obj &j, const commsdsl::Message &message)
 {
     j.merge_patch({{kKeyFieldName, message.name()},
                    {kKeyFieldDisplayName, message.displayName()},
@@ -21,4 +22,4 @@ void to_json(json_obj &j, const commsdsl::Message &message)
         j[kKeyFieldDeprecatedSince] = message.deprecatedSince();
     j[kKeyFieldSinceVersion] = message.sinceVersion();
 }
-} // namespace protodoc
+} // namespace commsdsl

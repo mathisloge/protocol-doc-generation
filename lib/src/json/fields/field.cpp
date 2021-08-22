@@ -34,10 +34,10 @@ void to_json(json_obj &j, const commsdsl::Field &f)
     switch (f.kind())
     {
     case commsdsl::Field::Kind::Int:
-        protodoc::to_json(j, commsdsl::IntField{f});
+        to_json(j, commsdsl::IntField{f});
         break;
     case commsdsl::Field::Kind::Enum:
-        protodoc::to_json(j, commsdsl::EnumField{f});
+        to_json(j, commsdsl::EnumField{f});
         break;
     case commsdsl::Field::Kind::Set:
         protodoc::to_json(j, commsdsl::SetField{f});
@@ -58,13 +58,13 @@ void to_json(json_obj &j, const commsdsl::Field &f)
         protodoc::to_json(j, commsdsl::DataField{f});
         break;
     case commsdsl::Field::Kind::List:
-        protodoc::to_json(j, commsdsl::ListField{f});
+        to_json(j, commsdsl::ListField{f});
         break;
     case commsdsl::Field::Kind::Ref:
-        protodoc::to_json(j, commsdsl::RefField{f});
+        to_json(j, commsdsl::RefField{f});
         break;
     case commsdsl::Field::Kind::Optional:
-        protodoc::to_json(j, commsdsl::OptionalField{f});
+        to_json(j, commsdsl::OptionalField{f});
         break;
     case commsdsl::Field::Kind::Variant:
         protodoc::to_json(j, commsdsl::VariantField{f});

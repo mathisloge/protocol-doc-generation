@@ -1,14 +1,14 @@
 #include "layer.hpp"
-#include "field.hpp"
 #include "../types.hpp"
-namespace protodoc
+#include "field.hpp"
+
+using namespace protodoc;
+namespace commsdsl
 {
 void to_json(json_obj &j, const commsdsl::Layer &f)
 {
-    j[kKeyFieldName] = f.name();
-    if (!f.description().empty())
-        j[kKeyFieldDescription] = f.description();
+    j.merge_patch({{kKeyFieldName, f.name()}, {kKeyFieldDescription, f.description()}});
     if (f.hasField())
-        to_json(j[kKeyFieldField], f.field());
+        j[kKeyFieldField] = f.field();
 }
-} // namespace protodoc
+} // namespace commsdsl

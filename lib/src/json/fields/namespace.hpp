@@ -2,7 +2,7 @@
 #include <commsdsl/Namespace.h>
 #include "../def.hpp"
 
-namespace protodoc
+namespace commsdsl
 {
-void to_json(json_obj &j, const commsdsl::Namespace &ns);
+void to_json(protodoc::json_obj &j, const commsdsl::Namespace &ns);
 } // namespace protodoc

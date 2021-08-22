@@ -131,9 +131,7 @@ bool Generator::writePlatforms(json_obj &json)
 {
     if (!json[kKeyPlatforms].contains(kKeyPlatforms))
         json[kKeyPlatforms][kKeyPlatforms] = json_obj::object();
-
-    to_json(json[kKeyPlatforms][kKeyPlatforms], impl_->protocol_.platforms());
-
+    json[kKeyPlatforms][kKeyPlatforms] = impl_->protocol_.platforms();
     return true;
 }
 

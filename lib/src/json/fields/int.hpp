@@ -2,7 +2,7 @@
 #include <commsdsl/IntField.h>
 #include "../def.hpp"
 
-namespace protodoc
+namespace commsdsl
 {
-void to_json(json_obj &j, const commsdsl::IntField &f);
+void to_json(protodoc::json_obj &j, const commsdsl::IntField &f);
 } // namespace protodoc

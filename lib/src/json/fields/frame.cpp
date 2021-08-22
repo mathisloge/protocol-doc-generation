@@ -2,23 +2,18 @@
 #include "../types.hpp"
 #include "layer.hpp"
 
-namespace protodoc
+using namespace protodoc;
+namespace commsdsl
 {
 
 void to_json(json_obj &j, const commsdsl::Frame &f)
 {
-    j[kKeyFieldName] = f.name();
-    if (!f.description().empty())
-        j[kKeyFieldDescription] = f.description();
-    to_json(j[kKeyFields], f.layers());
+    j.merge_patch({{kKeyFieldName, f.name()}, {kKeyFieldDescription, f.description()}, {kKeyFields, f.layers()}});
 }
-
 void to_json(json_obj &j, const commsdsl::Frame::LayersList &f)
 {
     for (const auto &layer : f)
-    {
-        to_json(j[layer.name()], layer);
-    }
+        j[layer.name()] = layer;
 }
 
-} // namespace protodoc
+} // namespace commsdsl

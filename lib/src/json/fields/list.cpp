@@ -3,12 +3,13 @@
 #include "../types.hpp"
 #include "field.hpp"
 
-namespace protodoc
+using namespace protodoc;
+namespace commsdsl
 {
 
 void to_json(json_obj &j, const commsdsl::ListField &f)
 {
-    j[kKeyType] = kListType;
+    j.merge_patch({{kKeyType, kListType}});
 
     if (f.hasLengthPrefixField())
     {
@@ -35,7 +36,7 @@ void to_json(json_obj &j, const commsdsl::ListField &f)
     j["fixedElemLength"] = f.elemFixedLength();
     j["fixedCount"] = f.fixedCount();
 
-    to_json(j[kKeyFieldField], f.elementField());
+    j[kKeyFieldField] = f.elementField();
 }
 
-} // namespace protodoc
+} // namespace commsdsl
