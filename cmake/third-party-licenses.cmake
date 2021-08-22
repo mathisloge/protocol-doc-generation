@@ -3,5 +3,4 @@ configure_file (
     "${CMAKE_CURRENT_BINARY_DIR}/third-party-licenses.txt"
 )
 
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/third-party-licenses.txt" DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/third-party-licenses.txt" DESTINATION ${CMAKE_INSTALL_BINDIR})
