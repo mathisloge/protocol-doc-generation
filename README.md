@@ -23,7 +23,7 @@ A cmake integration example can be found at [mathisloge/protodoc-cmake-example](
 
 ## protodoc.json
 
-A schema file is available at https://github.com/mathisloge/protocol-doc-generation/blob/master/schemas/protodoc.schema.json
+A schema file is available at https://github.com/mathisloge/protocol-doc-generation/blob/master/schemas/protodoc.schema.json.
 
 ```json
 {
