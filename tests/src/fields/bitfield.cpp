@@ -10,7 +10,6 @@
 using namespace protodoc;
 TEST_CASE("BitfieldField json structure test", "[fields]")
 {
-
     commsdsl::Protocol p;
     const bool parsed = p.parse("bitfield.xml");
     REQUIRE(parsed);

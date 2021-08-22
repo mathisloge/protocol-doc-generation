@@ -46,7 +46,7 @@ void to_json(json_obj &j, const commsdsl::Field &f)
         protodoc::to_json(j, commsdsl::FloatField{f});
         break;
     case commsdsl::Field::Kind::Bitfield:
-        protodoc::to_json(j, commsdsl::BitfieldField{f});
+        to_json(j, commsdsl::BitfieldField{f});
         break;
     case commsdsl::Field::Kind::Bundle:
         protodoc::to_json(j, commsdsl::BundleField{f});
