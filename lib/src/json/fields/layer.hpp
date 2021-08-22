@@ -1,6 +1,6 @@
 #pragma once
 #include <commsdsl/Layer.h>
-#include "def.hpp"
+#include "../def.hpp"
 
 namespace protodoc
 {

@@ -1,9 +1,9 @@
 #include "optional.hpp"
 #include <sstream>
 #include "../endian.hpp"
-#include "../field.hpp"
 #include "../types.hpp"
 #include "../units.hpp"
+#include "field.hpp"
 
 namespace protodoc
 {

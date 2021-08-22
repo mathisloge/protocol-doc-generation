@@ -3,9 +3,9 @@ include(GenerateExportHeader)
 set(SRCS 
     src/generator.cpp
     src/inja_callbacks.cpp
-    src/json/platform.cpp
-    src/json/namespace.cpp
-    src/json/field.cpp
+    src/json/fields/platform.cpp
+    src/json/fields/namespace.cpp
+    src/json/fields/field.cpp
     src/json/fields/bitfield.cpp
     src/json/fields/enum.cpp
     src/json/fields/float.cpp
@@ -18,18 +18,20 @@ set(SRCS
     src/json/fields/set.cpp
     src/json/fields/string.cpp
     src/json/fields/variant.cpp
-    src/json/frame.cpp
-    src/json/layer.cpp
-    src/json/message.cpp
+    src/json/fields/frame.cpp
+    src/json/fields/layer.cpp
+    src/json/fields/message.cpp
 )
 set(HDRS
     include/protodoc/generator.hpp
     src/inja_callbacks.hpp
     src/json/endian.hpp
+    src/json/units.hpp
+    src/json/types.hpp
     src/json/json.hpp
-    src/json/platform.hpp
-    src/json/namespace.hpp
-    src/json/field.hpp
+    src/json/fields/field.hpp
+    src/json/fields/platform.hpp
+    src/json/fields/namespace.hpp
     src/json/fields/bitfield.hpp
     src/json/fields/enum.hpp
     src/json/fields/float.hpp
@@ -42,11 +44,9 @@ set(HDRS
     src/json/fields/set.hpp
     src/json/fields/string.hpp
     src/json/fields/variant.hpp
-    src/json/units.hpp
-    src/json/types.hpp
-    src/json/frame.hpp
-    src/json/layer.hpp
-    src/json/message.hpp
+    src/json/fields/frame.hpp
+    src/json/fields/layer.hpp
+    src/json/fields/message.hpp
 )
 
 add_library(libprotodoc ${SRCS} ${HDRS})

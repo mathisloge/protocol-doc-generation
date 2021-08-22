@@ -1,8 +1,8 @@
 #include "namespace.hpp"
+#include "../types.hpp"
 #include "field.hpp"
 #include "frame.hpp"
 #include "message.hpp"
-#include "types.hpp"
 
 namespace protodoc
 {

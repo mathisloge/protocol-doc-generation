@@ -1,6 +1,6 @@
 #pragma once
 #include "def.hpp"
-#include "frame.hpp"
-#include "namespace.hpp"
-#include "platform.hpp"
+#include "fields/frame.hpp"
+#include "fields/namespace.hpp"
+#include "fields/platform.hpp"
 #include "types.hpp"

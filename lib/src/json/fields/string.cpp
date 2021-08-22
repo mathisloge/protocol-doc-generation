@@ -1,6 +1,6 @@
 #include "string.hpp"
-#include "../field.hpp"
 #include "../types.hpp"
+#include "field.hpp"
 
 namespace protodoc
 {

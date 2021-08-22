@@ -1,5 +1,5 @@
 #include "platform.hpp"
-#include "types.hpp"
+#include "../types.hpp"
 namespace protodoc
 {
 void to_json(json_obj &j, const commsdsl::Protocol::PlatformsList &platforms)

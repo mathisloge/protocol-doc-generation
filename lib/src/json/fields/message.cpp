@@ -1,7 +1,8 @@
 #include "message.hpp"
 #include <commsdsl/Protocol.h>
+#include "../types.hpp"
 #include "field.hpp"
-#include "types.hpp"
+
 namespace protodoc
 {
 void to_json(json_obj &j, const commsdsl::Message::FieldsList &fields)

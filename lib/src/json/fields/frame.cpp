@@ -1,6 +1,7 @@
 #include "frame.hpp"
+#include "../types.hpp"
 #include "layer.hpp"
-#include "types.hpp"
+
 namespace protodoc
 {
 

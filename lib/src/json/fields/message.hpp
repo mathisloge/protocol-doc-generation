@@ -1,6 +1,6 @@
 #pragma once
 #include <commsdsl/Message.h>
-#include "def.hpp"
+#include "../def.hpp"
 
 namespace protodoc
 {

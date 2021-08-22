@@ -1,6 +1,6 @@
 #include "variant.hpp"
-#include "../field.hpp"
 #include "../types.hpp"
+#include "field.hpp"
 namespace protodoc
 {
 void to_json(json_obj &j, const commsdsl::VariantField &f)

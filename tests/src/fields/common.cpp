@@ -1,6 +1,6 @@
 #include "common.hpp"
 #include <catch.hpp>
-#include <json/field.hpp>
+#include <json/fields/field.hpp>
 #include <json/types.hpp>
 
 namespace protodoc::tests

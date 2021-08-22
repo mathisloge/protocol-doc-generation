@@ -1,7 +1,7 @@
 #include "bitfield.hpp"
 #include "../endian.hpp"
-#include "../field.hpp"
 #include "../types.hpp"
+#include "field.hpp"
 
 namespace protodoc
 {
