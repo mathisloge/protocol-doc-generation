@@ -2,7 +2,7 @@
 #include <commsdsl/SetField.h>
 #include "../def.hpp"
 
-namespace protodoc
+namespace commsdsl
 {
-void to_json(json_obj &j, const commsdsl::SetField &f);
+void to_json(protodoc::json_obj &j, const commsdsl::SetField &f);
 } // namespace protodoc

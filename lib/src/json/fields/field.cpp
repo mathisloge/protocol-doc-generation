@@ -34,40 +34,40 @@ void to_json(json_obj &j, const commsdsl::Field &f)
     switch (f.kind())
     {
     case commsdsl::Field::Kind::Int:
-        to_json(j, commsdsl::IntField{f});
+        j.merge_patch(commsdsl::IntField{f});
         break;
     case commsdsl::Field::Kind::Enum:
-        to_json(j, commsdsl::EnumField{f});
+        j.merge_patch(commsdsl::EnumField{f});
         break;
     case commsdsl::Field::Kind::Set:
-        protodoc::to_json(j, commsdsl::SetField{f});
+        j.merge_patch(commsdsl::SetField{f});
         break;
     case commsdsl::Field::Kind::Float:
-        protodoc::to_json(j, commsdsl::FloatField{f});
+        j.merge_patch(commsdsl::FloatField{f});
         break;
     case commsdsl::Field::Kind::Bitfield:
-        to_json(j, commsdsl::BitfieldField{f});
+        j.merge_patch(commsdsl::BitfieldField{f});
         break;
     case commsdsl::Field::Kind::Bundle:
-        protodoc::to_json(j, commsdsl::BundleField{f});
+        j.merge_patch(commsdsl::BundleField{f});
         break;
     case commsdsl::Field::Kind::String:
-        protodoc::to_json(j, commsdsl::StringField{f});
+        j.merge_patch(commsdsl::StringField{f});
         break;
     case commsdsl::Field::Kind::Data:
-        protodoc::to_json(j, commsdsl::DataField{f});
+        j.merge_patch(commsdsl::DataField{f});
         break;
     case commsdsl::Field::Kind::List:
-        to_json(j, commsdsl::ListField{f});
+        j.merge_patch(commsdsl::ListField{f});
         break;
     case commsdsl::Field::Kind::Ref:
-        to_json(j, commsdsl::RefField{f});
+        j.merge_patch(commsdsl::RefField{f});
         break;
     case commsdsl::Field::Kind::Optional:
-        to_json(j, commsdsl::OptionalField{f});
+        j.merge_patch(commsdsl::OptionalField{f});
         break;
     case commsdsl::Field::Kind::Variant:
-        protodoc::to_json(j, commsdsl::VariantField{f});
+        j.merge_patch(commsdsl::VariantField{f});
         break;
     default:
         j[kKeyType] = keyValueUnknown;

@@ -3,17 +3,18 @@
 #include "../types.hpp"
 #include "field.hpp"
 
-namespace protodoc
+using namespace protodoc;
+namespace commsdsl
 {
-
 void to_json(json_obj &j, const commsdsl::DataField &f)
 {
-    j[kKeyType] = kDataType;
+    constexpr const char *kKeyLengthField = "lengthField";
+    constexpr const char *kKeyFixedLength = "fixedLength";
+    j.merge_patch({{kKeyType, kDataType}, {kKeyFixedLength, f.fixedLength()}});
     if (f.hasLengthPrefixField())
-        to_json(j["lengthField"], f.lengthPrefixField());
+        j[kKeyLengthField].merge_patch(f.lengthPrefixField());
     else if (!f.detachedPrefixFieldName().empty())
-        j["lengthField"] = f.detachedPrefixFieldName();
-    j["fixedLength"] = f.fixedLength();
+        j[kKeyLengthField].merge_patch(f.detachedPrefixFieldName());
 }
 
-} // namespace protodoc
+} // namespace commsdsl

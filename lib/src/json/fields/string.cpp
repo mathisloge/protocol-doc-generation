@@ -2,22 +2,24 @@
 #include "../types.hpp"
 #include "field.hpp"
 
-namespace protodoc
+using namespace protodoc;
+namespace commsdsl
 {
-void to_json(json_obj &j, const commsdsl::StringField &f)
+void to_json(protodoc::json_obj &j, const commsdsl::StringField &f)
 {
+    j.merge_patch({{kKeyType, kStringType}});
     j[kKeyType] = kStringType;
 
     if (f.hasLengthPrefixField())
     {
         if (f.detachedPrefixFieldName().empty())
-            to_json(j["lengthField"], f.lengthPrefixField());
+            j["lengthField"].merge_patch(f.lengthPrefixField());
         else
-            j["lengthField"] = f.detachedPrefixFieldName();
+            j["lengthField"].merge_patch(f.detachedPrefixFieldName());
     }
     else if (f.hasZeroTermSuffix())
-        j["zeroTerminated"] = f.hasZeroTermSuffix();
+        j["zeroTerminated"].merge_patch(f.hasZeroTermSuffix());
     else
-        j["fixedLength"] = f.fixedLength();
+        j["fixedLength"].merge_patch(f.fixedLength());
 }
-} // namespace protodoc
+} // namespace commsdsl

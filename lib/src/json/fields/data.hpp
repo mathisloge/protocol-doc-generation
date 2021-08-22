@@ -2,7 +2,8 @@
 #include <commsdsl/DataField.h>
 #include "../def.hpp"
 
-namespace protodoc
+using namespace protodoc;
+namespace commsdsl
 {
-void to_json(json_obj &j, const commsdsl::DataField &f);
+void to_json(protodoc::json_obj &j, const commsdsl::DataField &f);
 } // namespace protodoc

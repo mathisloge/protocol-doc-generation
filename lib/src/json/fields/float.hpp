@@ -2,7 +2,7 @@
 #include <commsdsl/FloatField.h>
 #include "../def.hpp"
 
-namespace protodoc
+namespace commsdsl
 {
-void to_json(json_obj &j, const commsdsl::FloatField &f);
-} // namespace protodoc
+void to_json(protodoc::json_obj &j, const commsdsl::FloatField &f);
+} // namespace commsdsl

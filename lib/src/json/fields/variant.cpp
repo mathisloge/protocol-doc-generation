@@ -1,15 +1,20 @@
 #include "variant.hpp"
 #include "../types.hpp"
 #include "field.hpp"
-namespace protodoc
+
+using namespace protodoc;
+namespace commsdsl
 {
+static void to_json(json_obj &j, const commsdsl::VariantField::Members &members)
+{
+    for (const auto &m : members)
+        j[m.name()].merge_patch(m);
+}
+
 void to_json(json_obj &j, const commsdsl::VariantField &f)
 {
-    j[kKeyType] = kVariantType;
-    for (const auto &m : f.members())
-        to_json(j[kKeyFieldMembers][m.name()], m);
-
+    j.merge_patch({{kKeyType, kVariantType}, kKeyFieldMembers, f.members()});
     if (f.defaultMemberIdx() != std::numeric_limits<decltype(f.defaultMemberIdx())>::max())
-        to_json(j["defaultMember"], f.members()[f.defaultMemberIdx()]);
+        j["defaultMember"].merge_patch(f.members()[f.defaultMemberIdx()]);
 }
-} // namespace protodoc
+} // namespace commsdsl
