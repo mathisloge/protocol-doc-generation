@@ -10,13 +10,12 @@
 using namespace protodoc;
 TEST_CASE("BitfieldField json structure test", "[fields]")
 {
-    protodoc::json_obj j;
+
     commsdsl::Protocol p;
     const bool parsed = p.parse("bitfield.xml");
     REQUIRE(parsed);
     REQUIRE(p.validate());
-    protodoc::to_json(j, p.findField("Bitfield1"));
-
+    protodoc::json_obj j = p.findField("Bitfield1");
     tests::testCommonFields(j, kBitfieldType, commsdsl::Field::Kind::Bitfield);
     REQUIRE(j.at(kKeyFieldDisplayName).get<std::string>() == "Proper Bitfield Name");
     REQUIRE(j.at(kKeyFieldDescription).get<std::string>() == "Bitfield description");
