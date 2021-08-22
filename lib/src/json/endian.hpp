@@ -1,10 +1,8 @@
 #pragma once
-#include <string_view>
 #include <commsdsl/Endian.h>
-
+#include "def.hpp"
 namespace protodoc
 {
-inline constexpr const char * kKeyEndian = "endian";
 constexpr const char *EndianToString(commsdsl::Endian type)
 {
     using Endian = commsdsl::Endian;
@@ -13,7 +11,7 @@ constexpr const char *EndianToString(commsdsl::Endian type)
     {
     case Endian::Endian_Little: return "endian_little";
     case Endian::Endian_Big: return "endian_big";
-    default: return "unknown";
+    default: return keyValueUnknown;
     }
     // clang-format on
 }

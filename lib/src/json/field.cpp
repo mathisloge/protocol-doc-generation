@@ -69,7 +69,7 @@ void to_json(json_obj &j, const commsdsl::Field &f)
         to_json(j, commsdsl::VariantField{f});
         break;
     default:
-        j[kKeyType] = "unknown";
+        j[kKeyType] = keyValueUnknown;
         break;
     }
 }

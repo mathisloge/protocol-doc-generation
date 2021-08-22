@@ -39,7 +39,7 @@ void to_json(json_obj &j, const commsdsl::OptionalField &f)
         addCond(cond_str, f.cond());
         j["condition"] = cond_str.str();
     }
-    to_json(j["field"], f.field());
+    to_json(j[kKeyFieldField], f.field());
 }
 
 } // namespace protodoc
