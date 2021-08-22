@@ -142,6 +142,8 @@ bool Generator::writeNamespaces(json_obj &json)
     for (const auto &ns : impl_->protocol_.namespaces())
     {
         const std::string ns_name = ns.name().empty() ? "global" : ns.name();
+        if (!json[kKeyNamespace].contains(ns_name))
+            json[kKeyNamespace][ns_name] = json_obj::object();
         auto &ns_json = json[kKeyNamespace][ns_name];
         to_json(ns_json, ns);
     }
