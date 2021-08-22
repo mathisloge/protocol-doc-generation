@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://github.com/mathisloge/protocol-doc-generation/blob/master/protodoc.schema.json",
+    "$id": "https://github.com/mathisloge/protocol-doc-generation/blob/master/schemas/protodoc.schema.json",
     "title": "protodoc",
     "description": "protodoc settings file",
     "type": "object",
