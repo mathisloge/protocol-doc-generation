@@ -1,4 +1,6 @@
 include(CMakePackageConfigHelpers)
+include(third-party-licenses)
+
 install(TARGETS protodoc libprotodoc
     EXPORT protodocTargets
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
