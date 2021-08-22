@@ -91,15 +91,19 @@ bool Generator::write(const GeneratorOpts &opts)
 
     if (opts.json_output)
     {
-        std::ofstream json_output_file{"protodoc_internal.json"};
+        spdlog::info("root: {}", opts.root.string());
+        std::ofstream json_output_file{opts.output_dir / "protodoc_internal.json"};
         json_output_file << std::setw(4) << json << std::endl;
     }
     // try
     // {
     // std::cout << env.render_file("platforms.tex", json) << std::endl;
-    spdlog::info("Writing platforms...");
-    const std::string platforms_ext{opts.templates.t_platforms.extension().string()};
-    env.write(opts.templates.t_platforms.string(), json, "platforms" + platforms_ext);
+    if (json.find("platforms") != json.end())
+    {
+        spdlog::info("Writing platforms...");
+        const std::string platforms_ext{opts.templates.t_platforms.extension().string()};
+        env.write(opts.templates.t_platforms.string(), json, "platforms" + platforms_ext);
+    }
     // env.write("frames.adoc", json, "frames.adoc");
     spdlog::info("Writing namespaces...");
     const std::string namespaces_ext{opts.templates.t_namespaces.extension().string()};
@@ -111,7 +115,7 @@ bool Generator::write(const GeneratorOpts &opts)
         spdlog::info("Writing namespace {}...", key);
         inja::json ns_json{{kKeyNamespace, val}};
         ns_json.merge_patch(lang_json);
-        std::ofstream ns_json_file(key + ".json");
+        std::ofstream ns_json_file(opts.output_dir / (key + ".json"));
         ns_json_file << std::setw(4) << ns_json << std::endl;
         env.write(opts.templates.t_namespace.string(), ns_json, key + namespace_ext);
     }
@@ -126,7 +130,7 @@ bool Generator::write(const GeneratorOpts &opts)
 bool Generator::writePlatforms(json_obj &json)
 {
     if (!json[kKeyPlatforms].contains(kKeyPlatforms))
-        json[kKeyPlatforms][kKeyPlatforms] = json_obj{};
+        json[kKeyPlatforms][kKeyPlatforms] = json_obj::object();
 
     to_json(json[kKeyPlatforms][kKeyPlatforms], impl_->protocol_.platforms());
 

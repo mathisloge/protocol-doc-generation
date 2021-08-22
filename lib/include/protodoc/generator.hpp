@@ -11,6 +11,7 @@ namespace protodoc
 using FilesList = std::vector<std::filesystem::path>;
 struct GeneratorOpts
 {
+    std::filesystem::path root;
     bool trim;
     bool split;
     bool json_output;

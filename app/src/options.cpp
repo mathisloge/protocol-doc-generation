@@ -47,6 +47,14 @@ void parseOpts(const cxxopts::ParseResult &res, protodoc::GeneratorOpts &opts)
             return fs::path{root_dir->get<std::string>()};
         return settings_file.parent_path();
     }();
+    opts.root = settings_root;
+    if (!fs::exists(opts.root))
+    {
+        if (!fs::create_directories(opts.root))
+            throw std::runtime_error("settings: could not create root directory. Please create it first!");
+    }
+    else if (!fs::is_directory(opts.root))
+        throw std::runtime_error(fmt::format("settings: root is not a directory: [{}]", opts.root.string()));
 
     { //! templates
         if (!templates.is_object())

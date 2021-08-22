@@ -1,0 +1,19 @@
+{
+    "root": "D:\\dev\\protodoc-gen-test\\schema_doc",
+    "templates": {
+        "root": "templates/templates",
+        "platforms": "platforms.adoc",
+        "namespaces": "namespaces.adoc",
+        "namespace": "namespaces.adoc"
+    },
+    "lang": "lang_en.json",
+    "custom": "custom.json",
+    "output": "D:/dev/protocol-doc-generation/build/windows-default-debug/generated",
+    "trim": true,
+    "split": true,
+    "jsonOutput": true,
+    "responseFile": {
+        "file": "D:/dev/protodoc-gen-test/schema/schema_list.txt",
+        "path": "D:/dev/protodoc-gen-test/schema"
+    }
+}
