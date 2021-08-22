@@ -6,6 +6,19 @@ Generates protocol descriptions from https://github.com/commschamp/CommsDSL-Spec
 
 Create a [protodoc.json](#protodocjson) file and call `protodoc -s "<pathto>/protodoc.json"`.
 
+## CMake integration
+
+The projects exports cmake targets.
+```cmake
+find_package(protodoc CONFIG REQUIRED)
+protodoc_generate("${CMAKE_CURRENT_SOURCE_DIR}/protodoc.json" "generate_doc")
+```
+
+the `protodoc_generate` will take two arguments. The first one is the path to the [protodoc.json](#protodocjson) and the second one is the target name.
+
+If you use `protodoc_generate` you can use cmake variables in the [protodoc.json](#protodocjson). If you are using relative paths, please make sure that you will set `root` to the appropiate path since `protodoc_generate` will move the [protodoc.json](#protodocjson) to `${CMAKE_CURRENT_BINARY_DIR}`. So if you don't set `root`, relative paths will resolve to `${CMAKE_CURRENT_BINARY_DIR}/<relative_path>`.
+
+A cmake integration example can be found at [mathisloge/protodoc-cmake-example](https://github.com/mathisloge/protodoc-cmake-example).
 
 
 ## protodoc.json
