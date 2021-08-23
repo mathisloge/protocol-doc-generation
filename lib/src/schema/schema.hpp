@@ -17,8 +17,8 @@ class JsonSchemaProperty
     static constexpr const char *kKeyDescription = "description";
 
   public:
-    explicit JsonSchemaProperty(schema_json &json);
-    JsonSchemaProperty(JsonSchemaProperty &self);
+    JsonSchemaProperty(schema_json &json);
+    JsonSchemaProperty(const JsonSchemaProperty &self);
     ~JsonSchemaProperty();
 
   protected:
@@ -92,6 +92,12 @@ class JsonSchemaObjectProperty : public JsonSchemaProperty
 
         schema_[kKeyProperties][name] = std::move(prop);
         return T{schema_[kKeyProperties][name]};
+    }
+
+    JsonSchemaObjectProperty &init()
+    {
+        schema_[kKeyType] = Type();
+        return *this;
     }
 
     static const char *Type()
@@ -203,11 +209,7 @@ class JsonSchema final : public JsonSchemaProperty
     JsonSchema &setTitle(const std::string &title);
     JsonSchema &setDescription(const std::string &description);
 
-    template <typename T>
-    T as()
-    {
-        return T{*this};
-    }
+    schema_json &json();
 
   private:
     const std::string schema_name_;
