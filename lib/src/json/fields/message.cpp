@@ -1,6 +1,5 @@
 #include "message.hpp"
 #include <commsdsl/Protocol.h>
-#include "../types.hpp"
 #include "field.hpp"
 
 using namespace protodoc;

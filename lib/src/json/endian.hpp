@@ -1,18 +1,11 @@
 #pragma once
 #include <commsdsl/Endian.h>
 #include "def.hpp"
-namespace protodoc
+
+namespace commsdsl
 {
-constexpr const char *EndianToString(commsdsl::Endian type)
-{
-    using Endian = commsdsl::Endian;
-    // clang-format off
-    switch (type)
-    {
-    case Endian::Endian_Little: return "endian_little";
-    case Endian::Endian_Big: return "endian_big";
-    default: return keyValueUnknown;
-    }
-    // clang-format on
-}
-} // namespace protodoc
+NLOHMANN_JSON_SERIALIZE_ENUM(Endian,
+                             {{Endian::Endian_Little, "littleEndian"},
+                              {Endian::Endian_Big, "bigEndian"},
+                              {Endian::Endian_NumOfValues, protodoc::keyValueUnknown}});
+} // namespace commsdsl

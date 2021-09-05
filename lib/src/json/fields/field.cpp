@@ -1,5 +1,5 @@
 #include "field.hpp"
-#include "../types.hpp"
+#include "../../schema/schema.hpp"
 #include "bitfield.hpp"
 #include "bundle.hpp"
 #include "data.hpp"
@@ -22,7 +22,7 @@ void to_json(json_obj &j, const commsdsl::Field &f)
     j.merge_patch({{kKeyFieldName, f.name()},
                    {kKeyFieldDisplayName, f.displayName()},
                    {kKeyFieldDescription, f.description()},
-                   {kKeyFieldSemanticType, SemanticTypeToString(f.semanticType())},
+                   {kKeyFieldSemanticType, f.semanticType()},
                    {kKeyFieldKind, f.kind()},
                    {kKeyFieldMaxLength, f.minLength()},
                    {kKeyFieldMaxLength, f.maxLength()}});
@@ -76,3 +76,44 @@ void to_json(json_obj &j, const commsdsl::Field &f)
 }
 
 } // namespace commsdsl
+
+namespace protodoc
+{
+void generateFieldSchema(const std::string &base_url)
+{
+    JsonSchema schema{base_url, "field"};
+
+    JsonSchemaObjectProperty schema_obj{schema.json()};
+    schema_obj.init();
+
+    schema_obj.addProperty<JsonSchemaStringProperty>(kKeyFieldName, "unique name of the field", true);
+    schema_obj.addProperty<JsonSchemaStringProperty>(kKeyFieldDisplayName, "human readable name of the field", false);
+    schema_obj.addProperty<JsonSchemaStringProperty>(kKeyFieldDescription, "description of the field", false);
+    schema_obj.addProperty<JsonSchemaEnumProperty>(kKeyFieldSemanticType, "semantic type", true)
+        .addValue(commsdsl::Field::SemanticType::None)
+        .addValue(commsdsl::Field::SemanticType::Version)
+        .addValue(commsdsl::Field::SemanticType::MessageId)
+        .addValue(commsdsl::Field::SemanticType::Length)
+        .addValue(commsdsl::Field::SemanticType::NumOfValues) //! unknown value
+        ;
+    schema_obj.addProperty<JsonSchemaEnumProperty>(kKeyFieldKind, "field kind", true)
+        .addValue(commsdsl::Field::Kind::Int)
+        .addValue(commsdsl::Field::Kind::Enum)
+        .addValue(commsdsl::Field::Kind::Set)
+        .addValue(commsdsl::Field::Kind::Float)
+        .addValue(commsdsl::Field::Kind::Bitfield)
+        .addValue(commsdsl::Field::Kind::Bundle)
+        .addValue(commsdsl::Field::Kind::String)
+        .addValue(commsdsl::Field::Kind::Data)
+        .addValue(commsdsl::Field::Kind::List)
+        .addValue(commsdsl::Field::Kind::Ref)
+        .addValue(commsdsl::Field::Kind::Optional)
+        .addValue(commsdsl::Field::Kind::Variant)
+        .addValue(commsdsl::Field::Kind::NumOfValues);
+    schema_obj.addProperty<JsonSchemaNumberProperty>(kKeyFieldDeprecatedSince, "deprecated since version", false);
+    schema_obj.addProperty<JsonSchemaNumberProperty>(kKeyFieldSinceVersion, "available since version", false);
+
+    schema.setTitle("Field");
+    schema.write(".");
+}
+} // namespace protodoc

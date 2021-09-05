@@ -1,5 +1,4 @@
 #include "variant.hpp"
-#include "../types.hpp"
 #include "field.hpp"
 
 using namespace protodoc;

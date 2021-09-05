@@ -1,8 +1,6 @@
 #include "common.hpp"
 #include <catch.hpp>
 #include <json/fields/field.hpp>
-#include <json/types.hpp>
-
 namespace protodoc::tests
 {
 void testCommonFields(const protodoc::json_obj &j, const std::string_view field_type, commsdsl::Field::Kind kind)

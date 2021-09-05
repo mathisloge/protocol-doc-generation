@@ -24,6 +24,17 @@ class JsonSchemaProperty
   protected:
     schema_json &schema_;
 };
+class JsonSchemaRefProperty : public JsonSchemaProperty
+{
+    static constexpr const char *kType = "$ref";
+
+  public:
+    JsonSchemaRefProperty &setRef(const std::string &base_url, const std::string &id)
+    {
+        schema_[kType] = base_url + id;
+        return *this;
+    }
+};
 
 class JsonSchemaBooleanProperty : public JsonSchemaProperty
 {
@@ -49,6 +60,18 @@ class JsonSchemaNullProperty : public JsonSchemaProperty
         return kType;
     }
 };
+class JsonSchemaStringProperty : public JsonSchemaProperty
+{
+  private:
+    static constexpr const char *kType = "string";
+
+  public:
+    using JsonSchemaProperty::JsonSchemaProperty;
+    static const char *Type()
+    {
+        return kType;
+    }
+};
 
 class JsonSchemaEnumProperty : public JsonSchemaProperty
 {
@@ -58,7 +81,7 @@ class JsonSchemaEnumProperty : public JsonSchemaProperty
   public:
     using JsonSchemaProperty::JsonSchemaProperty;
 
-    JsonSchemaEnumProperty &addValue(const std::string &value_type)
+    JsonSchemaEnumProperty &addValue(const schema_json &value_type)
     {
         schema_[kType].emplace_back(value_type);
         return *this;
@@ -66,7 +89,7 @@ class JsonSchemaEnumProperty : public JsonSchemaProperty
 
     static schema_json Type()
     {
-        return schema_json{{kType, schema_json::array()}};
+        return nullptr;
     }
 };
 
@@ -76,6 +99,7 @@ class JsonSchemaObjectProperty : public JsonSchemaProperty
     static constexpr const char *kKeyProperties = "properties";
     static constexpr const char *kKeyRequired = "required";
     static constexpr const char *kType = "object";
+    static constexpr const char *kAllOf = "allOf";
 
   public:
     using JsonSchemaProperty::JsonSchemaProperty;
@@ -84,7 +108,8 @@ class JsonSchemaObjectProperty : public JsonSchemaProperty
     T addProperty(const std::string &name, const std::string &description, bool required)
     {
         auto prop = nlohmann::json::object();
-        prop[kKeyType] = T::Type();
+        if (T::Type() != nullptr)
+            prop[kKeyType] = T::Type();
         if (!description.empty())
             prop[kKeyDescription] = description;
         if (required)
@@ -92,6 +117,13 @@ class JsonSchemaObjectProperty : public JsonSchemaProperty
 
         schema_[kKeyProperties][name] = std::move(prop);
         return T{schema_[kKeyProperties][name]};
+    }
+
+    template <typename T>
+    T addAllOf()
+    {
+        auto &emplaced = schema_[kAllOf].emplace_back();
+        return JsonSchemaRefProperty{emplaced};
     }
 
     JsonSchemaObjectProperty &init()
@@ -193,16 +225,10 @@ class JsonSchemaArrayProperty : public JsonSchemaProperty
     }
 };
 
-class JsonSchemaRefProperty : public JsonSchemaProperty
-{
-  public:
-    JsonSchemaRefProperty &setRef(const std::string &url);
-};
-
 class JsonSchema final : public JsonSchemaProperty
 {
   public:
-    explicit JsonSchema(const std::string &schema_name);
+    explicit JsonSchema(const std::string &base_url, const std::string &id);
     ~JsonSchema();
     void write(const std::filesystem::path &output_dir);
 
@@ -212,7 +238,8 @@ class JsonSchema final : public JsonSchemaProperty
     schema_json &json();
 
   private:
-    const std::string schema_name_;
+    const std::string schema_id_;
+    const std::string base_url_;
     schema_json schema_;
 };
 } // namespace protodoc

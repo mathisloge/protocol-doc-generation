@@ -1,6 +1,5 @@
 #include "data.hpp"
 #include "../endian.hpp"
-#include "../types.hpp"
 #include "field.hpp"
 
 using namespace protodoc;

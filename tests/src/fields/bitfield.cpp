@@ -4,7 +4,6 @@
 #include <commsdsl/commsdsl.h>
 #include <json/def.hpp>
 #include <json/fields/field.hpp>
-#include <json/types.hpp>
 #include "common.hpp"
 
 using namespace protodoc;

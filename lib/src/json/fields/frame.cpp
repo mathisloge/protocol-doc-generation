@@ -1,5 +1,4 @@
 #include "frame.hpp"
-#include "../types.hpp"
 #include "layer.hpp"
 
 using namespace protodoc;

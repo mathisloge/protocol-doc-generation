@@ -1,6 +1,5 @@
 #include "bitfield.hpp"
 #include "../endian.hpp"
-#include "../types.hpp"
 #include "field.hpp"
 
 using namespace protodoc;
@@ -14,8 +13,7 @@ static void to_json(json_obj &j, const commsdsl::BitfieldField::Members &members
 
 void to_json(json_obj &j, const commsdsl::BitfieldField &f)
 {
-    j.merge_patch(
-        {{kKeyType, kBitfieldType}, {kKeyEndian, EndianToString(f.endian())}, {kKeyFieldMembers, f.members()}});
+    j.merge_patch({{kKeyType, kBitfieldType}, {kKeyEndian, f.endian()}, {kKeyFieldMembers, f.members()}});
 }
 
 } // namespace commsdsl

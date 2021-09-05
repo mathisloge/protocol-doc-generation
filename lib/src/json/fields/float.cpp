@@ -1,11 +1,14 @@
 #include "float.hpp"
 #include "../endian.hpp"
-#include "../types.hpp"
 #include "../units.hpp"
 
 using namespace protodoc;
 namespace commsdsl
 {
+using Type = FloatField::Type;
+NLOHMANN_JSON_SERIALIZE_ENUM(
+    Type, {{Type::Float, "float"}, {Type::Double, "double"}, {Type::NumOfValues, protodoc::keyValueUnknown}});
+
 static void to_json(json_obj &j, const commsdsl::FloatField::ValidRangesList &ranges)
 {
     for (const auto &range : ranges)
@@ -19,9 +22,7 @@ static void to_json(json_obj &j, const commsdsl::FloatField::ValidRangesList &ra
 }
 void to_json(json_obj &j, const commsdsl::FloatField &f)
 {
-    j.merge_patch({{kKeyType, TypeToString(f.type())},
-                   {kKeyEndian, EndianToString(f.endian())},
-                   {kKeyFieldRange, f.validRanges()}});
+    j.merge_patch({{kKeyType, f.type()}, {kKeyEndian, f.endian()}, {kKeyFieldRange, f.validRanges()}});
     if (f.units() != commsdsl::Units::Unknown && f.units() < commsdsl::Units::NumOfValues)
         j[kKeyFieldUnits] = UnitsToString(f.units());
 }

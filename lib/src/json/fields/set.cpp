@@ -1,6 +1,5 @@
 #include "set.hpp"
 #include "../endian.hpp"
-#include "../types.hpp"
 
 using namespace protodoc;
 namespace commsdsl
@@ -22,6 +21,6 @@ static void to_json(json_obj &j, const commsdsl::SetField::Bits &bits)
 
 void to_json(json_obj &j, const commsdsl::SetField &f)
 {
-    j.merge_patch({{kKeyType, kSetType}, {kKeyEndian, EndianToString(f.endian())}, {"bits", f.bits()}});
+    j.merge_patch({{kKeyType, kSetType}, {kKeyEndian, f.endian()}, {"bits", f.bits()}});
 }
 } // namespace commsdsl
