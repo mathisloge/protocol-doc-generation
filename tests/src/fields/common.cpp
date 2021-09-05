@@ -3,15 +3,18 @@
 #include <json/fields/field.hpp>
 namespace protodoc::tests
 {
-void testCommonFields(const protodoc::json_obj &j, const std::string_view field_type, commsdsl::Field::Kind kind)
+void testCommonFields(const protodoc::json_obj &j, commsdsl::Field::Kind kind, commsdsl::Field::SemanticType semantic)
 {
-    REQUIRE_NOTHROW(j.at(kKeyType));
-    REQUIRE(j.at(kKeyType).is_string());
-    REQUIRE(j.at(kKeyType).get<std::string>() == field_type);
+    REQUIRE_NOTHROW(j.at(kKeyFieldSemanticType));
+    REQUIRE(j.at(kKeyFieldSemanticType).is_string());
+    REQUIRE(j.at(kKeyFieldSemanticType).get<commsdsl::Field::SemanticType>() == semantic);
 
     REQUIRE_NOTHROW(j.at(kKeyFieldKind));
-    REQUIRE(j.at(kKeyFieldKind).is_number());
-    REQUIRE(j.at(kKeyFieldKind).get<int>() == static_cast<int>(kind));
+    REQUIRE(j.at(kKeyFieldKind).is_string());
+    REQUIRE(j.at(kKeyFieldKind).get<commsdsl::Field::Kind>() == kind);
+
+    REQUIRE_NOTHROW(j.at(kKeyFieldName));
+    REQUIRE(j.at(kKeyFieldName).is_string());
 
     REQUIRE_NOTHROW(j.at(kKeyFieldDisplayName));
     REQUIRE(j.at(kKeyFieldDisplayName).is_string());

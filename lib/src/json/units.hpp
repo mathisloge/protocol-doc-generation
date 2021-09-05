@@ -1,65 +1,60 @@
 #pragma once
 #include <commsdsl/Units.h>
-namespace protodoc
+#include "def.hpp"
+namespace commsdsl
 {
-constexpr const char *UnitsToString(commsdsl::Units unit)
-{
-    switch (unit)
-    {
-        // clang-format off
-            case commsdsl::Units::Unknown: return "Unknown";
-            // Time
-            case commsdsl::Units::Nanoseconds: return "Nanoseconds";
-            case commsdsl::Units::Microseconds: return "Microseconds";
-            case commsdsl::Units::Milliseconds: return "Milliseconds";
-            case commsdsl::Units::Seconds: return "Seconds";
-            case commsdsl::Units::Minutes: return "Minutes";
-            case commsdsl::Units::Hours: return "Hours";
-            case commsdsl::Units::Days: return "Days";
-            case commsdsl::Units::Weeks: return "Weeks";
-            // Distance  
-            case commsdsl::Units::Nanometers: return "Nanometers";
-            case commsdsl::Units::Micrometers: return "Micrometers";
-            case commsdsl::Units::Millimeters: return "Millimeters";
-            case commsdsl::Units::Centimeters: return "Centimeters";
-            case commsdsl::Units::Meters: return "Meters";
-            case commsdsl::Units::Kilometers: return "Kilometers";
-            // Speed
-            case commsdsl::Units::NanometersPerSecond: return "NanometersPerSecond";
-            case commsdsl::Units::MicrometersPerSecond: return "MicrometersPerSecond";
-            case commsdsl::Units::MillimetersPerSecond: return "MillimetersPerSecond";
-            case commsdsl::Units::CentimetersPerSecond: return "CentimetersPerSecond";
-            case commsdsl::Units::MetersPerSecond: return "MetersPerSecond";
-            case commsdsl::Units::KilometersPerSecond: return "KilometersPerSecond";
-            case commsdsl::Units::KilometersPerHour: return "KilometersPerHour";
-            // Frequency
-            case commsdsl::Units::Hertz: return "Hertz";
-            case commsdsl::Units::KiloHertz: return "KiloHertz";
-            case commsdsl::Units::MegaHertz: return "MegaHertz";
-            case commsdsl::Units::GigaHertz: return "GigaHertz";
-            // Angle
-            case commsdsl::Units::Degrees: return "Degrees";
-            case commsdsl::Units::Radians: return "Radians";
-            // Electric Current
-            case commsdsl::Units::Nanoamps: return "Nanoamps";
-            case commsdsl::Units::Microamps: return "Microamps";
-            case commsdsl::Units::Milliamps: return "Milliamps";
-            case commsdsl::Units::Amps: return "Amps";
-            case commsdsl::Units::Kiloamps: return "Kiloamps";
-            // Electric Voltage
-            case commsdsl::Units::Nanovolts: return "Nanovolts";
-            case commsdsl::Units::Microvolts: return "Microvolts";
-            case commsdsl::Units::Millivolts: return "Millivolts";
-            case commsdsl::Units::Volts: return "Volts";
-            case commsdsl::Units::Kilovolts: return "Kilovolts";
-            // Memory Size
-            case commsdsl::Units::Bytes: return "Bytes";
-            case commsdsl::Units::Kilobytes: return "Kilobytes";
-            case commsdsl::Units::Megabytes: return "Megabytes";
-            case commsdsl::Units::Gigabytes: return "Gigabytes";
-            case commsdsl::Units::Terabytes: return "Terabytes";
-            default: return "err";
-        // clang-format on
-    }
+NLOHMANN_JSON_SERIALIZE_ENUM(Units,
+                             {{Units::Unknown, "unknown"},
+                              // Time
+                              {Units::Nanoseconds, "nanoseconds"},
+                              {Units::Microseconds, "microseconds"},
+                              {Units::Milliseconds, "milliseconds"},
+                              {Units::Seconds, "seconds"},
+                              {Units::Minutes, "minutes"},
+                              {Units::Hours, "hours"},
+                              {Units::Days, "days"},
+                              {Units::Weeks, "weeks"},
+                              // Distance
+                              {Units::Nanometers, "nanometers"},
+                              {Units::Micrometers, "micrometers"},
+                              {Units::Millimeters, "millimeters"},
+                              {Units::Centimeters, "centimeters"},
+                              {Units::Meters, "meters"},
+                              {Units::Kilometers, "kilometers"},
+                              // Speed
+                              {Units::NanometersPerSecond, "nanometersPerSecond"},
+                              {Units::MicrometersPerSecond, "micrometersPerSecond"},
+                              {Units::MillimetersPerSecond, "millimetersPerSecond"},
+                              {Units::CentimetersPerSecond, "centimetersPerSecond"},
+                              {Units::MetersPerSecond, "metersPerSecond"},
+                              {Units::KilometersPerSecond, "kilometersPerSecond"},
+                              {Units::KilometersPerHour, "kilometersPerHour"},
+                              // Frequency
+                              {Units::Hertz, "hertz"},
+                              {Units::KiloHertz, "kiloHertz"},
+                              {Units::MegaHertz, "megaHertz"},
+                              {Units::GigaHertz, "gigaHertz"},
+                              // Angle
+                              {Units::Degrees, "degrees"},
+                              {Units::Radians, "radians"},
+                              // Electric Current
+                              {Units::Nanoamps, "nanoamps"},
+                              {Units::Microamps, "microamps"},
+                              {Units::Milliamps, "milliamps"},
+                              {Units::Amps, "amps"},
+                              {Units::Kiloamps, "kiloamps"},
+                              // Electric Voltage
+                              {Units::Nanovolts, "nanovolts"},
+                              {Units::Microvolts, "microvolts"},
+                              {Units::Millivolts, "millivolts"},
+                              {Units::Volts, "volts"},
+                              {Units::Kilovolts, "kilovolts"},
+                              // Memory Size
+                              {Units::Bytes, "bytes"},
+                              {Units::Kilobytes, "kilobytes"},
+                              {Units::Megabytes, "megabytes"},
+                              {Units::Gigabytes, "gigabytes"},
+                              {Units::Terabytes, "terabytes"},
+                              {Units::NumOfValues, protodoc::keyValueUnknown}});
+
 }
-} // namespace protodoc

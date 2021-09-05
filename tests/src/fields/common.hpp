@@ -5,5 +5,5 @@
 
 namespace protodoc::tests
 {
-void testCommonFields(const protodoc::json_obj &j, const std::string_view field_type, commsdsl::Field::Kind kind);
+void testCommonFields(const protodoc::json_obj &j, commsdsl::Field::Kind kind, commsdsl::Field::SemanticType semantic);
 }

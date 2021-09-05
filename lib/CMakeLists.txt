@@ -28,7 +28,6 @@ set(HDRS
     src/inja_callbacks.hpp
     src/json/endian.hpp
     src/json/units.hpp
-    src/json/types.hpp
     src/json/json.hpp
     src/json/fields/field.hpp
     src/json/fields/platform.hpp

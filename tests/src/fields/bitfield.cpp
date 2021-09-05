@@ -14,7 +14,7 @@ TEST_CASE("BitfieldField json structure test", "[fields]")
     REQUIRE(parsed);
     REQUIRE(p.validate());
     protodoc::json_obj j = p.findField("Bitfield1");
-    tests::testCommonFields(j, kBitfieldType, commsdsl::Field::Kind::Bitfield);
+    tests::testCommonFields(j, commsdsl::Field::Kind::Bitfield, commsdsl::Field::SemanticType::None);
     REQUIRE(j.at(kKeyFieldDisplayName).get<std::string>() == "Proper Bitfield Name");
     REQUIRE(j.at(kKeyFieldDescription).get<std::string>() == "Bitfield description");
 

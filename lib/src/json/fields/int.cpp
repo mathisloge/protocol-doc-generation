@@ -38,7 +38,7 @@ void to_json(json_obj &j, const commsdsl::IntField &f)
                    {kKeyFieldScaling, f.scaling()},
                    {kKeyFieldRange, f.validRanges()}});
     if (f.units() != commsdsl::Units::Unknown && f.units() < commsdsl::Units::NumOfValues)
-        j[kKeyFieldUnits] = UnitsToString(f.units());
+        j[kKeyFieldUnits] = f.units();
 }
 
 } // namespace commsdsl

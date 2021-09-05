@@ -24,7 +24,7 @@ void to_json(json_obj &j, const commsdsl::FloatField &f)
 {
     j.merge_patch({{kKeyType, f.type()}, {kKeyEndian, f.endian()}, {kKeyFieldRange, f.validRanges()}});
     if (f.units() != commsdsl::Units::Unknown && f.units() < commsdsl::Units::NumOfValues)
-        j[kKeyFieldUnits] = UnitsToString(f.units());
+        j[kKeyFieldUnits] = f.units();
 }
 
 } // namespace commsdsl

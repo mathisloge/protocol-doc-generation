@@ -70,7 +70,7 @@ void to_json(json_obj &j, const commsdsl::Field &f)
         j.merge_patch(commsdsl::VariantField{f});
         break;
     default:
-        j[kKeyType] = keyValueUnknown;
+        j[kKeyFieldKind] = keyValueUnknown;
         break;
     }
 }
