@@ -1,0 +1,12 @@
+{
+    "registries": [
+        {
+            "kind": "git",
+            "repository": "https://github.com/mathisloge/vcpkg-registry.git",
+            "packages": [
+                "cpp-json-schema"
+            ],
+            "baseline": "c01b5bea0872c209fe919c5bf4113f4550c5f426"
+        }
+    ]
+}

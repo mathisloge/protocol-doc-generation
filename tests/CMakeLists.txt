@@ -12,7 +12,6 @@ add_executable(tests
     src/fields/common.hpp
     src/fields/common.cpp
     src/fields/bitfield.cpp
-    src/schema.cpp
 )
 target_link_libraries(tests PRIVATE 
     Catch2::Catch2 

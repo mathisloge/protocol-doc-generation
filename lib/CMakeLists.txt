@@ -21,7 +21,6 @@ set(SRCS
     src/json/fields/frame.cpp
     src/json/fields/layer.cpp
     src/json/fields/message.cpp
-    src/schema/schema.cpp
 )
 set(HDRS
     include/protodoc/generator.hpp
@@ -47,7 +46,6 @@ set(HDRS
     src/json/fields/frame.hpp
     src/json/fields/layer.hpp
     src/json/fields/message.hpp
-    src/schema/schema.hpp
 )
 
 add_library(libprotodoc ${SRCS} ${HDRS})
@@ -72,6 +70,7 @@ target_link_libraries(libprotodoc PUBLIC
     spdlog::spdlog
     nlohmann_json::nlohmann_json
     pantor::inja
+    cpp-json-schema::cpp-json-schema
 )
 
 install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})

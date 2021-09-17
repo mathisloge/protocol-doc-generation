@@ -1,5 +1,4 @@
 #include "field.hpp"
-#include "../../schema/schema.hpp"
 #include "bitfield.hpp"
 #include "bundle.hpp"
 #include "data.hpp"
@@ -12,6 +11,7 @@
 #include "set.hpp"
 #include "string.hpp"
 #include "variant.hpp"
+#include <cpp-json-schema/schema.hpp>
 
 using namespace protodoc;
 namespace commsdsl
@@ -81,6 +81,7 @@ namespace protodoc
 {
 void generateFieldSchema(const std::string &base_url)
 {
+    using namespace schema;
     JsonSchema schema{base_url, "field"};
 
     JsonSchemaObjectProperty schema_obj{schema.json()};

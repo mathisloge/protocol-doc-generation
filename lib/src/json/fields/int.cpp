@@ -1,7 +1,7 @@
 #include "int.hpp"
-#include "../../schema/schema.hpp"
 #include "../endian.hpp"
 #include "../units.hpp"
+#include <cpp-json-schema/schema.hpp>
 
 using namespace protodoc;
 namespace commsdsl
@@ -47,6 +47,7 @@ namespace protodoc
 {
 void generateIntFieldSchema(const std::string &base_url)
 {
+    using namespace schema;
     JsonSchema schema{base_url, "intField"};
 
     JsonSchemaObjectProperty schema_obj{schema.json()};

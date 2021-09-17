@@ -19,6 +19,7 @@ find_package(LibCommsdsl CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 find_package(inja CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
+find_package(cpp-json-schema CONFIG REQUIRED)
 
 include(GNUInstallDirs)
 include(GetGitRevisionDescription)
