@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.21)
+file(READ vcpkg.json VCPKG_MANIFEST_STR)
+string(JSON VCPKG_PROJ_VERSION GET ${VCPKG_MANIFEST_STR} "version-semver")
 project(protodoc 
-    VERSION 1.0.0 
+    VERSION ${VCPKG_PROJ_VERSION}
     HOMEPAGE_URL "https://github.com/mathisloge/protocol-doc-generation" 
     LANGUAGES CXX
 )
