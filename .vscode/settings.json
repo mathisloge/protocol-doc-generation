@@ -96,5 +96,6 @@
         "xutility": "cpp",
         "cinttypes": "cpp",
         "execution": "cpp"
-    }
+    },
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
 }
