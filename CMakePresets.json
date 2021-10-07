@@ -20,6 +20,7 @@
         },
         {
             "name": "generator-ninja",
+            "hidden": true,
             "generator": "Ninja"
         },
         {
@@ -105,6 +106,17 @@
                 "default-release",
                 "linux-default"
             ]
+        },
+        {
+            "name": "windows-install",
+            "displayName": "Windows Install Config",
+            "inherits": [
+                "windows-default-release"
+            ],
+            "cacheVariables": {
+                "BUILD_TESTING": "OFF",
+                "BUILD_SHARED_LIBS": "ON"
+            }
         }
     ],
     "buildPresets": [
@@ -115,6 +127,10 @@
         {
             "name": "linux-ci",
             "configurePreset": "linux-default-release"
+        },
+        {
+            "name": "windows-install",
+            "configurePreset": "windows-install"
         }
     ],
     "testPresets": [

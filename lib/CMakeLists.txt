@@ -73,5 +73,5 @@ target_link_libraries(libprotodoc PUBLIC
     cpp-json-schema::cpp-json-schema
 )
 
-install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/protodoc_export.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(DIRECTORY include/ DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/protodoc_export.hpp" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/protodoc/")

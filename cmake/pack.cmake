@@ -3,6 +3,8 @@ set(CPACK_PACKAGE_HOMEPAGE_URL "https://github.com/mathisloge/protocol-doc-gener
 set(CPACK_PACKAGE_EXECUTABLES "protodoc;protodoc")
 set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE.txt")
 set(CPACK_TOPLEVEL_TAG "protodoc")
+set(CPACK_PACKAGE_VENDOR "Mathis Logemann")
+set(CPACK_WIX_UPGRADE_GUID "249ca838-d0b2-4559-bf92-6d458868d86e")
 
 if(WIN32)
     set(CPACK_GENERATOR "WIX")
