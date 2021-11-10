@@ -1,4 +1,4 @@
-name: CMake
+name: BuildAndTest
 
 on:
   push:
@@ -7,61 +7,79 @@ on:
     branches: [master]
 
 env:
-  CONFIGURE_PRESET: "linux-default-release"
-  BUILD_PRESET: "linux-ci"
   VCPKG_BINARY_SOURCES: "clear;nuget,GitHub,readwrite"
+  VCPKG_NUGET_REPOSITORY: https://github.com/mathisloge/vcpkg-nuget.git
 
 jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         include:
-          - os: "ubuntu-20.04"
+          - os: "ubuntu-latest"
             triplet: "x64-linux"
             mono: "mono"
+            vcpkgroot: $VCPKG_INSTALLATION_ROOT
+            preset: linux-ci
+            cpack: cpack
+          - os: "macos-latest"
+            triplet: "x64-linux"
+            mono: "mono"
+            vcpkgroot: $VCPKG_INSTALLATION_ROOT
+            preset: macos-ci
+            cpack: cpack
+          - os: "windows-latest"
+            vcpkgroot: C:/vcpkg
+            preset: windows-ci
+            cpack: "C:\\Program Files\\CMake\\bin\\cpack.exe"
+
     steps:
+      - uses: ilammy/msvc-dev-cmd@v1
+
       - uses: actions/checkout@v2
         with:
           submodules: "recursive"
-      - uses: lukka/get-cmake@latest
-
-      - uses: actions/cache@v2
-        id: cache
-        with:
-          path: ./vcpkg
-          key: ${{ runner.os }}-${{ hashFiles('vcpkg/**') }}
-
-      - name: bootstrap vcpkg
-        if: steps.cache.outputs.cache-hit != 'true'
-        shell: "bash"
-        run: |
-          if [ "$RUNNER_OS" == "Linux" ]; then
-               ./vcpkg/bootstrap-vcpkg.sh
-          elif [ "$RUNNER_OS" == "Windows" ]; then
-               ./vcpkg/bootstrap-vcpkg.bat
-          else
-               echo "$RUNNER_OS not supported"
-               exit 1
-          fi
 
       - name: "Setup NuGet Credentials"
         shell: "bash"
         run: >
-          ${{ matrix.mono }} `./vcpkg/vcpkg fetch nuget | tail -n 1`
+          ${{ matrix.mono }} `$VCPKG_INSTALLATION_ROOT/vcpkg fetch nuget | tail -n 1`
           sources add
           -source "https://nuget.pkg.github.com/mathisloge/index.json"
           -storepasswordincleartext
           -name "GitHub"
           -username "mathisloge"
-          -password "${{ secrets.GITHUB_TOKEN }}"
+          -password "${{ secrets.VCPKG_NUGET_CI }}"
 
+      - name: "Setup NuGet apikey"
+        shell: "bash"
+        run: >
+          ${{ matrix.mono }} `$VCPKG_INSTALLATION_ROOT/vcpkg fetch nuget | tail -n 1`
+          setapikey "${{ secrets.VCPKG_NUGET_CI }}" -Source "https://nuget.pkg.github.com/mathisloge/index.json"
+      
       - name: Configure CMake
-        run: cmake --preset ${{env.CONFIGURE_PRESET}}
+        run: cmake -DCMAKE_TOOLCHAIN_FILE=${{matrix.vcpkgroot}}/scripts/buildsystems/vcpkg.cmake --preset=${{matrix.preset}}
 
       - name: Build
-        run: cmake --build --preset ${{env.BUILD_PRESET}}
+        run: cmake --build --preset ${{matrix.preset}}
 
       - name: Test
-        run: ctest --preset ${{env.BUILD_PRESET}} --output-on-failure
+        run: ctest --preset ${{matrix.preset}}
+
+      - name: Package
+        run: cmake --build --preset ${{matrix.preset}} --target package
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: mapnik-artifact
+          path: build/*-ci/mapnik-*.tar.gz
+          retention-days: 2
+
+      - name: upload failure logs
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{matrix.preset}}-artifact
+          path: build/
+          retention-days: 2

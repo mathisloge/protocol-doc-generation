@@ -38,6 +38,9 @@ inline constexpr std::string_view kRefType = "ref";
 inline constexpr std::string_view kSetType = "set";
 inline constexpr std::string_view kStringType = "string";
 inline constexpr std::string_view kVariantType = "variant";
+inline constexpr std::string_view kEnumType = "enum";
+inline constexpr std::string_view kFloatType = "float";
+inline constexpr std::string_view kIntType = "int";
 
 inline constexpr const char *keyValueUnknown = "unknown";
 

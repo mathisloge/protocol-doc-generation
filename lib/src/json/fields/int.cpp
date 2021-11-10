@@ -33,7 +33,7 @@ static void to_json(json_obj &j, const commsdsl::IntField::ValidRangesList &rang
 }
 void to_json(json_obj &j, const commsdsl::IntField &f)
 {
-    j.merge_patch({{kKeyType, f.type()},
+    j.merge_patch({{kKeyType, kIntType},
                    {kKeyEndian, f.endian()},
                    {kKeyFieldScaling, f.scaling()},
                    {kKeyFieldRange, f.validRanges()}});

@@ -22,7 +22,7 @@ static void to_json(json_obj &j, const commsdsl::FloatField::ValidRangesList &ra
 }
 void to_json(json_obj &j, const commsdsl::FloatField &f)
 {
-    j.merge_patch({{kKeyType, f.type()}, {kKeyEndian, f.endian()}, {kKeyFieldRange, f.validRanges()}});
+    j.merge_patch({{kKeyType, kFloatType}, {kKeyEndian, f.endian()}, {kKeyFieldRange, f.validRanges()}});
     if (f.units() != commsdsl::Units::Unknown && f.units() < commsdsl::Units::NumOfValues)
         j[kKeyFieldUnits] = f.units();
 }

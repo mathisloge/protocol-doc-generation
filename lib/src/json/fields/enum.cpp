@@ -22,7 +22,7 @@ static void to_json(protodoc::json_obj &j, const commsdsl::EnumField::Values &va
 
 void to_json(protodoc::json_obj &j, const commsdsl::EnumField &f)
 {
-    j.merge_patch({{kKeyType, f.type()}, {"enum", f.values()}});
+    j.merge_patch({{kKeyType, kEnumType}, {"enum", f.values()}});
 }
 
 } // namespace commsdsl
