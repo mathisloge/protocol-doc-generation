@@ -76,8 +76,8 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: mapnik-artifact
-          path: build/*-ci/mapnik-*.tar.gz
+          name: protodoc-artifact
+          path: build/*-ci/protodoc-*-*.*
           retention-days: 2
 
       - name: upload failure logs
