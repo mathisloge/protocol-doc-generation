@@ -171,8 +171,7 @@
             "name": "ci-options",
             "hidden": true,
             "cacheVariables": {
-                "BUILD_TESTING": "ON",
-                "BUILD_DEMO_VIEWER": "OFF"
+                "BUILD_TESTING": "ON"
             }
         },
         {
@@ -181,11 +180,7 @@
             "inherits": [
                 "windows-default-release",
                 "ci-options"
-            ],
-            "cacheVariables": {
-                "INSTALL_DEPENDENCIES": "ON",
-                "ADDITIONAL_LIBARIES_PATHS": "${sourceDir}/build/${presetName}/vcpkg_installed/x64-windows/bin"
-            }
+            ]
         },
         {
             "name": "linux-ci",

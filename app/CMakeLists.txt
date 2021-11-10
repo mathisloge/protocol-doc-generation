@@ -5,13 +5,20 @@ add_executable(protodoc
     src/options.hpp
     src/options.cpp
 )
-set_property(TARGET protodoc PROPERTY CXX_STANDARD 20)
 target_include_directories(protodoc PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(protodoc PRIVATE 
     protodoc::libprotodoc
     commsdsl::commsdsl
     cxxopts::cxxopts
     spdlog::spdlog
+)
+set_target_properties(protodoc PROPERTIES 
+    CXX_EXTENSIONS OFF
+    CXX_STANDARD 20
+    CXX_STANDARD_REQUIRED ON
+    LIBRARY_OUTPUT_DIRECTORY "${m_output_dir}"
+    RUNTIME_OUTPUT_DIRECTORY "${m_output_dir}"
+    ARCHIVE_OUTPUT_DIRECTORY "${m_output_dir}"
 )
 
 configure_file (

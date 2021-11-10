@@ -17,6 +17,7 @@ if(BUILD_TESTING AND BUILD_SHARED_LIBS)
     set(BUILD_SHARED_LIBS OFF)
 endif()
 
+set(m_output_dir "${CMAKE_CURRENT_BINARY_DIR}/out")
 find_package(LibCommsdsl CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 find_package(inja CONFIG REQUIRED)

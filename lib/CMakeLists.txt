@@ -58,6 +58,9 @@ set_target_properties(libprotodoc PROPERTIES
     OUTPUT_NAME "protodoc"
     DEBUG_POSTFIX "d" 
     PREFIX "lib"
+    LIBRARY_OUTPUT_DIRECTORY "${m_output_dir}"
+    RUNTIME_OUTPUT_DIRECTORY "${m_output_dir}"
+    ARCHIVE_OUTPUT_DIRECTORY "${m_output_dir}"
 )
 target_compile_definitions(libprotodoc PRIVATE INJA_THROW=throw)
 target_include_directories(libprotodoc PUBLIC 
