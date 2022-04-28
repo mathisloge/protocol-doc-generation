@@ -9,8 +9,10 @@
 |since version
 |deprecated since
 
-{% for fkey, field in namespaces.fields %}
+{% set sortedFields = inOrder(namespaces.fields) %}
+## for fieldKey in sortedFields
+{% set field = at(namespaces.fields, fieldKey) %}
 {% include "field.adoc" %} 
-{% endfor %}
+## endfor
 
 |===

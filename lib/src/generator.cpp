@@ -72,6 +72,7 @@ bool Generator::write(const GeneratorOpts &opts)
 
     env.add_callback("latexText", 1, callbacks::latexText);
     env.add_callback("sortEnum", 2, callbacks::sortEnum);
+    env.add_callback("inOrder", 1, callbacks::inOrder);
 
     json_obj json;
     if (!opts.custom_json.empty())

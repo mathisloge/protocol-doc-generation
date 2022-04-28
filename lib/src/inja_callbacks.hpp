@@ -5,4 +5,5 @@ namespace protodoc::callbacks
 {
 inja::json latexText(inja::Arguments &args);
 inja::json sortEnum(inja::Arguments &args);
+inja::json inOrder(inja::Arguments &args);
 } // namespace protodoc::callbacks

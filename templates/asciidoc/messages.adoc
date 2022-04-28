@@ -14,9 +14,11 @@
 |since version
 |deprecated since
 {% if existsIn(message, "fields") %}
-{% for fkey, field in message.fields %}
+{% set sortedFields = inOrder(message.fields) %}
+## for fieldKey in sortedFields
+{% set field = at(message.fields, fieldKey) %}
 {% include "field.adoc" %} 
-{% endfor %}
+## endfor
 {% endif %}
 
 |===
