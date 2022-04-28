@@ -2,7 +2,7 @@
 #include <commsdsl/parse/Protocol.h>
 #include "../def.hpp"
 
-namespace commsdsl::parse
+namespace protodoc
 {
-void to_json(protodoc::json_obj &j, const Protocol::PlatformsList &platforms);
+void platforms_to_json(protodoc::json_obj &j, const commsdsl::parse::Protocol::PlatformsList &platforms);
 } // namespace commsdsl::parse

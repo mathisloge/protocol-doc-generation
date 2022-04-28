@@ -13,10 +13,11 @@
 |Scaling
 |since version
 |deprecated since
-
+{% if existsIn(message, "fields") %}
 {% for fkey, field in message.fields %}
 {% include "field.adoc" %} 
 {% endfor %}
+{% endif %}
 
 |===
 {% endfor  %}

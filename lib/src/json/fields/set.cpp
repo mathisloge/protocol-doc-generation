@@ -16,7 +16,11 @@ static void to_json(json_obj &j, const SetField::BitInfo &f)
 static void to_json(json_obj &j, const SetField::Bits &bits)
 {
     for (const auto &b : bits)
-        j.merge_patch({b.first, b.second});
+    {
+        json_obj bit_json = b.second;
+        bit_json.merge_patch({{kKeyFieldName, b.first}});
+        j[b.first].merge_patch(bit_json);
+    }
 }
 
 void to_json(json_obj &j, const SetField &f)

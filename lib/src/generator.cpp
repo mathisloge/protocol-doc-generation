@@ -117,7 +117,14 @@ bool Generator::write(const GeneratorOpts &opts)
         ns_json.merge_patch(lang_json);
         std::ofstream ns_json_file(opts.output_dir / (key + ".json"));
         ns_json_file << std::setw(4) << ns_json << std::endl;
-        env.write(opts.templates.t_namespace.string(), ns_json, key + namespace_ext);
+        try
+        {
+            env.write(opts.templates.t_namespace.string(), ns_json, key + namespace_ext);
+        }
+        catch (inja::RenderError ex)
+        {
+            spdlog::error("Render error in file {}. Error: {}", opts.templates.t_namespace.string(), ex.what());
+        }
     }
 
     // }
@@ -131,7 +138,7 @@ bool Generator::writePlatforms(json_obj &json)
 {
     if (!json[kKeyPlatforms].contains(kKeyPlatforms))
         json[kKeyPlatforms][kKeyPlatforms] = json_obj::object();
-    json[kKeyPlatforms][kKeyPlatforms] = impl_->protocol_.platforms();
+    platforms_to_json(json[kKeyPlatforms][kKeyPlatforms], impl_->protocol_.platforms());
     return true;
 }
 

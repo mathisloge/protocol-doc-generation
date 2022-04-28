@@ -33,7 +33,7 @@ static void to_json(json_obj &j, const IntField::ValidRangesList &ranges)
 }
 void to_json(json_obj &j, const IntField &f)
 {
-    j.merge_patch({{kKeyType, kIntType},
+    j.merge_patch({{kKeyType, f.type()},
                    {kKeyEndian, f.endian()},
                    {kKeyFieldScaling, f.scaling()},
                    {kKeyFieldRange, f.validRanges()}});

@@ -1,4 +1,4 @@
-
+{% if existsIn(field, "kind") %} 
 {% if field.kind == 0 %} 
     {% include "fields/int.adoc" %} 
 {% else if field.kind == 1 %}
@@ -14,10 +14,13 @@
 {% else %}
 |[#field_{^ field.name ^}]*{^ field.name ^}*
 |{^ at(types, field.type) ^}
-|{% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %}
+|{% if existsIn(field, "minLength") %}{% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %}{% endif %} 
 |{^ default(field.description, "") ^}
 |{% if existsIn(field, "units") %} {^ at(units, field.units) ^} {% else %} - {% endif %} 
 |{% if existsIn(field, "scaling") %} stem:[frac({^ field.scaling.0 ^})({^ field.scaling.1 ^})] {% else %} - {% endif %}
 |{^ default(field.minVersion, "-") ^}
 |{^ default(field.deprecatedSice, "-") ^}
+{% endif %}
+{% else %}
+UNKNOWN
 {% endif %}
