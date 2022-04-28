@@ -1,6 +1,6 @@
 {
     "name": "protodoc",
-    "version-semver": "0.9.1",
+    "version-semver": "0.10.0",
     "dependencies": [
         "spdlog",
         "commsdsl",
