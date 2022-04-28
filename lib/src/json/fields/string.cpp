@@ -2,9 +2,9 @@
 #include "field.hpp"
 
 using namespace protodoc;
-namespace commsdsl
+namespace commsdsl::parse
 {
-void to_json(protodoc::json_obj &j, const commsdsl::StringField &f)
+void to_json(protodoc::json_obj &j, const StringField &f)
 {
     j.merge_patch({{kKeyType, kStringType}});
     j[kKeyType] = kStringType;
@@ -21,4 +21,4 @@ void to_json(protodoc::json_obj &j, const commsdsl::StringField &f)
     else
         j["fixedLength"].merge_patch(f.fixedLength());
 }
-} // namespace commsdsl
+} // namespace commsdsl::parse

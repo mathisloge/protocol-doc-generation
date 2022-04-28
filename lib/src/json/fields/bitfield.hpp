@@ -1,8 +1,8 @@
 #pragma once
-#include <commsdsl/BitfieldField.h>
+#include <commsdsl/parse/BitfieldField.h>
 #include "../def.hpp"
 
-namespace commsdsl
+namespace commsdsl::parse
 {
-void to_json(protodoc::json_obj &j, const commsdsl::BitfieldField &f);
-} // namespace commsdsl
+void to_json(protodoc::json_obj &j, const BitfieldField &f);
+} // namespace commsdsl::parse

@@ -1,8 +1,8 @@
 #pragma once
-#include <commsdsl/Field.h>
+#include <commsdsl/parse/Field.h>
 #include "../def.hpp"
 
-namespace commsdsl
+namespace commsdsl::parse
 {
 NLOHMANN_JSON_SERIALIZE_ENUM(Field::Kind,
                              {{Field::Kind::Int, "int"},
@@ -26,10 +26,10 @@ NLOHMANN_JSON_SERIALIZE_ENUM(Field::SemanticType,
                               {Field::SemanticType::Length, "length"},
                               {Field::SemanticType::NumOfValues, protodoc::keyValueUnknown}});
 
-void to_json(protodoc::json_obj &j, const commsdsl::Field &f);
-} // namespace commsdsl
+void to_json(protodoc::json_obj &j, const Field &f);
+} // namespace commsdsl::parse
 
 namespace protodoc
 {
-void generateFieldSchema(const std::string& base_url);
+void generateFieldSchema(const std::string &base_url);
 }

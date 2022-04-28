@@ -1,10 +1,10 @@
 #include "enum.hpp"
 
 using namespace protodoc;
-namespace commsdsl
+namespace commsdsl::parse
 {
 
-static void to_json(protodoc::json_obj &j, const commsdsl::EnumField::Values &values)
+static void to_json(protodoc::json_obj &j, const EnumField::Values &values)
 {
     for (const auto &value : values)
     {
@@ -15,14 +15,14 @@ static void to_json(protodoc::json_obj &j, const commsdsl::EnumField::Values &va
         auto &val_json = j[value.first];
         if (value.second.m_sinceVersion > 0)
             val_json[kKeyFieldSinceVersion] = value.second.m_sinceVersion;
-        if (commsdsl::Protocol::notYetDeprecated() != value.second.m_deprecatedSince)
+        if (Protocol::notYetDeprecated() != value.second.m_deprecatedSince)
             val_json[kKeyFieldDeprecatedSince] = value.second.m_deprecatedSince;
     }
 }
 
-void to_json(protodoc::json_obj &j, const commsdsl::EnumField &f)
+void to_json(protodoc::json_obj &j, const EnumField &f)
 {
     j.merge_patch({{kKeyType, kEnumType}, {"enum", f.values()}});
 }
 
-} // namespace commsdsl
+} // namespace commsdsl::parse

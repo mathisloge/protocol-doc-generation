@@ -1,8 +1,8 @@
 #pragma once
-#include <commsdsl/OptionalField.h>
+#include <commsdsl/parse/OptionalField.h>
 #include "../def.hpp"
 
-namespace commsdsl
+namespace commsdsl::parse
 {
-void to_json(protodoc::json_obj &j, const commsdsl::OptionalField &f);
-} // namespace protodoc
+void to_json(protodoc::json_obj &j, const OptionalField &f);
+} // namespace commsdsl::parse

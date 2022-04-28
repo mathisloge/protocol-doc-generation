@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
+set(VCPKG_OVERLAY_PORTS "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg-ports/commsdsl")
 file(READ vcpkg.json VCPKG_MANIFEST_STR)
 string(JSON VCPKG_PROJ_VERSION GET ${VCPKG_MANIFEST_STR} "version-semver")
 project(protodoc 
@@ -18,6 +19,7 @@ if(BUILD_TESTING AND BUILD_SHARED_LIBS)
 endif()
 
 set(m_output_dir "${CMAKE_CURRENT_BINARY_DIR}/out")
+find_package(LibXml2 CONFIG REQUIRED) # needed for LibCommsdsl
 find_package(LibCommsdsl CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 find_package(inja CONFIG REQUIRED)

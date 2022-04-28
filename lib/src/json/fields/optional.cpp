@@ -5,22 +5,22 @@
 #include "field.hpp"
 
 using namespace protodoc;
-namespace commsdsl
+namespace commsdsl::parse
 {
 
-static void addCond(std::ostream &cond_str, const commsdsl::OptCond &cond)
+static void addCond(std::ostream &cond_str, const OptCond &cond)
 {
     if (!cond.valid())
         return;
     switch (cond.kind())
     {
-    case commsdsl::OptCond::Kind::Expr: {
-        const commsdsl::OptCondExpr expr{cond};
+    case OptCond::Kind::Expr: {
+        const OptCondExpr expr{cond};
         cond_str << expr.left() << expr.op() << expr.right();
         break;
     }
-    case commsdsl::OptCond::Kind::List: {
-        commsdsl::OptCondList l{cond};
+    case OptCond::Kind::List: {
+        OptCondList l{cond};
         auto cl{l.conditions()};
         for (auto &c : cl)
             addCond(cond_str, c);
@@ -31,16 +31,16 @@ static void addCond(std::ostream &cond_str, const commsdsl::OptCond &cond)
     }
 }
 
-static void to_json(protodoc::json_obj &j, const commsdsl::OptCond &f)
+static void to_json(protodoc::json_obj &j, const OptCond &f)
 {
     std::stringstream cond_str;
     addCond(cond_str, f);
     j = cond_str.str();
 }
 
-void to_json(protodoc::json_obj &j, const commsdsl::OptionalField &f)
+void to_json(protodoc::json_obj &j, const OptionalField &f)
 {
     j.merge_patch({{kKeyType, kOptionalType}, {kKeyFieldField, f.field()}, {"condition", f.cond()}});
 }
 
-} // namespace commsdsl
+} // namespace commsdsl::parse

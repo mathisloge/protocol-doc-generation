@@ -3,10 +3,10 @@
 #include "field.hpp"
 
 using namespace protodoc;
-namespace commsdsl
+namespace commsdsl::parse
 {
 
-void to_json(json_obj &j, const commsdsl::ListField &f)
+void to_json(json_obj &j, const ListField &f)
 {
     j.merge_patch({{kKeyType, kListType}});
 
@@ -38,4 +38,4 @@ void to_json(json_obj &j, const commsdsl::ListField &f)
     j[kKeyFieldField] = f.elementField();
 }
 
-} // namespace commsdsl
+} // namespace commsdsl::parse

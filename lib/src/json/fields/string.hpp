@@ -1,8 +1,8 @@
 #pragma once
-#include <commsdsl/StringField.h>
+#include <commsdsl/parse/StringField.h>
 #include "../def.hpp"
 
-namespace commsdsl
+namespace commsdsl::parse
 {
-void to_json(protodoc::json_obj &j, const commsdsl::StringField &f);
-} // namespace commsdsl
+void to_json(protodoc::json_obj &j, const StringField &f);
+} // namespace commsdsl::parse

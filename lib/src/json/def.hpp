@@ -3,7 +3,7 @@
 #include <nlohmann/json.hpp>
 namespace protodoc
 {
-using json_obj = nlohmann::ordered_json;
+using json_obj = nlohmann::json;
 
 static constexpr const char *kKeyPlatforms = "platforms";
 static constexpr const char *kKeyNamespace = "namespaces";
@@ -27,7 +27,6 @@ inline constexpr const char *kKeyFieldMembers = "members";
 inline constexpr const char *kKeyFieldField = "field";
 inline constexpr const char *kKeyEndian = "endian";
 inline constexpr const char *kKeyValue = "value";
-
 
 inline constexpr std::string_view kBitfieldType = "bitfield";
 inline constexpr std::string_view kOptionalType = "optional";

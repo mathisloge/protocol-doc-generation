@@ -1,8 +1,8 @@
 #pragma once
-#include <commsdsl/EnumField.h>
+#include <commsdsl/parse/EnumField.h>
 #include "../def.hpp"
 
-namespace commsdsl
+namespace commsdsl::parse
 {
-void to_json(protodoc::json_obj &j, const commsdsl::EnumField &f);
-} // namespace protodoc
+void to_json(protodoc::json_obj &j, const EnumField &f);
+} // namespace commsdsl::parse

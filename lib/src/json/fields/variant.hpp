@@ -1,8 +1,8 @@
 #pragma once
-#include <commsdsl/VariantField.h>
+#include <commsdsl/parse/VariantField.h>
 #include "../def.hpp"
 
-namespace commsdsl
+namespace commsdsl::parse
 {
-void to_json(protodoc::json_obj &j, const commsdsl::VariantField &f);
-} // namespace commsdsl
+void to_json(protodoc::json_obj &j, const VariantField &f);
+} // namespace commsdsl::parse

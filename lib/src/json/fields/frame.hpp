@@ -1,9 +1,9 @@
 #pragma once
-#include <commsdsl/Frame.h>
+#include <commsdsl/parse/Frame.h>
 #include "../def.hpp"
 
-namespace commsdsl
+namespace commsdsl::parse
 {
-void to_json(protodoc::json_obj &j, const commsdsl::Frame &f);
-void to_json(protodoc::json_obj &j, const commsdsl::Frame::LayersList &f);
-} // namespace commsdsl
+void to_json(protodoc::json_obj &j, const Frame &f);
+void to_json(protodoc::json_obj &j, const Frame::LayersList &f);
+} // namespace commsdsl::parse

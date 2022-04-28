@@ -14,10 +14,10 @@
 #include <cpp-json-schema/schema.hpp>
 
 using namespace protodoc;
-namespace commsdsl
+namespace commsdsl::parse
 {
 
-void to_json(json_obj &j, const commsdsl::Field &f)
+void to_json(json_obj &j, const Field &f)
 {
     j.merge_patch({{kKeyFieldName, f.name()},
                    {kKeyFieldDisplayName, f.displayName()},
@@ -27,47 +27,47 @@ void to_json(json_obj &j, const commsdsl::Field &f)
                    {kKeyFieldMaxLength, f.minLength()},
                    {kKeyFieldMaxLength, f.maxLength()}});
 
-    if (commsdsl::Protocol::notYetDeprecated() != f.deprecatedSince())
+    if (Protocol::notYetDeprecated() != f.deprecatedSince())
         j[kKeyFieldDeprecatedSince] = f.deprecatedSince();
     if (f.sinceVersion() > 0)
         j[kKeyFieldSinceVersion] = f.sinceVersion();
     switch (f.kind())
     {
-    case commsdsl::Field::Kind::Int:
-        j.merge_patch(commsdsl::IntField{f});
+    case Field::Kind::Int:
+        j.merge_patch(IntField{f});
         break;
-    case commsdsl::Field::Kind::Enum:
-        j.merge_patch(commsdsl::EnumField{f});
+    case Field::Kind::Enum:
+        j.merge_patch(EnumField{f});
         break;
-    case commsdsl::Field::Kind::Set:
-        j.merge_patch(commsdsl::SetField{f});
+    case Field::Kind::Set:
+        j.merge_patch(SetField{f});
         break;
-    case commsdsl::Field::Kind::Float:
-        j.merge_patch(commsdsl::FloatField{f});
+    case Field::Kind::Float:
+        j.merge_patch(FloatField{f});
         break;
-    case commsdsl::Field::Kind::Bitfield:
-        j.merge_patch(commsdsl::BitfieldField{f});
+    case Field::Kind::Bitfield:
+        j.merge_patch(BitfieldField{f});
         break;
-    case commsdsl::Field::Kind::Bundle:
-        j.merge_patch(commsdsl::BundleField{f});
+    case Field::Kind::Bundle:
+        j.merge_patch(BundleField{f});
         break;
-    case commsdsl::Field::Kind::String:
-        j.merge_patch(commsdsl::StringField{f});
+    case Field::Kind::String:
+        j.merge_patch(StringField{f});
         break;
-    case commsdsl::Field::Kind::Data:
-        j.merge_patch(commsdsl::DataField{f});
+    case Field::Kind::Data:
+        j.merge_patch(DataField{f});
         break;
-    case commsdsl::Field::Kind::List:
-        j.merge_patch(commsdsl::ListField{f});
+    case Field::Kind::List:
+        j.merge_patch(ListField{f});
         break;
-    case commsdsl::Field::Kind::Ref:
-        j.merge_patch(commsdsl::RefField{f});
+    case Field::Kind::Ref:
+        j.merge_patch(RefField{f});
         break;
-    case commsdsl::Field::Kind::Optional:
-        j.merge_patch(commsdsl::OptionalField{f});
+    case Field::Kind::Optional:
+        j.merge_patch(OptionalField{f});
         break;
-    case commsdsl::Field::Kind::Variant:
-        j.merge_patch(commsdsl::VariantField{f});
+    case Field::Kind::Variant:
+        j.merge_patch(VariantField{f});
         break;
     default:
         j[kKeyFieldKind] = keyValueUnknown;
@@ -75,7 +75,7 @@ void to_json(json_obj &j, const commsdsl::Field &f)
     }
 }
 
-} // namespace commsdsl
+} // namespace commsdsl::parse
 
 namespace protodoc
 {
@@ -91,26 +91,26 @@ void generateFieldSchema(const std::string &base_url)
     schema_obj.addProperty<JsonSchemaStringProperty>(kKeyFieldDisplayName, "human readable name of the field", false);
     schema_obj.addProperty<JsonSchemaStringProperty>(kKeyFieldDescription, "description of the field", false);
     schema_obj.addProperty<JsonSchemaEnumProperty>(kKeyFieldSemanticType, "semantic type", true)
-        .addValue(commsdsl::Field::SemanticType::None)
-        .addValue(commsdsl::Field::SemanticType::Version)
-        .addValue(commsdsl::Field::SemanticType::MessageId)
-        .addValue(commsdsl::Field::SemanticType::Length)
-        .addValue(commsdsl::Field::SemanticType::NumOfValues) //! unknown value
+        .addValue(commsdsl::parse::Field::SemanticType::None)
+        .addValue(commsdsl::parse::Field::SemanticType::Version)
+        .addValue(commsdsl::parse::Field::SemanticType::MessageId)
+        .addValue(commsdsl::parse::Field::SemanticType::Length)
+        .addValue(commsdsl::parse::Field::SemanticType::NumOfValues) //! unknown value
         ;
     schema_obj.addProperty<JsonSchemaEnumProperty>(kKeyFieldKind, "field kind", true)
-        .addValue(commsdsl::Field::Kind::Int)
-        .addValue(commsdsl::Field::Kind::Enum)
-        .addValue(commsdsl::Field::Kind::Set)
-        .addValue(commsdsl::Field::Kind::Float)
-        .addValue(commsdsl::Field::Kind::Bitfield)
-        .addValue(commsdsl::Field::Kind::Bundle)
-        .addValue(commsdsl::Field::Kind::String)
-        .addValue(commsdsl::Field::Kind::Data)
-        .addValue(commsdsl::Field::Kind::List)
-        .addValue(commsdsl::Field::Kind::Ref)
-        .addValue(commsdsl::Field::Kind::Optional)
-        .addValue(commsdsl::Field::Kind::Variant)
-        .addValue(commsdsl::Field::Kind::NumOfValues);
+        .addValue(commsdsl::parse::Field::Kind::Int)
+        .addValue(commsdsl::parse::Field::Kind::Enum)
+        .addValue(commsdsl::parse::Field::Kind::Set)
+        .addValue(commsdsl::parse::Field::Kind::Float)
+        .addValue(commsdsl::parse::Field::Kind::Bitfield)
+        .addValue(commsdsl::parse::Field::Kind::Bundle)
+        .addValue(commsdsl::parse::Field::Kind::String)
+        .addValue(commsdsl::parse::Field::Kind::Data)
+        .addValue(commsdsl::parse::Field::Kind::List)
+        .addValue(commsdsl::parse::Field::Kind::Ref)
+        .addValue(commsdsl::parse::Field::Kind::Optional)
+        .addValue(commsdsl::parse::Field::Kind::Variant)
+        .addValue(commsdsl::parse::Field::Kind::NumOfValues);
     schema_obj.addProperty<JsonSchemaNumberProperty>(kKeyFieldDeprecatedSince, "deprecated since version", false);
     schema_obj.addProperty<JsonSchemaNumberProperty>(kKeyFieldSinceVersion, "available since version", false);
 

@@ -1,8 +1,8 @@
 #pragma once
-#include <commsdsl/Namespace.h>
+#include <commsdsl/parse/Namespace.h>
 #include "../def.hpp"
 
-namespace commsdsl
+namespace commsdsl::parse
 {
-void to_json(protodoc::json_obj &j, const commsdsl::Namespace &ns);
-} // namespace protodoc
+void to_json(protodoc::json_obj &j, const Namespace &ns);
+} // namespace commsdsl::parse

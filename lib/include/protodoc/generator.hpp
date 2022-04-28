@@ -2,7 +2,7 @@
 #include <filesystem>
 #include <memory>
 #include <vector>
-#include <commsdsl/Protocol.h>
+#include <commsdsl/parse/Protocol.h>
 #include <nlohmann/json.hpp>
 #include "protodoc_export.hpp"
 
@@ -37,8 +37,8 @@ class PROTODOC_EXPORT Generator final
   private:
     bool parseSchemaFiles(const FilesList &files);
     bool write(const GeneratorOpts &opts);
-    bool writePlatforms(nlohmann::ordered_json &json);
-    bool writeNamespaces(nlohmann::ordered_json &json);
+    bool writePlatforms(nlohmann::json &json);
+    bool writeNamespaces(nlohmann::json &json);
 
   private:
     class Impl;

@@ -1,9 +1,9 @@
 #pragma once
-#include <commsdsl/DataField.h>
+#include <commsdsl/parse/DataField.h>
 #include "../def.hpp"
 
 using namespace protodoc;
-namespace commsdsl
+namespace commsdsl::parse
 {
-void to_json(protodoc::json_obj &j, const commsdsl::DataField &f);
-} // namespace protodoc
+void to_json(protodoc::json_obj &j, const DataField &f);
+} // namespace commsdsl::parse

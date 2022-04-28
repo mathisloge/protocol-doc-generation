@@ -1,8 +1,8 @@
 #pragma once
-#include <commsdsl/ListField.h>
+#include <commsdsl/parse/ListField.h>
 #include "../def.hpp"
 
-namespace commsdsl
+namespace commsdsl::parse
 {
-void to_json(protodoc::json_obj &j, const commsdsl::ListField &f);
-} // namespace commsdsl
+void to_json(protodoc::json_obj &j, const ListField &f);
+} // namespace commsdsl::parse

@@ -1,11 +1,11 @@
 #include "platform.hpp"
 
 using namespace protodoc;
-namespace commsdsl
+namespace commsdsl::parse
 {
-void to_json(json_obj &j, const commsdsl::Protocol::PlatformsList &platforms)
+void to_json(json_obj &j, const Protocol::PlatformsList &platforms)
 {
     for (const auto &p : platforms)
         j[p][kKeyFieldName] = p;
 }
-} // namespace commsdsl
+} // namespace commsdsl::parse

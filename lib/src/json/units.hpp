@@ -1,7 +1,7 @@
 #pragma once
-#include <commsdsl/Units.h>
+#include <commsdsl/parse/Units.h>
 #include "def.hpp"
-namespace commsdsl
+namespace commsdsl::parse
 {
 NLOHMANN_JSON_SERIALIZE_ENUM(Units,
                              {{Units::Unknown, "unknown"},

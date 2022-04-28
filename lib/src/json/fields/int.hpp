@@ -1,12 +1,12 @@
 #pragma once
-#include <commsdsl/IntField.h>
+#include <commsdsl/parse/IntField.h>
 #include "../def.hpp"
 
-namespace commsdsl
+namespace commsdsl::parse
 {
-void to_json(protodoc::json_obj &j, const commsdsl::IntField &f);
-} // namespace commsdsl
+void to_json(protodoc::json_obj &j, const IntField &f);
+} // namespace commsdsl::parse
 namespace protodoc
 {
-void generateIntFieldSchema(const std::string& base_url);
+void generateIntFieldSchema(const std::string &base_url);
 }

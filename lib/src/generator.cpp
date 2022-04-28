@@ -1,7 +1,7 @@
 #include "protodoc/generator.hpp"
 #include <fstream>
 #include <sstream>
-#include <commsdsl/EnumField.h>
+#include <commsdsl/parse/EnumField.h>
 #include <commsdsl/version.h>
 #include <inja/environment.hpp>
 #include <nlohmann/json.hpp>
@@ -17,7 +17,7 @@ class Generator::Impl final
   public:
     Impl() = default;
     ~Impl() = default;
-    commsdsl::Protocol protocol_;
+    commsdsl::parse::Protocol protocol_;
 };
 
 Generator::Generator()

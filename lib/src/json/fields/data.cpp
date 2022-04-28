@@ -3,9 +3,9 @@
 #include "field.hpp"
 
 using namespace protodoc;
-namespace commsdsl
+namespace commsdsl::parse
 {
-void to_json(json_obj &j, const commsdsl::DataField &f)
+void to_json(json_obj &j, const DataField &f)
 {
     constexpr const char *kKeyLengthField = "lengthField";
     constexpr const char *kKeyFixedLength = "fixedLength";
@@ -16,4 +16,4 @@ void to_json(json_obj &j, const commsdsl::DataField &f)
         j[kKeyLengthField].merge_patch(f.detachedPrefixFieldName());
 }
 
-} // namespace commsdsl
+} // namespace commsdsl::parse
