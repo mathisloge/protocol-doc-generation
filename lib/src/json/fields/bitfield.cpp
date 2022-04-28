@@ -1,15 +1,10 @@
 #include "bitfield.hpp"
 #include "../endian.hpp"
-#include "field.hpp"
+#include "field_vector.hpp"
 
 using namespace protodoc;
 namespace commsdsl::parse
 {
-static void to_json(json_obj &j, const BitfieldField::Members &members)
-{
-    for (const auto &member : members)
-        j[member.name()].merge_patch(member);
-}
 
 void to_json(json_obj &j, const BitfieldField &f)
 {

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.21)
 set(VCPKG_OVERLAY_PORTS "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg-ports/commsdsl")
 file(READ vcpkg.json VCPKG_MANIFEST_STR)
-string(JSON VCPKG_PROJ_VERSION GET ${VCPKG_MANIFEST_STR} "version-semver")
+string(JSON VCPKG_PROJ_VERSION GET ${VCPKG_MANIFEST_STR} "version")
 project(protodoc 
     VERSION ${VCPKG_PROJ_VERSION}
     HOMEPAGE_URL "https://github.com/mathisloge/protocol-doc-generation" 

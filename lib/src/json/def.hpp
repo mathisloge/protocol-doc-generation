@@ -5,6 +5,8 @@ namespace protodoc
 {
 using json_obj = nlohmann::json;
 
+static constexpr const char *kKeyOrderIndex = "protodocOrder";
+
 static constexpr const char *kKeyPlatforms = "platforms";
 static constexpr const char *kKeyNamespace = "namespaces";
 static constexpr const char *kKeyFrames = "frames";
