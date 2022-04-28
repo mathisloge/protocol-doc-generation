@@ -1,4 +1,3 @@
-{% if existsIn(field, "kind") %} 
 {% if field.kind == 0 %} 
     {% include "fields/int.adoc" %} 
 {% else if field.kind == 1 %}
@@ -20,7 +19,4 @@
 |{% if existsIn(field, "scaling") %} stem:[frac({^ field.scaling.0 ^})({^ field.scaling.1 ^})] {% else %} - {% endif %}
 |{^ default(field.minVersion, "-") ^}
 |{^ default(field.deprecatedSice, "-") ^}
-{% endif %}
-{% else %}
-UNKNOWN
 {% endif %}

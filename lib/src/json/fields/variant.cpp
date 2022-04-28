@@ -8,7 +8,7 @@ namespace commsdsl::parse
 void to_json(json_obj &j, const VariantField &f)
 {
     const auto members = f.members();
-    j.merge_patch({{kKeyType, kVariantType}, kKeyFieldMembers, members});
+    j.merge_patch({{kKeyType, kVariantType}, {kKeyFieldMembers, members}});
     if (f.defaultMemberIdx() != std::numeric_limits<decltype(f.defaultMemberIdx())>::max())
         j["defaultMember"].merge_patch(members[f.defaultMemberIdx()]);
 }
