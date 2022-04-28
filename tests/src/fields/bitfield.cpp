@@ -19,8 +19,9 @@ TEST_CASE("BitfieldField json structure test", "[fields]")
     REQUIRE(j.at(kKeyFieldDescription).get<std::string>() == "Bitfield description");
 
     REQUIRE_NOTHROW(j.at("members"));
-    REQUIRE(j.at("members").is_object());
-    REQUIRE(j.at("members").size() == 3);
-    REQUIRE(j.at("members").front()["name"] == "Enum1");
-    REQUIRE(j.at("members").back()["name"] == "Int1");
+    const auto &members = j.at("members");
+    REQUIRE(members.is_object());
+    REQUIRE(members.size() == 3);
+    REQUIRE((*members.find("Enum1"))["protodocOrder"] == 0);
+    REQUIRE((*members.find("Int1"))["protodocOrder"] == 2);
 }
