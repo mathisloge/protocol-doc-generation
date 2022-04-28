@@ -8,7 +8,6 @@
         "catch2",
         "cxxopts",
         "nlohmann-json",
-        "cpp-json-schema",
-        "libxml2"
+        "cpp-json-schema"
     ]
 }

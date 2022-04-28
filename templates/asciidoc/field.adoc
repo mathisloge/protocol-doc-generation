@@ -1,19 +1,19 @@
-{% if field.kind == 0 %} 
+{% if field.kind == "int" %} 
     {% include "fields/int.adoc" %} 
-{% else if field.kind == 1 %}
+{% else if field.kind == "enum" %}
     {% include "fields/enum.adoc" %}     
-{% else if field.kind == 3 %}
+{% else if field.kind == "float" %}
     {% include "fields/float.adoc" %} 
-{% else if field.kind == 4 %}
+{% else if field.kind == "bitfield" %}
     {% include "fields/bitfield.adoc" %} 
-{% else if field.kind == 9 %}
+{% else if field.kind == "ref" %}
     {% include "fields/ref.adoc" %} 
-{% else if field.kind == 10 %}
+{% else if field.kind == "optional" %}
     {% include "fields/optional.adoc" %} 
 {% else %}
 |[#field_{^ field.name ^}]*{^ field.name ^}*
 |{^ at(types, field.type) ^}
-|{% if existsIn(field, "minLength") %}{% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %}{% endif %} 
+|{% if field.minLength == field.maxLength %} {^ field.minLength ^} {% else %} {^ field.minLength ^} - {^ field.maxLength ^} {% endif %}
 |{^ default(field.description, "") ^}
 |{% if existsIn(field, "units") %} {^ at(units, field.units) ^} {% else %} - {% endif %} 
 |{% if existsIn(field, "scaling") %} stem:[frac({^ field.scaling.0 ^})({^ field.scaling.1 ^})] {% else %} - {% endif %}

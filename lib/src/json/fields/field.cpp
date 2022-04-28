@@ -24,7 +24,7 @@ void to_json(json_obj &j, const Field &f)
                    {kKeyFieldDescription, f.description()},
                    {kKeyFieldSemanticType, f.semanticType()},
                    {kKeyFieldKind, f.kind()},
-                   {kKeyFieldMaxLength, f.minLength()},
+                   {kKeyFieldMinLength, f.minLength()},
                    {kKeyFieldMaxLength, f.maxLength()}});
 
     if (Protocol::notYetDeprecated() != f.deprecatedSince())
